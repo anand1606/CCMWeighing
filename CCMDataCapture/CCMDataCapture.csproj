@@ -236,7 +236,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\uct_Weight_wpf\uct_Weight_wpf.csproj">
+    <ProjectReference Include="..\uct_Weight_wpf\uct_Weight_wpf.csproj">
       <Project>{9764d549-6e0f-4724-9284-62ac428a39a2}</Project>
       <Name>uct_Weight_wpf</Name>
     </ProjectReference>
