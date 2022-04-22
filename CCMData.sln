@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMDataBrodCast", "CCMDataBrodCast\CCMDataBrodCast.csproj", "{616B31F0-881C-4BAD-8992-3370E4964172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMDataCapture", "CCMDataCapture\CCMDataCapture\CCMDataCapture.csproj", "{D0A33FFB-95CA-4751-B34F-28E4A54535BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CCMDataCapture", "CCMDataCapture\CCMDataCapture.csproj", "{D0A33FFB-95CA-4751-B34F-28E4A54535BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "uct_Weight_wpf", "uct_Weight_wpf\uct_Weight_wpf.csproj", "{9764D549-6E0F-4724-9284-62AC428A39A2}"
 EndProject
