@@ -121,8 +121,8 @@ namespace ccmModBus
 
             //get the latest parameters
             string err = string.Empty;
+            Library.WriteInfoLog("Modbus Service->info->Heartbeat");
 
-            
 
             DataSet ds = Library.GetData("Select * From  ccmModbusRegister ", sqlcnstr, out err);
             if (!string.IsNullOrEmpty(err))
