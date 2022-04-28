@@ -168,10 +168,10 @@ namespace ccmModBus
             hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
             if (hasRows)
             {
-                Library.WriteInfoLog("Modbus Service->Record Founds");
+                //Library.WriteInfoLog("Modbus Service->Record Founds");
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    Library.WriteInfoLog("Modbus Service->inside loop->" );
+                   
                     int regadd = 0;
                     map.TryGetValue(row["MachineNo"].ToString(), out regadd);
                     if (regadd != 0)
@@ -179,21 +179,14 @@ namespace ccmModBus
                         //Library.WriteInfoLog("Modbus Service->writing register->" + regadd.ToString() + "->" + row["ID"].ToString());
                         int regval = Convert.ToInt16(row["ID"].ToString());
 
-
+                        Library.WriteInfoLog("Modbus Service->writing register->" + regadd.ToString() + "-Value->" + regval.ToString() );
                         //----- auto normal performance version, more flexibility
-
                         //modserver.ClearBuffers();
                         //ushort	0 to 65,535	Unsigned 16-bit integer
                         var registers = modserver.GetHoldingRegisters();
                         registers.SetBigEndian<ushort>(regadd, Convert.ToUInt16(regval));
                         modserver.Update();
 
-
-                        //32-bit register -- high performance version, less flexibility
-                        //modserver.ClearBuffers();
-                        //var short_buffer = modserver.GetHoldingRegisterBuffer<int>();
-                        //short_buffer[regadd] = regval;
-                        //modserver.Update();
 
                         sql = "Update ccmAlarm Set AlmSent = 1, AlmSentTime = GetDate() where " +
                                         " tDate ='" + Convert.ToDateTime(row["tDate"]).ToString("yyyy-MM-dd") + "' And " +
