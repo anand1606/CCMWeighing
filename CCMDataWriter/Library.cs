@@ -192,6 +192,17 @@ namespace CCMDataWriter
         public string Joint { get; set; }
         public string MouldNo { get; set; }
 
+        public string Material { get; set; }
+        public string Standard { get; set; }
+        public string OperatorCode { get; set; }
+        public string OperatorName { get; set; }
+
+        public string LastPunch { get; set; }
+
+        public decimal AlmMinWt { get; set; }
+        public decimal AlmMaxWt { get; set; }
+
+
 
         public CurrentSetting()
         {
@@ -203,12 +214,28 @@ namespace CCMDataWriter
             this.Class = "";
             this.Joint = "";
             this.MouldNo = "";
+
+            this.AlmMaxWt = 0;
+            this.AlmMinWt = 0;
+            this.Material = "";
+            this.Standard = "";
+            this.OperatorCode = "";
+            this.OperatorName = "";
+            this.LastPunch = "";
         }
 
         public override string ToString()
         {
-            string tmpstr = "{Size = {0}, Length = {1}, Class = {2} , Joint = {3} , MouldNo = {4} , MinWt = {5} , MaxWt = {6} , NomWt = {7} }";
-            string tmpstr1 = string.Format(tmpstr, this.Size, this.Length.ToString(), this.Class, this.Joint, this.MouldNo, this.MinWt.ToString(), this.MaxWt.ToString(), this.NomWt.ToString());
+            string tmpstr = "{Size = {0}, Length = {1}, Class = {2} , Joint = {3} , MouldNo = {4} , MinWt = {5} , MaxWt = {6} , NomWt = {7}," +
+                " AlmMaxWt = {8}, AlmMinWt = {9}, Material = {10}, Standard = {11}, OperatorCode = {12}, OperatorName = {13} " +
+                "" +
+                " }";
+            string tmpstr1 = string.Format(tmpstr, this.Size, this.Length.ToString(), 
+                this.Class, this.Joint, this.MouldNo, this.MinWt.ToString(),
+                this.MaxWt.ToString(), this.NomWt.ToString(),
+                this.AlmMaxWt.ToString(), this.AlmMinWt.ToString(),
+                this.Material.ToString(), this.Standard.ToString(), this.OperatorCode,this.OperatorName);
+               
             return tmpstr1;
         }
     }

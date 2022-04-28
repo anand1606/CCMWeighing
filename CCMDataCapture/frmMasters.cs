@@ -57,7 +57,7 @@ namespace CCMDataCapture
 
                         if (string.IsNullOrEmpty(err) && newid > 0)
                         {
-                            cmd.CommandText = "Insert into [" + tablename + "] (ID,Desc,AddDt) values ('" + newid.ToString() + "','" + desc.ToString() + "',GetDate())";
+                            cmd.CommandText = "Insert into [" + tablename + "] (ID,Description,AddDt) values ('" + newid.ToString() + "','" + desc.ToString() + "',GetDate())";
                             cmd.ExecuteNonQuery();
                             return true;
                         }
@@ -166,19 +166,6 @@ namespace CCMDataCapture
             ResetControl();
         }
 
-
-        private void btnWeightSetting_Click(object sender, EventArgs e)
-        {
-            Form t = Application.OpenForms["frmWeightMaster"];
-
-            if (t == null)
-            {
-                frmWeightMaster m = new frmWeightMaster();
-                m.Show();
-            }
-        }
-
-
         private void btnAdd_Click(object sender, EventArgs e)
         {
             bool t = AddMaster(TableName, txtID.Text.ToString(), txtDesc.Text.ToString());
@@ -216,17 +203,6 @@ namespace CCMDataCapture
             grid.DataSource = dsMaster;
             grid.DataMember = dsMaster.Tables[0].TableName;
             grid.RefreshDataSource();
-        }
-
-        private void btnEmailSetting_Click(object sender, EventArgs e)
-        {
-            Form t = Application.OpenForms["frmEmailConfig"];
-
-            if (t == null)
-            {
-                frmEmailConfig m = new frmEmailConfig();
-                m.Show();
-            }
         }
 
         private void btnShiftConfig_Click(object sender, EventArgs e)
@@ -282,6 +258,7 @@ namespace CCMDataCapture
         {
             ResetControl();
         }
+
     }//end mainformclass
 
 }//end namespace

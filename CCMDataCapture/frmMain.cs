@@ -80,7 +80,8 @@ namespace CCMDataCapture
                 this.weightCanwas2.model.Disconnect();
                 this.weightCanwas3.model.Disconnect();
                 this.weightCanwas4.model.Disconnect();
-                //this.weightCanwas5.model.Disconnect();
+                this.weightCanwas5.model.Disconnect();
+                this.weightCanwas6.model.Disconnect();
 
             }
         }
@@ -113,6 +114,9 @@ namespace CCMDataCapture
             string sqlconfig = "sql_connection.txt";
             fullpath = Path.Combine(strpath, sqlconfig);
             SQLConStr = File.ReadLines(fullpath).First();
+
+            Utility.SQLCnStr = SQLConStr;
+
             string err = string.Empty;
             sys = new Sysinfo();
             
@@ -130,19 +134,19 @@ namespace CCMDataCapture
             {
                 foreach (DataRow dr in dsMachine.Tables[0].Rows)
                 {
-                    cmbWeighLog.Items.Add(dr["MachineIP"].ToString());
+                    cmbWeighLog.Items.Add(dr["MachineName"].ToString() + ","+ dr["MachineIP"].ToString());
                     cmb_10.Items.Add(dr["MachineName"].ToString());
                     cmb_Report_Machines.Items.Add(dr["MachineName"].ToString());
                 }
             }
-            
+
 
 
             //bool x = Utility.RetriveLic(SQLConStr, key, out sys, out err);
             //txtLicID.Text = sys.Hostkey;
             //lblInstallDt.Text = sys.InstallDt.ToString("yyyy-MM-dd");
             //lblLicType.Text = sys.LicType + "-" + sys.Limitdays.ToString() + "Days";
-            
+
             //if (x && sys.LicType != "TRIAL")
             //{
             //    x = Utility.MatchLic(sys, SQLConStr, key);
@@ -166,24 +170,58 @@ namespace CCMDataCapture
             //        return;
             //    }
             //}
-            
-            
-            bool t1 = weightCanwas1.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, "P", "", "",true);
+
+
+
+
+            xtraTabCCM1.Text = "CCM-P";
+            bool t1 = weightCanwas1.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia,strlstMaterial,strlstStandard, "P", "", "",true);
+            Thread.Sleep(100);
+
+            xtraTabCCM2.Text = "CCM-Q";
+            bool t2 = weightCanwas2.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard,"Q", "", "", true);
+            Thread.Sleep(100);
+
+            xtraTabCCM3.Text = "CCM-R";
+            bool t3 = weightCanwas3.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia,strlstMaterial, strlstStandard, "R", "", "", true);
+            Thread.Sleep(100);
+
+            xtraTabCCM4.Text = "CCM-S";
+            bool t4 = weightCanwas4.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "S", "", "", true);
+            Thread.Sleep(100);
+
+            xtraTabCCM5.Text = "CCM-T";
+            bool t5 = weightCanwas5.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "T", "", "", true);
+            Thread.Sleep(100);
+
+            xtraTabCCM6.Text = "CCM-N";
+            bool t6 = weightCanwas6.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "N", "", "", true);
             Thread.Sleep(100);
 
 
-            bool t2 = weightCanwas2.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, "Q", "", "", true);
+            t1 = mainCanwas1.model.Connect(RBMQServer, SQLConStr, "P", "", "", true);
             Thread.Sleep(100);
 
-            bool t3 = weightCanwas3.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, "R", "", "", true);
+            t2 = mainCanwas2.model.Connect(RBMQServer, SQLConStr, "Q", "", "", true);
             Thread.Sleep(100);
 
-            bool t4 = weightCanwas4.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, "V", "", "", true);
+            t3 = mainCanwas3.model.Connect(RBMQServer, SQLConStr, "R", "", "", true);
             Thread.Sleep(100);
+
+            t4 = mainCanwas4.model.Connect(RBMQServer, SQLConStr, "S", "", "", true);
+            Thread.Sleep(100);
+
+            t5 = mainCanwas5.model.Connect(RBMQServer, SQLConStr, "T", "", "", true);
+            Thread.Sleep(100);
+
+            t6 = mainCanwas6.model.Connect(RBMQServer, SQLConStr, "N", "", "", true);
+            Thread.Sleep(100);
+
+
 
             //bool t5 = weightCanwas5.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, "TT", "192.168.11.16:1702", t5_tbname, true);
-            
-           
+
+
             cmb_10.SelectedIndex = 0;
             cmb_Report_Machines.SelectedIndex = 0;
 
@@ -247,7 +285,7 @@ namespace CCMDataCapture
 
             string tb = GetTableName(cmb_10.Text.Trim().ToString());
             loadGrid_Last10(tb);
-                
+               
             
         }
 
@@ -294,8 +332,16 @@ namespace CCMDataCapture
                     this.weightCanwas1.model.Disconnect();
                     this.weightCanwas2.model.Disconnect();
                     this.weightCanwas3.model.Disconnect();
-                    //this.weightCanwas4.model.Disconnect();
-                    //this.weightCanwas5.model.Disconnect();
+                    this.weightCanwas4.model.Disconnect();
+                    this.weightCanwas5.model.Disconnect();
+                    this.weightCanwas6.model.Disconnect();
+
+                    this.mainCanwas1.model.Disconnect();
+                    this.mainCanwas2.model.Disconnect();
+                    this.mainCanwas3.model.Disconnect();
+                    this.mainCanwas4.model.Disconnect();
+                    this.mainCanwas5.model.Disconnect();
+                    this.mainCanwas6.model.Disconnect();
 
                     //bool ReadytoClose = true;
 
@@ -315,11 +361,18 @@ namespace CCMDataCapture
                     //}
 
                     this.Cursor = Cursors.Default;
-                    this.elementHost1.Dispose();
-                    this.elementHost2.Dispose();
-                    this.elementHost3.Dispose();
-                    //this.elementHost4.Dispose();
-                    //this.elementHost5.Dispose();
+                    this.elm_wt_1.Dispose();
+                    this.elm_wt_2.Dispose();
+                    this.elm_wt_3.Dispose();
+                    this.elm_wt_4.Dispose();
+                    this.elm_wt_5.Dispose();
+                    this.elm_wt_6.Dispose();
+                    this.elm_main_1.Dispose();
+                    this.elm_main_2.Dispose();
+                    this.elm_main_3.Dispose();
+                    this.elm_main_4.Dispose();  
+                    this.elm_main_5.Dispose();  
+                    this.elm_main_6.Dispose();
 
                     this.Close();
                     Environment.Exit(Environment.ExitCode);
@@ -340,7 +393,8 @@ namespace CCMDataCapture
                     "Select top 10 Convert(varchar(10),C.tDate,121) as tDate,C.tShift,SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
                     "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                     " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG " +
-                    ",(case when (NomWt > 0) then Round(((ActWt-NomWt)/NomWt*100),3) else 100 end) as DevPer, info.InchargeName, C.PipeStatus " +
+                    ",(case when (NomWt > 0) then Round(((ActWt-NomWt)/NomWt*100),3) else 100 end) as DevPer, info.InchargeName, C.PipeStatus, " +
+                    " OperatorCode,OperatorName " +
                     " From [" + tablename + "] C left outer join ccmShiftWiseInfo info on c.tDate = info.tDate and c.tShift = info.tShift" +
                     " where C.tdate = Convert(date,Getdate())  " +
                     " Order By C.LogDateTime Desc ";
@@ -354,6 +408,29 @@ namespace CCMDataCapture
                     grd_last10.DataSource = ds;
                     grd_last10.DataMember = ds.Tables[0].TableName;
                 }
+                else
+                {
+                    grd_last10.DataSource = null;
+                }
+
+
+                //Alarmed Pipes
+                string MachineNo = cmb_10.Text.Trim().ToString();
+                sql = "Select top 50 Convert(varchar(10),tDate,121) as tDate, tShift,PipeDia,PipeClass,PipeWt,PipeWt,PipeStatus,OperatorCode,OperatorName " +
+                    " From ccmAlarm Where tDate = Convert(date,getdate()) and MachineNo ='" + MachineNo + "'";
+
+                ds = Utility.GetData(sql, SQLConStr, out err);
+
+                hasrows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+                if (hasrows)
+                {
+                    gridOverWt.DataSource = ds;
+                    gridOverWt.DataMember = ds.Tables[0].TableName;
+                }
+                else
+                {
+                    gridOverWt.DataSource = null;
+                }
 
             }
 
@@ -364,6 +441,7 @@ namespace CCMDataCapture
             string tb = GetTableName(cmb_10.Text.Trim().ToString());
             loadGrid_Last10(tb);
             //validate_lic();
+            
             setCurShiftInchargeGroup();
         }
 
@@ -388,7 +466,7 @@ namespace CCMDataCapture
                 "Select Convert(varchar(10),C.tDate,121) as tDate,C.tShift,SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
                 "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                 " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG , " +
-                " ABS((Case When (NomWt <= 0 ) then 0 else Round(((NomWt-ActWt)/NomWt*100),3) end)) as DevPer,info.InchargeName, PipeStatus " +
+                " ABS((Case When (NomWt <= 0 ) then 0 else Round(((NomWt-ActWt)/NomWt*100),3) end)) as DevPer,info.InchargeName, PipeStatus, OperatorCode,OperatorName  " +
                 " From [" + tTableName + "] C left outer join ccmShiftWiseInfo info on c.tDate = info.tDate and c.tShift = info.tShift";
             
                     
@@ -458,23 +536,24 @@ namespace CCMDataCapture
             if (cur.Hour >= 0 && cur.Hour <= 5 && cur.Minute <= 59 && cur.Second <= 59)
             {
                 txtCurDate.DateTime = cur.AddDays(-1).Date;
-                txtShift.Text = "B";
+                txtShift.Text = "C";
             }
-            if (cur.Hour >= 6 && cur.Hour <= 17 && cur.Minute <= 59 && cur.Second <= 59)
+            if (cur.Hour >= 6 && cur.Hour <= 13 && cur.Minute <= 59 && cur.Second <= 59)
             {
                 txtCurDate.DateTime = cur.Date;
                 txtShift.Text = "A";
             }
-            if (cur.Hour >= 18 && cur.Hour <= 23 && cur.Minute <= 59 && cur.Second <= 59)
+            if (cur.Hour >= 14 && cur.Hour <= 21 && cur.Minute <= 59 && cur.Second <= 59)
             {
                 txtCurDate.DateTime = cur.Date;
                 txtShift.Text = "B";
             }
-            //if (cur.Hour >= 22 && cur.Hour <= 23 && cur.Minute <= 59 && cur.Second <= 59)
-            //{
-            //    txtCurDate.DateTime = cur.Date;
-            //    txtShift.Text = "C";
-            //}
+            if (cur.Hour >= 22 && cur.Hour <= 23 && cur.Minute <= 59 && cur.Second <= 59)
+            {
+                txtCurDate.DateTime = cur.Date;
+                txtShift.Text = "C";
+            }
+
             string err = string.Empty;
             string sql = "select InchargeName from ccmShiftWiseInfo where tDate='" + txtCurDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim().ToString() + "'";
             
@@ -537,9 +616,9 @@ namespace CCMDataCapture
 
            
             this.Cursor = Cursors.Default;
-            this.elementHost1.Dispose();
-            this.elementHost2.Dispose();
-            this.elementHost3.Dispose();
+            this.elm_wt_1.Dispose();
+            this.elm_wt_2.Dispose();
+            this.elm_wt_3.Dispose();
             //this.elementHost4.Dispose();
             //this.elementHost5.Dispose();
 
@@ -904,7 +983,7 @@ namespace CCMDataCapture
                 {
                     sql =
                         "Select Convert(varchar(23),LogDateTime,121) as LogDateTime,MachineIP,SignalMsg,Signal,Weight,Processed,Saved from ccmSignalDetection where  LogDateTime between '" + errdt1.DateTime.ToString("yyyy-MM-dd HH:mm:ss") +
-                        "' And '" + errdt2.DateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' and MachineIP = '" + cmbWeighLog.Text.Trim() + "' Order By LogDateTime Asc ";
+                        "' And '" + errdt2.DateTime.ToString("yyyy-MM-dd HH:mm:ss") + "' and MachineIP = '" + cmbWeighLog.Text.Trim().Split(',')[1].ToString() + "' Order By LogDateTime Asc ";
                 }
 
                 
@@ -1231,5 +1310,53 @@ namespace CCMDataCapture
                 m.Show();
             }
         }
+
+
+        private void btnWeightSetting_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmWeightMaster"];
+
+            if (t == null)
+            {
+                frmWeightMaster m = new frmWeightMaster();
+                m.Show();
+            }
+        }
+
+
+        private void btnEmailSetting_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmEmailConfig"];
+
+            if (t == null)
+            {
+                frmEmailConfig m = new frmEmailConfig();
+                m.Show();
+            }
+        }
+
+
+        private void btnRFIDSetting_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmRFID"];
+
+            if (t == null)
+            {
+                frmRFID m = new frmRFID();
+                m.Show();
+            }
+        }
+
+        private void btnModbusSetting_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmModbusTcpConfig"];
+
+            if (t == null)
+            {
+                frmModbusTcpConfig m = new frmModbusTcpConfig();
+                m.Show();
+            }
+        }
+
     }
 }

@@ -33,8 +33,7 @@
             this.grid = new DevExpress.XtraGrid.GridControl();
             this.gv = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.btnEmailSetting = new System.Windows.Forms.Button();
-            this.btnWeightSetting = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.btnShiftConfig = new System.Windows.Forms.Button();
             this.grpMaster = new DevExpress.XtraEditors.RadioGroup();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -43,7 +42,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtDesc = new DevExpress.XtraEditors.TextEdit();
             this.txtID = new DevExpress.XtraEditors.TextEdit();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
@@ -124,8 +122,6 @@
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.btnCancel);
-            this.groupBox8.Controls.Add(this.btnEmailSetting);
-            this.groupBox8.Controls.Add(this.btnWeightSetting);
             this.groupBox8.Controls.Add(this.btnShiftConfig);
             this.groupBox8.Controls.Add(this.grpMaster);
             this.groupBox8.Controls.Add(this.btnDelete);
@@ -141,31 +137,21 @@
             this.groupBox8.TabIndex = 0;
             this.groupBox8.TabStop = false;
             // 
-            // btnEmailSetting
+            // btnCancel
             // 
-            this.btnEmailSetting.Location = new System.Drawing.Point(846, 51);
-            this.btnEmailSetting.Name = "btnEmailSetting";
-            this.btnEmailSetting.Size = new System.Drawing.Size(133, 27);
-            this.btnEmailSetting.TabIndex = 32;
-            this.btnEmailSetting.Text = "Email Config";
-            this.btnEmailSetting.UseVisualStyleBackColor = true;
-            this.btnEmailSetting.Click += new System.EventHandler(this.btnEmailSetting_Click);
-            // 
-            // btnWeightSetting
-            // 
-            this.btnWeightSetting.Location = new System.Drawing.Point(846, 18);
-            this.btnWeightSetting.Name = "btnWeightSetting";
-            this.btnWeightSetting.Size = new System.Drawing.Size(133, 27);
-            this.btnWeightSetting.TabIndex = 31;
-            this.btnWeightSetting.Text = "Weight Chart Master";
-            this.btnWeightSetting.UseVisualStyleBackColor = true;
-            this.btnWeightSetting.Click += new System.EventHandler(this.btnWeightSetting_Click);
+            this.btnCancel.Location = new System.Drawing.Point(574, 77);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 33;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnShiftConfig
             // 
-            this.btnShiftConfig.Location = new System.Drawing.Point(846, 84);
+            this.btnShiftConfig.Location = new System.Drawing.Point(707, 19);
             this.btnShiftConfig.Name = "btnShiftConfig";
-            this.btnShiftConfig.Size = new System.Drawing.Size(133, 27);
+            this.btnShiftConfig.Size = new System.Drawing.Size(133, 23);
             this.btnShiftConfig.TabIndex = 30;
             this.btnShiftConfig.Text = "Shift Config";
             this.btnShiftConfig.UseVisualStyleBackColor = true;
@@ -248,16 +234,6 @@
             this.txtID.TabIndex = 0;
             this.txtID.Validated += new System.EventHandler(this.txtID_Validated);
             // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(574, 77);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 33;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // frmMasters
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,9 +270,7 @@
         private System.Windows.Forms.Label label5;
         private DevExpress.XtraEditors.TextEdit txtDesc;
         private DevExpress.XtraEditors.TextEdit txtID;
-        private System.Windows.Forms.Button btnWeightSetting;
         private System.Windows.Forms.Button btnShiftConfig;
-        private System.Windows.Forms.Button btnEmailSetting;
         private System.Windows.Forms.Button btnCancel;
     }
 }

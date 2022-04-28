@@ -141,11 +141,11 @@ namespace CCMDataWriter
             }
 
             //weight log cleaner
-            //timer_logCleaner.AutoReset = true;
-            //timer_logCleaner.Interval = 10000;
-            //timer_logCleaner.Elapsed += timer_logCleaner_Elapsed;
-            //timer_logCleaner.Start();
- 
+            timer_logCleaner.AutoReset = true;
+            timer_logCleaner.Interval = 3600000;
+            timer_logCleaner.Elapsed += timer_logCleaner_Elapsed;
+            timer_logCleaner.Start();
+
             //data writer, pipe save from log
             timer.AutoReset = true;
             timer.Interval = 2000;
@@ -232,13 +232,13 @@ namespace CCMDataWriter
                try
                {
                    cn.Open();
-                   Library.WriteInfoLog("Log_Cleaner->Cleaning Old WeightLogData before 10 days");
+                   Library.WriteInfoLog("Log_Cleaner->Cleaning Old WeightLogData before 3 days");
                    using (SqlCommand cmd = new SqlCommand())
                    {
                        cmd.Connection = cn;
                        cmd.CommandTimeout = 0;
                        cmd.CommandType = CommandType.Text;
-                       cmd.CommandText = "Delete from ccmSignalDetection Where LogDateTime <= DateAdd(day,-10,'" + tDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "') and Processed = 1 ";
+                       cmd.CommandText = "Delete from ccmSignalDetection Where LogDateTime <= DateAdd(day,-3,'" + tDate.ToString("yyyy-MM-dd HH:mm:ss.fff") + "') and Processed = 1 ";
                        cmd.ExecuteNonQuery();
                        lastlogclean = tDate;
                    }
@@ -561,6 +561,8 @@ namespace CCMDataWriter
                              //    continue;
                              //}
 
+                            
+
                              isupdated = UpdateSignalRecords(tmprec.LogDateTime, t.MachineIP, issaved, err2);
 
                              if (issaved)
@@ -581,6 +583,7 @@ namespace CCMDataWriter
                         
         }
 
+        #region NotUsed
         private static void WeighVsSign(string MachineIP, string cnstr)
         {
             
@@ -619,7 +622,7 @@ namespace CCMDataWriter
                 catch (Exception ex) { }
             }
         }
-
+        #endregion
 
         private static bool UpdateSignalRecords(DateTime tLogDateTime, string tMachineIP,bool tSaved,string remarks)
         {
@@ -764,44 +767,55 @@ namespace CCMDataWriter
                     //get the maxpipeno. of the day if (logdatetime.hour between 0 to 5 and minutes betwen 0 to 59:59 ) keep minus 1 day and search.
                     DateTime tDate = new DateTime();
                     string tShift = string.Empty;
-                    int tSrNo = 0;
+                    int tSrNo = 0, tintSrno =0 ;
                     string PipeNumber = string.Empty;
                     string MachineNo = t.MachineID;
                     string MonthName = string.Empty;
                     string CurYear = string.Empty;
 
-                    #region SetShift
+                    #region SetShift as per -Samaghogha
                     if (t.LogDateTime.Hour >= 0 && t.LogDateTime.Hour <= 5 && t.LogDateTime.Minute <= 59 && t.LogDateTime.Second <= 59)
                     {
                         tDate = t.LogDateTime.AddDays(-1).Date;
                         CurYear = tDate.Year.ToString("0000").Substring(3);
-                        tShift = "B";
+                        tShift = "C";
                     }
-                    if (t.LogDateTime.Hour >= 6 && t.LogDateTime.Hour <= 17 && t.LogDateTime.Minute <= 59 && t.LogDateTime.Second <= 59)
+                    if (t.LogDateTime.Hour >= 6 && t.LogDateTime.Hour <= 13 && t.LogDateTime.Minute <= 59 && t.LogDateTime.Second <= 59)
                     {
                         tDate = t.LogDateTime.Date;
                         CurYear = tDate.Year.ToString("0000").Substring(3);
                         tShift = "A";
                     }
-                    if (t.LogDateTime.Hour >= 18 && t.LogDateTime.Hour <= 23 && t.LogDateTime.Minute <= 59 && t.LogDateTime.Second <= 59)
+                    if (t.LogDateTime.Hour >= 14 && t.LogDateTime.Hour <= 21 && t.LogDateTime.Minute <= 59 && t.LogDateTime.Second <= 59)
                     {
                         tDate = t.LogDateTime.Date;
                         CurYear = tDate.Year.ToString("0000").Substring(3);
                         tShift = "B";
                     }
-                    //if (t.LogDateTime.Hour >= 22 && t.LogDateTime.Hour <= 23 && t.LogDateTime.Minute <= 59 && t.LogDateTime.Second <= 59)
-                    //{
-                    //    tDate = t.LogDateTime.Date;
-                    //    tShift = "C";
-                    //}
+                    if (t.LogDateTime.Hour >= 22 && t.LogDateTime.Hour <= 23 && t.LogDateTime.Minute <= 59 && t.LogDateTime.Second <= 59)
+                    {
+                        tDate = t.LogDateTime.Date;
+                        tShift = "C";
+                    }
                     #endregion
 
-                    sql = "Select isnull(Max(SrNo),0) + 1 from [" + curTableNm + "] Where tDate ='" + tDate.ToString("yyyy-MM-dd") + "'";
 
+                    
+                    //srno-daily sequence no
+                    sql = "Select isnull(Max(SrNo),0) + 1 from [" + curTableNm + "] Where tDate ='" + tDate.ToString("yyyy-MM-dd") + "'";
+                                        
                     cmd.CommandType = CommandType.Text;
                     cmd.Connection = cn;
                     cmd.CommandText = sql;
                     tSrNo = (int)cmd.ExecuteScalar();
+                  
+                    //internal serial no - customized , dia wise sequence
+                    sql = "Select isnull(Max(IntSrNo),0) + 1 from [" + curTableNm + "] Where tDate ='" + tDate.ToString("yyyy-MM-dd") + "' and PipeDia ='" + t.Parameters.Size + "'";
+                    cmd.CommandType = CommandType.Text;
+                    cmd.Connection = cn;
+                    cmd.CommandText = sql;
+                    tintSrno = (int)cmd.ExecuteScalar();
+
                     #region SetMonth
                     switch (tDate.Month)
                     {
@@ -844,7 +858,8 @@ namespace CCMDataWriter
                     }
                     #endregion
 
-                    PipeNumber = CurYear + MonthName + tDate.ToString("dd") + MachineNo  + tSrNo.ToString("0000");
+                    //Batch No - as per old 
+                    PipeNumber = CurYear + MonthName + tDate.ToString("dd") + MachineNo  + tintSrno.ToString("0000");
 
                     t.Parameters.MouldNo = t.Parameters.MouldNo.Replace("'", "");
                     t.Parameters.MouldNo = t.Parameters.MouldNo.Replace('"', ' ');
@@ -870,11 +885,23 @@ namespace CCMDataWriter
                     if (t.Parameters.Joint.Length > 10)
                         t.Parameters.Joint = t.Parameters.Joint.Substring(0, 9);
 
+                    string tPipeStatus = "OK";
+
+                    if(t.Parameters.AlmMinWt > 0 && t.ActWt <= Convert.ToDouble(t.Parameters.AlmMinWt))
+                            tPipeStatus = "LOW_WT_ALM";
+
+                    if (t.Parameters.AlmMaxWt > 0 && t.ActWt >= Convert.ToDouble(t.Parameters.AlmMaxWt))
+                        tPipeStatus = "OVER_WT_ALM";
+                    
+
                     // LogDateTime,SrNo,PipeNumber,PipeClass,PipeLength,PipeDia,JointType,MouldNo,ActWt,MinWt,MaxWt,NomWt
-                    string sql1 = "Insert into [" + curTableNm + "]  (tDate,tShift,SrNo,LogDateTime,MachineNo,PipeNumber,PipeClass,PipeLength,PipeDia,JointType,MouldNo,ActWt,MinWt,MaxWt,NomWt,AddDt,PipeStatus) " +
-                        " values ('" + tDate.ToString("yyyy-MM-dd") + "','" + tShift + "','" + tSrNo.ToString() + "','" + t.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + "'," +
+                    string sql1 = "Insert into [" + curTableNm + "]  (tDate,tShift,SrNo,LogDateTime,IntSrNo,MachineNo,PipeNumber,PipeClass,PipeLength,PipeDia," +
+                        " JointType,MouldNo,ActWt,MinWt,MaxWt,NomWt,AddDt,PipeStatus," +
+                        " Material,Standard,OperatorCode,OperatorName,AlmMinWt,AlmMaxWt ) " +
+                        " values ('" + tDate.ToString("yyyy-MM-dd") + "','" + tShift + "','" + tSrNo.ToString() + "','" + t.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + tintSrno.ToString() + "'," +
                         " '" + t.MachineID + "','" + PipeNumber + "','" + t.Parameters.Class + "','" + t.Parameters.Length.ToString() + "','" + t.Parameters.Size.ToString() + "','" + t.Parameters.Joint + "','" + t.Parameters.MouldNo + "'," +
-                        " '" + t.ActWt.ToString() + "','" + t.Parameters.MinWt.ToString() + "','" + t.Parameters.MaxWt.ToString() + "','" + t.Parameters.NomWt.ToString() + "',GetDate(),'OK');";
+                        " '" + t.ActWt.ToString() + "','" + t.Parameters.MinWt.ToString() + "','" + t.Parameters.MaxWt.ToString() + "','" + t.Parameters.NomWt.ToString() + "',GetDate(),'" + tPipeStatus + "'," +
+                        " '" + t.Parameters.Material + "','" + t.Parameters.Standard + "','" + t.Parameters.OperatorCode + "','" + t.Parameters.OperatorName + "','" + t.Parameters.AlmMinWt.ToString() + "','" + t.Parameters.AlmMaxWt.ToString() + "');";
 
                     try
                     {
@@ -885,6 +912,18 @@ namespace CCMDataWriter
                         //this.LastPipeNo = tSrNo.ToString();
                         //this.LastWeight = t.ActWt.ToString();
                         //this.LastWeightTime = t.LogDateTime.ToString("HH:mm:ss");
+
+                        if(tPipeStatus != "OK")
+                        {
+                            sql1 = "Insert into ccmAlarm (tDate,tShift,MachineNo,SrNo,PipeNumber,PipeWt,AlmSent,AddDt,PipeDia,PipeClass,OperatorCode,OperatorName,PipeStaus) " +
+                                " Values ('" + tDate.ToString("yyyy-MM-dd") + "','" + tShift + "','" + t.MachineID.ToString() + "'," +
+                                " '" + t.SrNo.ToString() + "','" + t.PipeNumber + "','" + t.ActWt.ToString() + "',0,GetDate()," +
+                                "'" + t.Parameters.Size + "','" + t.Parameters.Class + "','" + t.Parameters.OperatorCode + "','" + t.Parameters.OperatorName + "','" + tPipeStatus + "')";
+
+                            cmd.ExecuteNonQuery();
+
+                        }
+
                         retjson = JsonConvert.SerializeObject(t);
 
                         
@@ -961,6 +1000,10 @@ namespace CCMDataWriter
                     tCurSetting.Class = dr["LastClass"].ToString();
                     tCurSetting.Joint = dr["LastJoint"].ToString();
                     tCurSetting.MouldNo = dr["LastMould"].ToString();
+                    tCurSetting.Material = (dr["LastMaterial"] == null ? "": dr["LastMaterial"].ToString());
+                    tCurSetting.Standard = (dr["LastStandard"] == null ? "" : dr["LastStandard"].ToString());
+                    tCurSetting.OperatorCode = ( dr["LastOperatorCode"] == null ? "" : dr["LastOperatorCode"].ToString());
+                    tCurSetting.OperatorName = ( dr["LastOperatorName"] == null ? "" : dr["LastOperatorName"].ToString());
                     try
                     {
                         decimal tlength = 0;
@@ -1004,9 +1047,28 @@ namespace CCMDataWriter
                     {
                         Library.WriteInfoLog("NomWt->" + ex.Message.ToString());
                     }
-                   
-                    
-                    
+
+                    try
+                    {
+                        decimal almminwt = 0;
+                        decimal.TryParse(dr["LastAlmMinWt"].ToString(), out almminwt);
+                        tCurSetting.AlmMinWt = almminwt;
+                    }
+                    catch (Exception ex)
+                    {
+                        Library.WriteInfoLog("AlmMinWt->" + ex.Message.ToString());
+                    }
+
+                    try
+                    {
+                        decimal almmaxwt = 0;
+                        decimal.TryParse(dr["LastAlmMaxWt"].ToString(), out almmaxwt);
+                        tCurSetting.AlmMinWt = almmaxwt;
+                    }
+                    catch (Exception ex)
+                    {
+                        Library.WriteInfoLog("AlmMaxWt->" + ex.Message.ToString());
+                    }
 
                     //Library.WriteInfoLog("Last Parameters : " + tCurSetting.ToString());
                 }

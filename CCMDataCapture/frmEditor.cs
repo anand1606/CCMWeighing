@@ -209,7 +209,7 @@ namespace CCMDataCapture
                         DataTable HrlyView = DS.Tables[GetTableName(txtMachines.Text.Trim())].Copy();
                         foreach (DataRow Nhr in HrlyView.Rows)
                         {
-                            sql = "update [" + tablename + "] Set PipeStatus ='" + Nhr["PipeStatus"].ToString() + "' Where " +
+                            sql = "update [" + tablename + "] Set PipeStatus ='" + Nhr["PipeStatus"].ToString() + "', UpdDt = GetDate() Where " +
                                 " tDate ='" + txtDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim() + "' " +
                                 " And SrNo ='" + Nhr["SrNo"].ToString() + "'";
                             cmd.CommandText = sql;

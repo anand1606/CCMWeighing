@@ -408,6 +408,29 @@ namespace CCMDataCapture
             return EncryptString(key,hostkey + key );
         }
 
+        public static string SQLCnStr { get; set; }
+
+
+        public static void WriteInfoLog(string Message,string tFolder,string prifix)
+        {
+            StreamWriter sw = null;
+            try
+            {
+                DateTime dt = new DateTime();
+                dt = DateTime.Now;
+                string basepath = AppDomain.CurrentDomain.BaseDirectory;
+                string fullpath = Path.Combine(basepath,tFolder,prifix + dt.ToString("yyyyMMdd") + ".txt");
+                sw = new StreamWriter(fullpath, true);
+
+                sw.WriteLine((DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + " : " + Message));
+                sw.Flush();
+                sw.Close();
+            }
+            catch
+            {
+
+            }
+        }
     }
 
     class Sysinfo

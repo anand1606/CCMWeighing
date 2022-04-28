@@ -26,11 +26,14 @@ namespace uct_Weight_wpf
         private string curValue = "0";
         private bool curStatus = false;
         
+        private System.Timers.Timer curTimer = new System.Timers.Timer();
+
+
         private List<string> _sizes = new List<string>();
         private List<string> _lengths = new List<string>();
         private List<string> _classes = new List<string>();
-        private List<string> _material = new List<string>();
-        private List<string> _standard = new List<string>();
+        private List<string> _materials = new List<string>();
+        private List<string> _standards = new List<string>();
 
         private bool isDataSaveRequired = false;
         private Queue<StreamReceiver> _queue = new Queue<StreamReceiver>();
@@ -43,16 +46,28 @@ namespace uct_Weight_wpf
         private string curMould = string.Empty;
         private string curJoint = string.Empty;
         private string curMachine = string.Empty;
+        private string curEmpCode = string.Empty;
+        private string curEmpName = string.Empty;
+        private string curPunch = string.Empty;
+        private string curOperatorDetails = string.Empty;
 
         private double curMinWt = 0;
         private double curMaxWt = 0;
         private double curNomWt = 0;
+        private double curAlmMinWt = 0;
+        private double curAlmMaxWt = 0;
+        private string _AlarmRangeText = string.Empty;
+
+        private string curMaterial = string.Empty;
+        private string curStandard = string.Empty;
 
         private string lastwt = string.Empty;
         private string lastwttime = string.Empty;
         private string lastpipeno = string.Empty;
 
         private string RBMQServer = string.Empty;
+             
+
         private string curWeightClient = string.Empty;
 
         private bool isstarted = false;
@@ -173,6 +188,18 @@ namespace uct_Weight_wpf
             }
         }
 
+        public List<string> Materials
+        {
+            get { return this._materials;}
+            set { this._materials = value; NotifyPropertyChanged(); }
+        }
+
+        public List<string> Standards
+        {
+            get { return this._standards;}
+            set { this._standards = value; NotifyPropertyChanged(); }
+        }
+
         public double CurrentMinWt
         {
             get
@@ -186,8 +213,7 @@ namespace uct_Weight_wpf
                 {
                     this.curMinWt = value;
                     NotifyPropertyChanged();
-                    if (this.isDataSaveRequired)
-                        SaveLastParameters();
+                   
                 }
             }
         }
@@ -205,8 +231,7 @@ namespace uct_Weight_wpf
                 {
                     this.curMaxWt = value;
                     NotifyPropertyChanged();
-                    if (this.isDataSaveRequired)
-                        SaveLastParameters();
+                   
                 }
             }
         }
@@ -224,11 +249,63 @@ namespace uct_Weight_wpf
                 {
                     this.curNomWt = value;
                     NotifyPropertyChanged();
-                    if (this.isDataSaveRequired)
-                        SaveLastParameters();
+                    
                 }
             }
         }
+
+        public double CurrentAlmMinWt
+        {
+            get
+            {
+                return this.curAlmMinWt;
+            }
+
+            set
+            {
+                if (value != this.curAlmMinWt)
+                {
+                    this.curAlmMinWt = value;
+                    NotifyPropertyChanged();
+                    //if (this.isDataSaveRequired)
+                    //    SaveLastParameters();
+                }
+            }
+        }
+
+        public double CurrentAlmMaxWt
+        {
+            get
+            {
+                return this.curAlmMaxWt;
+            }
+
+            set
+            {
+                if (value != this.curAlmMaxWt)
+                {
+                    this.curAlmMaxWt = value;
+                    NotifyPropertyChanged();
+                    //if (this.isDataSaveRequired)
+                    //    SaveLastParameters();
+                }
+            }
+        }
+
+        public string CurAlramWtRangeDesc
+        {
+            get { return this._AlarmRangeText; }
+
+            set
+            {
+                if (value != this._AlarmRangeText)
+                {
+                    this._AlarmRangeText = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
 
         public string CurrentJoint
         {
@@ -408,7 +485,42 @@ namespace uct_Weight_wpf
                 }
             }
         }
-        
+
+        public string CurrentMaterial
+        {
+            get
+            {
+                return curMaterial;
+            }
+            set
+            {
+                if (value != this.curMaterial)
+                {
+                    this.curMaterial = value;
+                    NotifyPropertyChanged();
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
+                }
+            }
+        }
+
+        public string CurrentStandard
+        {
+            get
+            {
+                return curStandard;
+            }
+            set
+            {
+                if (value != this.curStandard)
+                {
+                    this.curStandard = value;
+                    NotifyPropertyChanged();
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
+                }
+            }
+        }
         public string CurrentMachine
         {
             get
@@ -425,6 +537,80 @@ namespace uct_Weight_wpf
                 }
             }
         }
+
+
+        public string CurrentOperator
+        {
+            get
+            {
+                return curEmpCode;
+            }
+            set
+            {
+                if (value != this.curEmpCode)
+                {
+                    this.curEmpCode = value;
+                    NotifyPropertyChanged();
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
+                }
+            }
+        }
+        public string CurrentOperatorName
+        {
+            get
+            {
+                return this.curEmpName;
+            }
+
+            set
+            {
+                if (value != this.curEmpName)
+                {
+                    this.curEmpName = value;
+                    NotifyPropertyChanged();
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
+                }
+            }
+        }
+
+        public string CurrentOperatorDetails
+        {
+            get 
+            {
+                return curOperatorDetails;                    
+            }
+
+            set {
+                if(value != this.curOperatorDetails)
+                {
+                    this.curOperatorDetails = value;
+                    NotifyPropertyChanged();
+                    //if (this.isDataSaveRequired)
+                    //    SaveLastParameters();
+                }
+                
+            }
+            
+        }
+
+
+        public string CurrentPunch
+        {
+            get { return this.curPunch; }
+            set 
+            { 
+                if (value != this.curPunch)
+                {
+                    this.curPunch = value;
+                    NotifyPropertyChanged();
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
+                }
+            }
+        }
+
 
         public string CurrentWeightClient
         {
@@ -445,12 +631,12 @@ namespace uct_Weight_wpf
 
                 
         public bool Connect(string tRBMQServer,string tSQLConnection,
-            List<string> tLengths, List<string> tClasses, List<string> tSizes ,
+            List<string> tLengths, List<string> tClasses, List<string> tSizes , List<string> tMaterials, List<string> tStandards,
             string tMachineID, string tTcpWeightClient, string tCurrentTable, bool tisDataSaveRequired = false
             )
         {
 
-           
+            
             
             this.RBMQServer = tRBMQServer;
             this.curSQLConStr = tSQLConnection;
@@ -482,6 +668,8 @@ namespace uct_Weight_wpf
             Lengths = tLengths;
             Classes = tClasses;
             Sizes = tSizes;
+            Materials = tMaterials;
+            Standards = tStandards;
             LoadLastParameters();
             Start_RBMQ_Client();
             shutdown = false;
@@ -522,7 +710,6 @@ namespace uct_Weight_wpf
                                 }
                             }
 
-
                             Thread.Sleep(1000);
 
                         }//while true;
@@ -557,11 +744,19 @@ namespace uct_Weight_wpf
                 CurrentLength = dr["LastLength"].ToString();
                 CurrentSize = dr["LastSize"].ToString();
                 CurrentMinWt = Convert.ToDouble(dr["LastMinWt"]);
-                
+                curAlmMinWt = Convert.ToDouble(dr["LastAlmMinWt"]);
+                curAlmMaxWt = Convert.ToDouble(dr["LastAlmMaxWt"]);
+
+                CurAlramWtRangeDesc = "Min/Max : " + dr["LastAlmMinWt"].ToString() + " / " + dr["LastAlmMaxWt"].ToString();
                 CurrentMaxWt = Convert.ToDouble(dr["LastMaxWt"]);
                 CurrentNomWt = Convert.ToDouble(dr["LastNomWt"]);
                 CurrentMould = dr["LastMould"].ToString();
                 CurrentJoint = dr["LastJoint"].ToString();
+                CurrentMaterial = dr["LastMaterial"].ToString();
+                CurrentStandard = dr["LastStandard"].ToString();
+                CurrentOperator = dr["LastOperatorCode"].ToString();
+                CurrentOperatorName = dr["LastOperatorName"].ToString();
+                CurrentOperatorDetails = CurrentOperator + ":" + CurrentOperatorName + "," + dr["LastPunch"].ToString();
             }
 
             ds.Dispose();
@@ -595,12 +790,15 @@ namespace uct_Weight_wpf
                     //LastNomWt	float	Checked
                     //LastJoint	varchar(50)	Checked
                     //LastMould	varchar(50)	Checked
-                     
+                    //LastMaterial varchar(50)
+                    //LastStandard varchar(50)
+                    //UpdDt datetime
                      
                      cn.Open();
                      using (SqlCommand cmd = new SqlCommand())
                      {
-                         string sql = "Insert into ccmLastPara (MachineID,LastSize,LastLength,LastClass,LastMinWt,LastMaxWt,LastNomWt,LastJoint,LastMould,UpdDt)" +
+                         string sql = "Insert into ccmLastPara (MachineID,LastSize,LastLength,LastClass,LastMinWt,LastMaxWt,LastNomWt," + 
+                            " LastAlmMinWt,LastAlmMaxWt,LastJoint,LastMould,LastMaterial,LastStandard,LastOperatorCode,LastOperatorName,LastPunch,UpdDt)" +
                              " Values ('" + curMachine.ToString() + "'," +
                              "'" + CurrentSize.ToString() + "'," +
                              "'" + CurrentLength.ToString() + "'," +
@@ -608,8 +806,15 @@ namespace uct_Weight_wpf
                              "'" + CurrentMinWt.ToString() + "'," +
                              "'" + CurrentMaxWt.ToString() + "'," +
                              "'" + CurrentNomWt.ToString() + "'," +
+                             "'" + CurrentAlmMinWt.ToString() + "'," +
+                             "'" + CurrentAlmMaxWt.ToString() + "'," +
                              "'" + CurrentJoint.ToString() + "'," +
-                             "'" + CurrentMould.ToString() + "',GetDate())";
+                             "'" + CurrentMould.ToString() + "'," +
+                             "'" + CurrentMaterial.ToString() + "'," +
+                             "'" + CurrentStandard.ToString() + "'," +
+                             "'" + CurrentOperator.ToString() + "'," +
+                             "'" + CurrentOperatorName.ToString() + "'," +
+                             "'" + CurrentPunch.ToString() + "',GetDate())";
                          cmd.Connection = cn;
                          cmd.CommandType = CommandType.Text;
                          cmd.CommandText = sql;
@@ -666,8 +871,72 @@ namespace uct_Weight_wpf
             return Result;
         }
 
+        public  string GetDescription(string sql, string ConnectionString, out string err)
+        {
+            object result;
+            err = string.Empty;
+
+            string returndesc = string.Empty;
+            if (string.IsNullOrEmpty(sql))
+            {
+                return returndesc;
+            }
+
+            if (string.IsNullOrEmpty(ConnectionString))
+            {
+                return returndesc;
+            }
+
+            if (sql.Contains("insert"))
+            {
+                return returndesc;
+            }
+            if (sql.Contains("update"))
+            {
+                return returndesc;
+            }
+            if (sql.Contains("delete"))
+            {
+                return returndesc;
+            }
+
+            if (!sql.ToUpper().Trim().Contains("TOP 1"))
+            {
+                sql = sql.ToUpper().Replace("SELECT", "SELECT TOP 1 ");
+            }
+
+            SqlConnection conn = new SqlConnection(ConnectionString);
+            SqlCommand command = new SqlCommand(sql, conn) { CommandType = CommandType.Text };
+
+
+            try
+            {
+                conn.Open();
+                command.CommandTimeout = 1500;
+                result = command.ExecuteScalar();
+
+                if (result != null)
+                    returndesc = Convert.ToString(result);
+
+                conn.Close();
+            }
+            catch (SqlException ex) { err = ex.Message.ToString(); }
+            catch (Exception ex) { err = ex.Message.ToString(); }
+            finally
+            {
+                conn.Close();
+            }
+
+            return returndesc;
+        }
+
+
         private bool Start_RBMQ_Client()
         {
+            curTimer.Interval = 5000;
+            curTimer.Elapsed += CurTimer_Elapsed;
+            curTimer.Start();
+
             if (string.IsNullOrEmpty(this.RBMQServer))
             {
                 this.RBMQServer = "amqp://anand:anand123@172.16.12.44:5672/CCM";
@@ -717,7 +986,7 @@ namespace uct_Weight_wpf
                     consumer = new EventingBasicConsumer(channel);
                     consumer.Received += (model, ea) =>
                     {
-                        var body = ea.Body;
+                        var body = ea.Body.ToArray(); 
                         string message = Encoding.UTF8.GetString(body);
                         var routingKey = ea.RoutingKey;
 
@@ -823,6 +1092,34 @@ namespace uct_Weight_wpf
             return true;
         }
 
+        private void CurTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            this.curTimer.Stop();
+            //operator information
+            string err = string.Empty;
+            string sql = "select RFIP from v_ccm_rf_link where ccmTable ='" + this.curTableNm + "'";
+            string rfip = GetDescription(sql, curSQLConStr, out err);
+
+            if (!string.IsNullOrEmpty(rfip))
+            {
+                sql = "Select Top 1 * from ccmRFIDTransaction where MachineIP ='" + rfip + "' Order by PunchTime Desc";
+                DataSet ds = GetData(sql, curSQLConStr, out err);
+                bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+                if (hasRows)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        this.CurrentOperator = dr["OperatorCode"].ToString();
+                        this.CurrentPunch = Convert.ToDateTime(dr["PunchTime"]).ToString("dd/MM/yy HH:mm:ss");
+                        this.CurrentOperatorName = GetDescription("Select OperatorName from ccmRFIDOperator where OperatorCode ='" + CurrentOperator + "'", curSQLConStr, out err);
+                        //this.curOperatorDetails = this.CurrentOperator + ":" + this.CurrentOperatorName + "," + this.CurrentPunch;
+                        this.CurrentOperatorDetails = this.CurrentOperator + " : " + this.CurrentOperatorName + " , " + this.CurrentPunch;
+                    }
+                }
+            }
+            this.curTimer.Start();
+        }
+
         private bool Publish_RBMQ_MSG(string message, string routingkey)
         {
             if (channel.IsOpen && !string.IsNullOrEmpty(message))
@@ -881,6 +1178,10 @@ namespace uct_Weight_wpf
         
         private bool STOP_RBMQ_Client()
         {
+            this.curTimer.Stop();
+            this.curTimer.Elapsed -= CurTimer_Elapsed;
+            this.curTimer.Close();
+
             try
             {
                 if (conn != null && channel != null)
@@ -964,7 +1265,7 @@ namespace uct_Weight_wpf
                         this.LastWeight = dr["ActWt"].ToString();
                     }
                 }
-                
+
                 
                 Thread.Sleep(1000);
 

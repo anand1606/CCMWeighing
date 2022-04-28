@@ -173,7 +173,11 @@ namespace uct_Weight_wpf
                     model.CurrentMinWt = (double)dr["MinWt"];
                     model.CurrentMaxWt = (double)dr["MaxWt"];
                     model.CurrentNomWt = (double)dr["NomWt"];
-                }                
+                    model.CurrentAlmMinWt = (double)dr["AlmMinWt"];
+                    model.CurrentAlmMaxWt = (double)dr["AlmMaxWt"];
+
+                    model.CurAlramWtRangeDesc = "Min/Max : " + dr["AlmMinWt"].ToString() + " / " + dr["AlmMaxWt"].ToString(); 
+                } 
             }
         }
 
@@ -187,5 +191,14 @@ namespace uct_Weight_wpf
             GetWeightInfo();
         }
 
+        private void sel_Material_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void sel_Standard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

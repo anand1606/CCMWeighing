@@ -48,11 +48,17 @@
             this.txtNomWt = new DevExpress.XtraEditors.SpinEdit();
             this.btnExport = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.txtAlmMinWt = new DevExpress.XtraEditors.SpinEdit();
+            this.txtAlmMaxWt = new DevExpress.XtraEditors.SpinEdit();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridWt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gv_Wt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMinWt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxWt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNomWt.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAlmMinWt.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAlmMaxWt.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridWt
@@ -62,7 +68,7 @@
             this.gridWt.MainView = this.gv_Wt;
             this.gridWt.Margin = new System.Windows.Forms.Padding(4);
             this.gridWt.Name = "gridWt";
-            this.gridWt.Size = new System.Drawing.Size(607, 388);
+            this.gridWt.Size = new System.Drawing.Size(607, 465);
             this.gridWt.TabIndex = 15;
             this.gridWt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gv_Wt});
@@ -83,7 +89,6 @@
             this.gv_Wt.OptionsFilter.AllowFilterEditor = false;
             this.gv_Wt.OptionsFilter.AllowFilterIncrementalSearch = false;
             this.gv_Wt.OptionsFilter.AllowMRUFilterList = false;
-            this.gv_Wt.OptionsFilter.FilterEditorUseMenuForOperandsAndOperators = false;
             this.gv_Wt.OptionsFind.AllowFindPanel = false;
             this.gv_Wt.OptionsMenu.EnableColumnMenu = false;
             this.gv_Wt.OptionsMenu.EnableFooterMenu = false;
@@ -101,44 +106,44 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(120, 332);
+            this.btnCancel.Location = new System.Drawing.Point(121, 399);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 41);
-            this.btnCancel.TabIndex = 19;
+            this.btnCancel.TabIndex = 43;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(12, 332);
+            this.btnDelete.Location = new System.Drawing.Point(13, 399);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 41);
-            this.btnDelete.TabIndex = 18;
+            this.btnDelete.TabIndex = 42;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(120, 283);
+            this.btnUpdate.Location = new System.Drawing.Point(121, 350);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 41);
-            this.btnUpdate.TabIndex = 17;
+            this.btnUpdate.TabIndex = 41;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 283);
+            this.btnAdd.Location = new System.Drawing.Point(13, 350);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(100, 41);
-            this.btnAdd.TabIndex = 16;
+            this.btnAdd.TabIndex = 40;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -149,7 +154,7 @@
             this.label1.Location = new System.Drawing.Point(23, 58);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 16);
+            this.label1.Size = new System.Drawing.Size(33, 16);
             this.label1.TabIndex = 22;
             this.label1.Text = "Size";
             // 
@@ -159,7 +164,7 @@
             this.label2.Location = new System.Drawing.Point(23, 134);
             this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 16);
+            this.label2.Size = new System.Drawing.Size(47, 16);
             this.label2.TabIndex = 25;
             this.label2.Text = "Length";
             // 
@@ -169,7 +174,7 @@
             this.label3.Location = new System.Drawing.Point(23, 171);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 16);
+            this.label3.Size = new System.Drawing.Size(53, 16);
             this.label3.TabIndex = 28;
             this.label3.Text = "Min. Wt.";
             // 
@@ -179,7 +184,7 @@
             this.label6.Location = new System.Drawing.Point(23, 245);
             this.label6.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(62, 16);
+            this.label6.Size = new System.Drawing.Size(61, 16);
             this.label6.TabIndex = 31;
             this.label6.Text = "Nom. Wt.";
             // 
@@ -189,7 +194,7 @@
             this.label4.Location = new System.Drawing.Point(23, 95);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 16);
+            this.label4.Size = new System.Drawing.Size(41, 16);
             this.label4.TabIndex = 29;
             this.label4.Text = "Class";
             // 
@@ -199,7 +204,7 @@
             this.label5.Location = new System.Drawing.Point(23, 208);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(55, 16);
+            this.label5.Size = new System.Drawing.Size(54, 16);
             this.label5.TabIndex = 30;
             this.label5.Text = "Max Wt.";
             // 
@@ -289,11 +294,11 @@
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(12, 381);
+            this.btnExport.Location = new System.Drawing.Point(13, 448);
             this.btnExport.Margin = new System.Windows.Forms.Padding(4);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(208, 41);
-            this.btnExport.TabIndex = 38;
+            this.btnExport.TabIndex = 44;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
@@ -304,15 +309,73 @@
             this.label7.Location = new System.Drawing.Point(239, 14);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(97, 16);
+            this.label7.Size = new System.Drawing.Size(96, 16);
             this.label7.TabIndex = 39;
             this.label7.Text = "List of Records";
+            // 
+            // txtAlmMinWt
+            // 
+            this.txtAlmMinWt.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtAlmMinWt.Location = new System.Drawing.Point(101, 280);
+            this.txtAlmMinWt.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAlmMinWt.Name = "txtAlmMinWt";
+            this.txtAlmMinWt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAlmMinWt.Properties.Appearance.Options.UseFont = true;
+            this.txtAlmMinWt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtAlmMinWt.Size = new System.Drawing.Size(120, 22);
+            this.txtAlmMinWt.TabIndex = 38;
+            // 
+            // txtAlmMaxWt
+            // 
+            this.txtAlmMaxWt.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.txtAlmMaxWt.Location = new System.Drawing.Point(101, 310);
+            this.txtAlmMaxWt.Margin = new System.Windows.Forms.Padding(4);
+            this.txtAlmMaxWt.Name = "txtAlmMaxWt";
+            this.txtAlmMaxWt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAlmMaxWt.Properties.Appearance.Options.UseFont = true;
+            this.txtAlmMaxWt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtAlmMaxWt.Size = new System.Drawing.Size(120, 22);
+            this.txtAlmMaxWt.TabIndex = 39;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(4, 283);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(88, 16);
+            this.label8.TabIndex = 42;
+            this.label8.Text = "Alarm Min Wt.";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(4, 313);
+            this.label9.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(92, 16);
+            this.label9.TabIndex = 43;
+            this.label9.Text = "Alarm Max Wt.";
             // 
             // frmWeightMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 433);
+            this.ClientSize = new System.Drawing.Size(864, 508);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtAlmMaxWt);
+            this.Controls.Add(this.txtAlmMinWt);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.txtNomWt);
@@ -342,6 +405,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtMinWt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtMaxWt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtNomWt.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAlmMinWt.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtAlmMaxWt.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -369,5 +434,9 @@
         private DevExpress.XtraEditors.SpinEdit txtNomWt;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Label label7;
+        private DevExpress.XtraEditors.SpinEdit txtAlmMinWt;
+        private DevExpress.XtraEditors.SpinEdit txtAlmMaxWt;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

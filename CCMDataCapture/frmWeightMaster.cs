@@ -111,7 +111,7 @@ namespace CCMDataCapture
         private void LoadGrid()
         {
             DataSet ds = new DataSet();
-            string sql = "select Size,Class,Len,MinWt,MaxWt,NomWt from ccmWeightMaster where 1 = 1 ";
+            string sql = "select Size,Class,Len,MinWt,MaxWt,NomWt,AlmMinWt,AlmMaxWt from ccmWeightMaster where 1 = 1 ";
             string err = string.Empty;
 
             ds = Utility.GetData(sql, cnstr, out err);
@@ -155,7 +155,10 @@ namespace CCMDataCapture
                     txtMinWt.EditValue = dr["MinWt"];
                     txtMaxWt.EditValue = dr["MaxWt"];
                     txtNomWt.EditValue = dr["NomWt"];
+                    txtAlmMinWt.EditValue = dr["AlmMinWt"];
+                    txtAlmMaxWt.EditValue = dr["AlmMaxWt"];
                 }
+
                 mode = "OLD";
                 btnAdd.Enabled = false;
                 btnUpdate.Enabled = true;
@@ -206,11 +209,23 @@ namespace CCMDataCapture
                 err = err + "Please Enter Nominal Weight" + Environment.NewLine;
             }
 
-            double tMin = 0, tMax = 0, tNom = 0;
+            if (txtAlmMinWt.EditValue == null)
+            {
+                err = err + "Please Enter Alarm Min Weight" + Environment.NewLine;
+            }
+
+            if (txtAlmMaxWt.EditValue == null)
+            {
+                err = err + "Please Enter Alarm Max Weight" + Environment.NewLine;
+            }
+
+            double tMin = 0, tMax = 0, tNom = 0, tAlmMin = 0, tAlmMax = 0;
             double.TryParse(txtMinWt.EditValue.ToString(), out tMin);
             double.TryParse(txtMaxWt.EditValue.ToString(), out tMax);
             double.TryParse(txtNomWt.EditValue.ToString(), out tNom);
-
+            double.TryParse(txtAlmMinWt.EditValue.ToString(),out tAlmMin);
+            double.TryParse(txtAlmMaxWt.EditValue.ToString(),out tAlmMax);
+ 
             if (tMin == 0 || tMax == 0 || tMax == 0)
             {
                 err = err + "Please Enter Valid Min/Max/Nom Weight" + Environment.NewLine;
@@ -248,6 +263,16 @@ namespace CCMDataCapture
                 err = err + "Nominal Weight must be less than Maximum Weight" + Environment.NewLine;
             }
 
+            if(tAlmMin > tMin)
+            {
+                err = err + "Alarm Min Weight must be less than Minimum Weight" + Environment.NewLine;
+            }
+
+            if (tAlmMax < tMax)
+            {
+                err = err + "Alarm Max Weight must be gretor than Maximum Weight" + Environment.NewLine;
+            }
+
             return err;
         }
 
@@ -260,6 +285,9 @@ namespace CCMDataCapture
             txtMinWt.EditValue = 0;
             txtMaxWt.EditValue = 0;
             txtNomWt.EditValue = 0;
+
+            txtAlmMaxWt.EditValue = 0;
+            txtAlmMinWt.EditValue = 0;
 
             txtSize.SelectedIndex = -1;
             txtClass.SelectedIndex = -1;
@@ -288,14 +316,16 @@ namespace CCMDataCapture
                     {
                         cn.Open();
                         cmd.Connection = cn;
-                        string sql = "Insert into ccmWeightMaster (Size,Class,Len,MinWt,MaxWt,NomWt,AddDt) Values ('{0}','{1}','{2}','{3}','{4}','{5}',GetDate())";
+                        string sql = "Insert into ccmWeightMaster (Size,Class,Len,MinWt,MaxWt,NomWt,AlmMinWt,AlmMaxWt,AddDt) Values ('{0}','{1}','{2}','{3}','{4}','{5}',GetDate())";
                         sql = string.Format(sql, 
                             txtSize.Text.ToString(),
                             txtClass.Text.ToString(),
                             txtLength.Text.ToString(),
                             txtMinWt.EditValue.ToString(),
                             txtMaxWt.EditValue.ToString(),
-                            txtNomWt.EditValue.ToString()
+                            txtNomWt.EditValue.ToString(),
+                            txtAlmMinWt.EditValue.ToString(), 
+                            txtAlmMaxWt.EditValue.ToString()
                             );
 
                         cmd.CommandText = sql;
@@ -330,14 +360,16 @@ namespace CCMDataCapture
                     {
                         cn.Open();
                         cmd.Connection = cn;
-                        string sql = "Update ccmWeightMaster Set MinWt='{0}',MaxWt='{1}',NomWt='{2}', UpdDt = GetDate() " +                           
-                            " Where Size = '{3}' And Class = '{4}' And Len = '{5}' ";
+                        string sql = "Update ccmWeightMaster Set MinWt='{0}',MaxWt='{1}',NomWt='{2}',AlmMinWt = '{3}', AlmMaxWt = '{4}', UpdDt = GetDate() " +                           
+                            " Where Size = '{5}' And Class = '{6}' And Len = '{7}' ";
 
                         //txtEmailAccount.Text.ToString().trim(),
                         sql = string.Format(sql,
                              txtMinWt.EditValue.ToString(),
                              txtMaxWt.EditValue.ToString(),
                              txtNomWt.EditValue.ToString(),
+                             txtAlmMinWt.EditValue.ToString(),
+                             txtAlmMaxWt.EditValue.ToString(),
                              txtSize.Text.ToString(),
                              txtClass.Text.ToString(),
                              txtLength.Text.ToString()
@@ -440,6 +472,8 @@ namespace CCMDataCapture
                 txtMinWt.EditValue = gv_Wt.GetRowCellValue(info.RowHandle, "MinWt").ToString();
                 txtMaxWt.EditValue = gv_Wt.GetRowCellValue(info.RowHandle, "MaxWt").ToString();
                 txtNomWt.EditValue = gv_Wt.GetRowCellValue(info.RowHandle, "NomWt").ToString();
+                txtAlmMinWt.EditValue = gv_Wt.GetRowCellValue(info.RowHandle, "AlmMinWt").ToString();
+                txtAlmMaxWt.EditValue = gv_Wt.GetRowCellValue(info.RowHandle, "AlmMaxWt").ToString();
                 SetMode();
             }
         }

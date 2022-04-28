@@ -29,30 +29,60 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tblp_Machines = new System.Windows.Forms.TableLayoutPanel();
-            this.elementHost4 = new System.Windows.Forms.Integration.ElementHost();
-            this.weightCanwas4 = new uct_Weight_wpf.WeightCanwas();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.weightCanwas1 = new uct_Weight_wpf.WeightCanwas();
-            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
-            this.weightCanwas2 = new uct_Weight_wpf.WeightCanwas();
-            this.elementHost3 = new System.Windows.Forms.Integration.ElementHost();
-            this.weightCanwas3 = new uct_Weight_wpf.WeightCanwas();
+            this.tblp_Main = new System.Windows.Forms.TableLayoutPanel();
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.tbp_Machines = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.btnModbusSetting = new System.Windows.Forms.Button();
+            this.btnRFIDSetting = new System.Windows.Forms.Button();
+            this.btnEmailSetting = new System.Windows.Forms.Button();
+            this.btnWeightSetting = new System.Windows.Forms.Button();
+            this.btnMasterData = new System.Windows.Forms.Button();
+            this.btnDefect = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.grpShiftIncharge = new System.Windows.Forms.GroupBox();
             this.btnSaveIncharge = new System.Windows.Forms.Button();
-            this.btnDefect = new System.Windows.Forms.Button();
             this.txtIncharge = new DevExpress.XtraEditors.TextEdit();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.txtCurDate = new DevExpress.XtraEditors.DateEdit();
             this.label25 = new System.Windows.Forms.Label();
             this.txtShift = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
-            this.btnMasterData = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.tblp_Main = new System.Windows.Forms.TableLayoutPanel();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.tbp_Machines = new DevExpress.XtraTab.XtraTabPage();
+            this.elm_main_6 = new System.Windows.Forms.Integration.ElementHost();
+            this.mainCanwas6 = new uct_main_wpf.mainCanwas();
+            this.elm_main_5 = new System.Windows.Forms.Integration.ElementHost();
+            this.mainCanwas5 = new uct_main_wpf.mainCanwas();
+            this.elm_main_4 = new System.Windows.Forms.Integration.ElementHost();
+            this.mainCanwas4 = new uct_main_wpf.mainCanwas();
+            this.elm_main_3 = new System.Windows.Forms.Integration.ElementHost();
+            this.mainCanwas3 = new uct_main_wpf.mainCanwas();
+            this.elm_main_2 = new System.Windows.Forms.Integration.ElementHost();
+            this.mainCanwas2 = new uct_main_wpf.mainCanwas();
+            this.elm_main_1 = new System.Windows.Forms.Integration.ElementHost();
+            this.mainCanwas1 = new uct_main_wpf.mainCanwas();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabWeight = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabCCM1 = new DevExpress.XtraTab.XtraTabPage();
+            this.elm_wt_1 = new System.Windows.Forms.Integration.ElementHost();
+            this.weightCanwas1 = new uct_Weight_wpf.WeightCanwas();
+            this.xtraTabCCM2 = new DevExpress.XtraTab.XtraTabPage();
+            this.elm_wt_2 = new System.Windows.Forms.Integration.ElementHost();
+            this.weightCanwas2 = new uct_Weight_wpf.WeightCanwas();
+            this.xtraTabCCM3 = new DevExpress.XtraTab.XtraTabPage();
+            this.elm_wt_3 = new System.Windows.Forms.Integration.ElementHost();
+            this.weightCanwas3 = new uct_Weight_wpf.WeightCanwas();
+            this.xtraTabCCM4 = new DevExpress.XtraTab.XtraTabPage();
+            this.elm_wt_4 = new System.Windows.Forms.Integration.ElementHost();
+            this.weightCanwas4 = new uct_Weight_wpf.WeightCanwas();
+            this.xtraTabCCM5 = new DevExpress.XtraTab.XtraTabPage();
+            this.elm_wt_5 = new System.Windows.Forms.Integration.ElementHost();
+            this.weightCanwas5 = new uct_Weight_wpf.WeightCanwas();
+            this.xtraTabCCM6 = new DevExpress.XtraTab.XtraTabPage();
+            this.elm_wt_6 = new System.Windows.Forms.Integration.ElementHost();
+            this.weightCanwas6 = new uct_Weight_wpf.WeightCanwas();
             this.tbp_10Pipes = new DevExpress.XtraTab.XtraTabPage();
             this.tblp_10Pipes = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -116,17 +146,32 @@
             this.grdLog = new DevExpress.XtraGrid.GridControl();
             this.gvLog = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.tblp_Machines.SuspendLayout();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gridOverWt = new DevExpress.XtraGrid.GridControl();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.tblp_Main.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
+            this.tbp_Machines.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
+            this.xtraTabControl2.SuspendLayout();
+            this.xtraTabPage1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.grpShiftIncharge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtIncharge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCurDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCurDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtShift.Properties)).BeginInit();
-            this.groupBox15.SuspendLayout();
-            this.tblp_Main.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.tbp_Machines.SuspendLayout();
+            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabWeight)).BeginInit();
+            this.xtraTabWeight.SuspendLayout();
+            this.xtraTabCCM1.SuspendLayout();
+            this.xtraTabCCM2.SuspendLayout();
+            this.xtraTabCCM3.SuspendLayout();
+            this.xtraTabCCM4.SuspendLayout();
+            this.xtraTabCCM5.SuspendLayout();
+            this.xtraTabCCM6.SuspendLayout();
             this.tbp_10Pipes.SuspendLayout();
             this.tblp_10Pipes.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -165,199 +210,10 @@
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvLog)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridOverWt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tblp_Machines
-            // 
-            this.tblp_Machines.BackColor = System.Drawing.Color.Transparent;
-            this.tblp_Machines.ColumnCount = 3;
-            this.tblp_Machines.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 489F));
-            this.tblp_Machines.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 489F));
-            this.tblp_Machines.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 239F));
-            this.tblp_Machines.Controls.Add(this.elementHost4, 1, 1);
-            this.tblp_Machines.Controls.Add(this.elementHost1, 0, 0);
-            this.tblp_Machines.Controls.Add(this.elementHost2, 1, 0);
-            this.tblp_Machines.Controls.Add(this.elementHost3, 0, 1);
-            this.tblp_Machines.Controls.Add(this.grpShiftIncharge, 2, 0);
-            this.tblp_Machines.Controls.Add(this.groupBox15, 2, 1);
-            this.tblp_Machines.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblp_Machines.Location = new System.Drawing.Point(0, 0);
-            this.tblp_Machines.Name = "tblp_Machines";
-            this.tblp_Machines.RowCount = 3;
-            this.tblp_Machines.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 220F));
-            this.tblp_Machines.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 220F));
-            this.tblp_Machines.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tblp_Machines.Size = new System.Drawing.Size(1129, 707);
-            this.tblp_Machines.TabIndex = 6;
-            // 
-            // elementHost4
-            // 
-            this.elementHost4.Location = new System.Drawing.Point(492, 223);
-            this.elementHost4.Name = "elementHost4";
-            this.elementHost4.Size = new System.Drawing.Size(483, 212);
-            this.elementHost4.TabIndex = 15;
-            this.elementHost4.Text = "elementHost4";
-            this.elementHost4.Child = this.weightCanwas4;
-            // 
-            // elementHost1
-            // 
-            this.elementHost1.Location = new System.Drawing.Point(3, 3);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(483, 214);
-            this.elementHost1.TabIndex = 7;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.weightCanwas1;
-            // 
-            // elementHost2
-            // 
-            this.elementHost2.Location = new System.Drawing.Point(492, 3);
-            this.elementHost2.Name = "elementHost2";
-            this.elementHost2.Size = new System.Drawing.Size(483, 214);
-            this.elementHost2.TabIndex = 8;
-            this.elementHost2.Text = "elementHost2";
-            this.elementHost2.Child = this.weightCanwas2;
-            // 
-            // elementHost3
-            // 
-            this.elementHost3.Location = new System.Drawing.Point(3, 223);
-            this.elementHost3.Name = "elementHost3";
-            this.elementHost3.Size = new System.Drawing.Size(483, 212);
-            this.elementHost3.TabIndex = 9;
-            this.elementHost3.Text = "elementHost3";
-            this.elementHost3.Child = this.weightCanwas3;
-            // 
-            // grpShiftIncharge
-            // 
-            this.grpShiftIncharge.AutoSize = true;
-            this.grpShiftIncharge.Controls.Add(this.btnSaveIncharge);
-            this.grpShiftIncharge.Controls.Add(this.btnDefect);
-            this.grpShiftIncharge.Controls.Add(this.txtIncharge);
-            this.grpShiftIncharge.Controls.Add(this.label27);
-            this.grpShiftIncharge.Controls.Add(this.label26);
-            this.grpShiftIncharge.Controls.Add(this.txtCurDate);
-            this.grpShiftIncharge.Controls.Add(this.label25);
-            this.grpShiftIncharge.Controls.Add(this.txtShift);
-            this.grpShiftIncharge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grpShiftIncharge.Location = new System.Drawing.Point(981, 3);
-            this.grpShiftIncharge.Name = "grpShiftIncharge";
-            this.grpShiftIncharge.Size = new System.Drawing.Size(233, 214);
-            this.grpShiftIncharge.TabIndex = 13;
-            this.grpShiftIncharge.TabStop = false;
-            this.grpShiftIncharge.Text = "Shift Parameters";
-            // 
-            // btnSaveIncharge
-            // 
-            this.btnSaveIncharge.Location = new System.Drawing.Point(6, 136);
-            this.btnSaveIncharge.Name = "btnSaveIncharge";
-            this.btnSaveIncharge.Size = new System.Drawing.Size(137, 27);
-            this.btnSaveIncharge.TabIndex = 25;
-            this.btnSaveIncharge.Text = "Save";
-            this.btnSaveIncharge.UseVisualStyleBackColor = true;
-            this.btnSaveIncharge.Click += new System.EventHandler(this.btnSaveIncharge_Click);
-            // 
-            // btnDefect
-            // 
-            this.btnDefect.Location = new System.Drawing.Point(6, 169);
-            this.btnDefect.Name = "btnDefect";
-            this.btnDefect.Size = new System.Drawing.Size(137, 27);
-            this.btnDefect.TabIndex = 26;
-            this.btnDefect.Text = "Quality Result";
-            this.btnDefect.UseVisualStyleBackColor = true;
-            this.btnDefect.Click += new System.EventHandler(this.btnDefect_Click);
-            // 
-            // txtIncharge
-            // 
-            this.txtIncharge.Location = new System.Drawing.Point(6, 110);
-            this.txtIncharge.Name = "txtIncharge";
-            this.txtIncharge.Size = new System.Drawing.Size(137, 20);
-            this.txtIncharge.TabIndex = 24;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(6, 87);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(93, 13);
-            this.label27.TabIndex = 23;
-            this.label27.Text = "Name of Incharge";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(6, 60);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(29, 13);
-            this.label26.TabIndex = 22;
-            this.label26.Text = "Shift";
-            // 
-            // txtCurDate
-            // 
-            this.txtCurDate.EditValue = null;
-            this.txtCurDate.Location = new System.Drawing.Point(49, 23);
-            this.txtCurDate.Name = "txtCurDate";
-            this.txtCurDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtCurDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtCurDate.Properties.ReadOnly = true;
-            this.txtCurDate.Size = new System.Drawing.Size(96, 20);
-            this.txtCurDate.TabIndex = 20;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(6, 24);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(30, 13);
-            this.label25.TabIndex = 1;
-            this.label25.Text = "Date";
-            // 
-            // txtShift
-            // 
-            this.txtShift.Location = new System.Drawing.Point(49, 59);
-            this.txtShift.Name = "txtShift";
-            this.txtShift.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtShift.Properties.Items.AddRange(new object[] {
-            "A",
-            "B",
-            "C"});
-            this.txtShift.Properties.ReadOnly = true;
-            this.txtShift.Size = new System.Drawing.Size(94, 20);
-            this.txtShift.TabIndex = 21;
-            // 
-            // groupBox15
-            // 
-            this.groupBox15.Controls.Add(this.btnMasterData);
-            this.groupBox15.Controls.Add(this.btnClose);
-            this.groupBox15.Location = new System.Drawing.Point(981, 223);
-            this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(145, 212);
-            this.groupBox15.TabIndex = 14;
-            this.groupBox15.TabStop = false;
-            this.groupBox15.Text = "Settings";
-            // 
-            // btnMasterData
-            // 
-            this.btnMasterData.Location = new System.Drawing.Point(6, 56);
-            this.btnMasterData.Name = "btnMasterData";
-            this.btnMasterData.Size = new System.Drawing.Size(133, 27);
-            this.btnMasterData.TabIndex = 30;
-            this.btnMasterData.Text = "Master Data";
-            this.btnMasterData.UseVisualStyleBackColor = true;
-            this.btnMasterData.Click += new System.EventHandler(this.btnMasterData_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.BackColor = System.Drawing.Color.Yellow;
-            this.btnClose.ForeColor = System.Drawing.Color.Red;
-            this.btnClose.Location = new System.Drawing.Point(6, 170);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(137, 36);
-            this.btnClose.TabIndex = 6;
-            this.btnClose.Text = "&Exit";
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // tblp_Main
             // 
@@ -407,10 +263,416 @@
             // 
             this.tbp_Machines.Appearance.PageClient.BackColor = System.Drawing.Color.WhiteSmoke;
             this.tbp_Machines.Appearance.PageClient.Options.UseBackColor = true;
-            this.tbp_Machines.Controls.Add(this.tblp_Machines);
+            this.tbp_Machines.Controls.Add(this.xtraTabControl2);
             this.tbp_Machines.Name = "tbp_Machines";
             this.tbp_Machines.Size = new System.Drawing.Size(1129, 707);
             this.tbp_Machines.Text = "Machines";
+            // 
+            // xtraTabControl2
+            // 
+            this.xtraTabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl2.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControl2.Name = "xtraTabControl2";
+            this.xtraTabControl2.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl2.Size = new System.Drawing.Size(1129, 707);
+            this.xtraTabControl2.TabIndex = 0;
+            this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2});
+            // 
+            // xtraTabPage1
+            // 
+            this.xtraTabPage1.Controls.Add(this.tableLayoutPanel1);
+            this.xtraTabPage1.Name = "xtraTabPage1";
+            this.xtraTabPage1.Size = new System.Drawing.Size(1123, 679);
+            this.xtraTabPage1.Text = "Main Screen";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Controls.Add(this.groupBox15, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.grpShiftIncharge, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.elm_main_6, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.elm_main_5, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.elm_main_4, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.elm_main_3, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.elm_main_2, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.elm_main_1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(5);
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1123, 679);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.btnModbusSetting);
+            this.groupBox15.Controls.Add(this.btnRFIDSetting);
+            this.groupBox15.Controls.Add(this.btnEmailSetting);
+            this.groupBox15.Controls.Add(this.btnWeightSetting);
+            this.groupBox15.Controls.Add(this.btnMasterData);
+            this.groupBox15.Controls.Add(this.btnDefect);
+            this.groupBox15.Controls.Add(this.btnClose);
+            this.groupBox15.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox15.Location = new System.Drawing.Point(379, 438);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Size = new System.Drawing.Size(365, 233);
+            this.groupBox15.TabIndex = 26;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "Settings";
+            // 
+            // btnModbusSetting
+            // 
+            this.btnModbusSetting.Location = new System.Drawing.Point(185, 102);
+            this.btnModbusSetting.Name = "btnModbusSetting";
+            this.btnModbusSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnModbusSetting.TabIndex = 39;
+            this.btnModbusSetting.Text = "Alarm Modbus Config";
+            this.btnModbusSetting.UseVisualStyleBackColor = true;
+            this.btnModbusSetting.Click += new System.EventHandler(this.btnModbusSetting_Click);
+            // 
+            // btnRFIDSetting
+            // 
+            this.btnRFIDSetting.Location = new System.Drawing.Point(185, 69);
+            this.btnRFIDSetting.Name = "btnRFIDSetting";
+            this.btnRFIDSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnRFIDSetting.TabIndex = 38;
+            this.btnRFIDSetting.Text = "RFID Config";
+            this.btnRFIDSetting.UseVisualStyleBackColor = true;
+            this.btnRFIDSetting.Click += new System.EventHandler(this.btnRFIDSetting_Click);
+            // 
+            // btnEmailSetting
+            // 
+            this.btnEmailSetting.Location = new System.Drawing.Point(185, 36);
+            this.btnEmailSetting.Name = "btnEmailSetting";
+            this.btnEmailSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnEmailSetting.TabIndex = 37;
+            this.btnEmailSetting.Text = "Email Config";
+            this.btnEmailSetting.UseVisualStyleBackColor = true;
+            this.btnEmailSetting.Click += new System.EventHandler(this.btnEmailSetting_Click);
+            // 
+            // btnWeightSetting
+            // 
+            this.btnWeightSetting.Location = new System.Drawing.Point(46, 102);
+            this.btnWeightSetting.Name = "btnWeightSetting";
+            this.btnWeightSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnWeightSetting.TabIndex = 36;
+            this.btnWeightSetting.Text = "Weight Chart Master";
+            this.btnWeightSetting.UseVisualStyleBackColor = true;
+            this.btnWeightSetting.Click += new System.EventHandler(this.btnWeightSetting_Click);
+            // 
+            // btnMasterData
+            // 
+            this.btnMasterData.Location = new System.Drawing.Point(46, 36);
+            this.btnMasterData.Name = "btnMasterData";
+            this.btnMasterData.Size = new System.Drawing.Size(133, 27);
+            this.btnMasterData.TabIndex = 30;
+            this.btnMasterData.Text = "Master Data";
+            this.btnMasterData.UseVisualStyleBackColor = true;
+            this.btnMasterData.Click += new System.EventHandler(this.btnMasterData_Click);
+            // 
+            // btnDefect
+            // 
+            this.btnDefect.Location = new System.Drawing.Point(46, 69);
+            this.btnDefect.Name = "btnDefect";
+            this.btnDefect.Size = new System.Drawing.Size(133, 27);
+            this.btnDefect.TabIndex = 26;
+            this.btnDefect.Text = "Quality Result";
+            this.btnDefect.UseVisualStyleBackColor = true;
+            this.btnDefect.Click += new System.EventHandler(this.btnDefect_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Yellow;
+            this.btnClose.ForeColor = System.Drawing.Color.Red;
+            this.btnClose.Location = new System.Drawing.Point(46, 135);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(272, 58);
+            this.btnClose.TabIndex = 6;
+            this.btnClose.Text = "&Exit";
+            this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // grpShiftIncharge
+            // 
+            this.grpShiftIncharge.AutoSize = true;
+            this.grpShiftIncharge.Controls.Add(this.btnSaveIncharge);
+            this.grpShiftIncharge.Controls.Add(this.txtIncharge);
+            this.grpShiftIncharge.Controls.Add(this.label27);
+            this.grpShiftIncharge.Controls.Add(this.label26);
+            this.grpShiftIncharge.Controls.Add(this.txtCurDate);
+            this.grpShiftIncharge.Controls.Add(this.label25);
+            this.grpShiftIncharge.Controls.Add(this.txtShift);
+            this.grpShiftIncharge.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.grpShiftIncharge.Location = new System.Drawing.Point(750, 438);
+            this.grpShiftIncharge.Name = "grpShiftIncharge";
+            this.grpShiftIncharge.Size = new System.Drawing.Size(365, 233);
+            this.grpShiftIncharge.TabIndex = 14;
+            this.grpShiftIncharge.TabStop = false;
+            this.grpShiftIncharge.Text = "Shift Incharge";
+            // 
+            // btnSaveIncharge
+            // 
+            this.btnSaveIncharge.Location = new System.Drawing.Point(294, 36);
+            this.btnSaveIncharge.Name = "btnSaveIncharge";
+            this.btnSaveIncharge.Size = new System.Drawing.Size(63, 57);
+            this.btnSaveIncharge.TabIndex = 25;
+            this.btnSaveIncharge.Text = "Save";
+            this.btnSaveIncharge.UseVisualStyleBackColor = true;
+            // 
+            // txtIncharge
+            // 
+            this.txtIncharge.Location = new System.Drawing.Point(107, 68);
+            this.txtIncharge.Name = "txtIncharge";
+            this.txtIncharge.Size = new System.Drawing.Size(184, 20);
+            this.txtIncharge.TabIndex = 24;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(8, 71);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(93, 13);
+            this.label27.TabIndex = 23;
+            this.label27.Text = "Name of Incharge";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(159, 43);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(29, 13);
+            this.label26.TabIndex = 22;
+            this.label26.Text = "Shift";
+            // 
+            // txtCurDate
+            // 
+            this.txtCurDate.EditValue = null;
+            this.txtCurDate.Location = new System.Drawing.Point(51, 40);
+            this.txtCurDate.Name = "txtCurDate";
+            this.txtCurDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtCurDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtCurDate.Properties.ReadOnly = true;
+            this.txtCurDate.Size = new System.Drawing.Size(96, 20);
+            this.txtCurDate.TabIndex = 20;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(8, 41);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(30, 13);
+            this.label25.TabIndex = 1;
+            this.label25.Text = "Date";
+            // 
+            // txtShift
+            // 
+            this.txtShift.Location = new System.Drawing.Point(194, 40);
+            this.txtShift.Name = "txtShift";
+            this.txtShift.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtShift.Properties.Items.AddRange(new object[] {
+            "A",
+            "B",
+            "C"});
+            this.txtShift.Properties.ReadOnly = true;
+            this.txtShift.Size = new System.Drawing.Size(94, 20);
+            this.txtShift.TabIndex = 21;
+            // 
+            // elm_main_6
+            // 
+            this.elm_main_6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elm_main_6.Location = new System.Drawing.Point(750, 223);
+            this.elm_main_6.Name = "elm_main_6";
+            this.elm_main_6.Size = new System.Drawing.Size(365, 209);
+            this.elm_main_6.TabIndex = 5;
+            this.elm_main_6.Text = "elementHost10";
+            this.elm_main_6.Child = this.mainCanwas6;
+            // 
+            // elm_main_5
+            // 
+            this.elm_main_5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elm_main_5.Location = new System.Drawing.Point(379, 223);
+            this.elm_main_5.Name = "elm_main_5";
+            this.elm_main_5.Size = new System.Drawing.Size(365, 209);
+            this.elm_main_5.TabIndex = 4;
+            this.elm_main_5.Text = "elementHost9";
+            this.elm_main_5.Child = this.mainCanwas5;
+            // 
+            // elm_main_4
+            // 
+            this.elm_main_4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elm_main_4.Location = new System.Drawing.Point(8, 223);
+            this.elm_main_4.Name = "elm_main_4";
+            this.elm_main_4.Size = new System.Drawing.Size(365, 209);
+            this.elm_main_4.TabIndex = 3;
+            this.elm_main_4.Text = "elementHost8";
+            this.elm_main_4.Child = this.mainCanwas4;
+            // 
+            // elm_main_3
+            // 
+            this.elm_main_3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elm_main_3.Location = new System.Drawing.Point(750, 8);
+            this.elm_main_3.Name = "elm_main_3";
+            this.elm_main_3.Size = new System.Drawing.Size(365, 209);
+            this.elm_main_3.TabIndex = 2;
+            this.elm_main_3.Text = "elementHost7";
+            this.elm_main_3.Child = this.mainCanwas3;
+            // 
+            // elm_main_2
+            // 
+            this.elm_main_2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elm_main_2.Location = new System.Drawing.Point(379, 8);
+            this.elm_main_2.Name = "elm_main_2";
+            this.elm_main_2.Size = new System.Drawing.Size(365, 209);
+            this.elm_main_2.TabIndex = 1;
+            this.elm_main_2.Text = "elementHost6";
+            this.elm_main_2.Child = this.mainCanwas2;
+            // 
+            // elm_main_1
+            // 
+            this.elm_main_1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.elm_main_1.Location = new System.Drawing.Point(8, 8);
+            this.elm_main_1.Name = "elm_main_1";
+            this.elm_main_1.Size = new System.Drawing.Size(365, 209);
+            this.elm_main_1.TabIndex = 0;
+            this.elm_main_1.Text = "elementHost5";
+            this.elm_main_1.Child = this.mainCanwas1;
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Controls.Add(this.xtraTabWeight);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1123, 679);
+            this.xtraTabPage2.Text = "Parameter Settings";
+            // 
+            // xtraTabWeight
+            // 
+            this.xtraTabWeight.AppearancePage.Header.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xtraTabWeight.AppearancePage.Header.Options.UseFont = true;
+            this.xtraTabWeight.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xtraTabWeight.AppearancePage.HeaderActive.Options.UseFont = true;
+            this.xtraTabWeight.AppearancePage.HeaderDisabled.Font = new System.Drawing.Font("Tahoma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xtraTabWeight.AppearancePage.HeaderDisabled.Options.UseFont = true;
+            this.xtraTabWeight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabWeight.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabWeight.Name = "xtraTabWeight";
+            this.xtraTabWeight.SelectedTabPage = this.xtraTabCCM1;
+            this.xtraTabWeight.Size = new System.Drawing.Size(1123, 679);
+            this.xtraTabWeight.TabIndex = 0;
+            this.xtraTabWeight.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabCCM1,
+            this.xtraTabCCM2,
+            this.xtraTabCCM3,
+            this.xtraTabCCM4,
+            this.xtraTabCCM5,
+            this.xtraTabCCM6});
+            // 
+            // xtraTabCCM1
+            // 
+            this.xtraTabCCM1.Controls.Add(this.elm_wt_1);
+            this.xtraTabCCM1.Name = "xtraTabCCM1";
+            this.xtraTabCCM1.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM1.Text = "CCM-1";
+            // 
+            // elm_wt_1
+            // 
+            this.elm_wt_1.Location = new System.Drawing.Point(22, 22);
+            this.elm_wt_1.Name = "elm_wt_1";
+            this.elm_wt_1.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_1.TabIndex = 0;
+            this.elm_wt_1.Text = "elementHost1";
+            this.elm_wt_1.Child = this.weightCanwas1;
+            // 
+            // xtraTabCCM2
+            // 
+            this.xtraTabCCM2.Controls.Add(this.elm_wt_2);
+            this.xtraTabCCM2.Name = "xtraTabCCM2";
+            this.xtraTabCCM2.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM2.Text = "CCM-2";
+            // 
+            // elm_wt_2
+            // 
+            this.elm_wt_2.Location = new System.Drawing.Point(22, 22);
+            this.elm_wt_2.Name = "elm_wt_2";
+            this.elm_wt_2.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_2.TabIndex = 1;
+            this.elm_wt_2.Text = "elementHost2";
+            this.elm_wt_2.Child = this.weightCanwas2;
+            // 
+            // xtraTabCCM3
+            // 
+            this.xtraTabCCM3.Controls.Add(this.elm_wt_3);
+            this.xtraTabCCM3.Name = "xtraTabCCM3";
+            this.xtraTabCCM3.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM3.Text = "CCM-3";
+            // 
+            // elm_wt_3
+            // 
+            this.elm_wt_3.Location = new System.Drawing.Point(22, 22);
+            this.elm_wt_3.Name = "elm_wt_3";
+            this.elm_wt_3.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_3.TabIndex = 1;
+            this.elm_wt_3.Text = "elementHost3";
+            this.elm_wt_3.Child = this.weightCanwas3;
+            // 
+            // xtraTabCCM4
+            // 
+            this.xtraTabCCM4.Controls.Add(this.elm_wt_4);
+            this.xtraTabCCM4.Name = "xtraTabCCM4";
+            this.xtraTabCCM4.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM4.Text = "CCM-4";
+            // 
+            // elm_wt_4
+            // 
+            this.elm_wt_4.Location = new System.Drawing.Point(22, 22);
+            this.elm_wt_4.Name = "elm_wt_4";
+            this.elm_wt_4.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_4.TabIndex = 1;
+            this.elm_wt_4.Text = "elementHost4";
+            this.elm_wt_4.Child = this.weightCanwas4;
+            // 
+            // xtraTabCCM5
+            // 
+            this.xtraTabCCM5.Controls.Add(this.elm_wt_5);
+            this.xtraTabCCM5.Name = "xtraTabCCM5";
+            this.xtraTabCCM5.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM5.Text = "CCM-5";
+            // 
+            // elm_wt_5
+            // 
+            this.elm_wt_5.Location = new System.Drawing.Point(22, 22);
+            this.elm_wt_5.Name = "elm_wt_5";
+            this.elm_wt_5.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_5.TabIndex = 1;
+            this.elm_wt_5.Text = "elementHost11";
+            this.elm_wt_5.Child = this.weightCanwas5;
+            // 
+            // xtraTabCCM6
+            // 
+            this.xtraTabCCM6.Controls.Add(this.elm_wt_6);
+            this.xtraTabCCM6.Name = "xtraTabCCM6";
+            this.xtraTabCCM6.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM6.Text = "CCM-6";
+            // 
+            // elm_wt_6
+            // 
+            this.elm_wt_6.Location = new System.Drawing.Point(22, 22);
+            this.elm_wt_6.Name = "elm_wt_6";
+            this.elm_wt_6.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_6.TabIndex = 1;
+            this.elm_wt_6.Text = "elementHost12";
+            this.elm_wt_6.Child = this.weightCanwas6;
             // 
             // tbp_10Pipes
             // 
@@ -423,13 +685,15 @@
             // 
             this.tblp_10Pipes.ColumnCount = 1;
             this.tblp_10Pipes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblp_10Pipes.Controls.Add(this.groupBox3, 0, 2);
             this.tblp_10Pipes.Controls.Add(this.groupBox7, 0, 1);
             this.tblp_10Pipes.Controls.Add(this.groupBox1, 0, 0);
             this.tblp_10Pipes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblp_10Pipes.Location = new System.Drawing.Point(0, 0);
             this.tblp_10Pipes.Name = "tblp_10Pipes";
-            this.tblp_10Pipes.RowCount = 2;
+            this.tblp_10Pipes.RowCount = 3;
             this.tblp_10Pipes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tblp_10Pipes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tblp_10Pipes.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblp_10Pipes.Size = new System.Drawing.Size(1129, 707);
             this.tblp_10Pipes.TabIndex = 0;
@@ -440,7 +704,7 @@
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.Location = new System.Drawing.Point(3, 103);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(1123, 601);
+            this.groupBox7.Size = new System.Drawing.Size(1123, 294);
             this.groupBox7.TabIndex = 2;
             this.groupBox7.TabStop = false;
             // 
@@ -450,7 +714,7 @@
             this.grd_last10.Location = new System.Drawing.Point(3, 17);
             this.grd_last10.MainView = this.gridView2;
             this.grd_last10.Name = "grd_last10";
-            this.grd_last10.Size = new System.Drawing.Size(1117, 581);
+            this.grd_last10.Size = new System.Drawing.Size(1117, 274);
             this.grd_last10.TabIndex = 6;
             this.grd_last10.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -699,6 +963,7 @@
             this.cmb_Options.Items.AddRange(new object[] {
             "Shift-A",
             "Shift-B",
+            "Shift-C",
             "ALL",
             "Timing"});
             this.cmb_Options.Location = new System.Drawing.Point(80, 53);
@@ -1227,6 +1492,58 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.gridOverWt);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 403);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1123, 301);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Alarmed Pipes :";
+            // 
+            // gridOverWt
+            // 
+            this.gridOverWt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridOverWt.Location = new System.Drawing.Point(3, 17);
+            this.gridOverWt.MainView = this.gridView4;
+            this.gridOverWt.Name = "gridOverWt";
+            this.gridOverWt.Size = new System.Drawing.Size(1117, 281);
+            this.gridOverWt.TabIndex = 6;
+            this.gridOverWt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView4});
+            // 
+            // gridView4
+            // 
+            this.gridView4.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.gridView4.Appearance.EvenRow.Options.UseBackColor = true;
+            this.gridView4.GridControl = this.gridOverWt;
+            this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.Editable = false;
+            this.gridView4.OptionsCustomization.AllowColumnMoving = false;
+            this.gridView4.OptionsCustomization.AllowFilter = false;
+            this.gridView4.OptionsCustomization.AllowGroup = false;
+            this.gridView4.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gridView4.OptionsCustomization.AllowSort = false;
+            this.gridView4.OptionsFilter.AllowColumnMRUFilterList = false;
+            this.gridView4.OptionsFilter.AllowFilterEditor = false;
+            this.gridView4.OptionsFilter.AllowFilterIncrementalSearch = false;
+            this.gridView4.OptionsFilter.AllowMRUFilterList = false;
+            this.gridView4.OptionsFind.AllowFindPanel = false;
+            this.gridView4.OptionsMenu.EnableColumnMenu = false;
+            this.gridView4.OptionsMenu.EnableFooterMenu = false;
+            this.gridView4.OptionsMenu.EnableGroupPanelMenu = false;
+            this.gridView4.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.False;
+            this.gridView4.OptionsMenu.ShowAutoFilterRowItem = false;
+            this.gridView4.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
+            this.gridView4.OptionsMenu.ShowGroupSortSummaryItems = false;
+            this.gridView4.OptionsMenu.ShowSplitItem = false;
+            this.gridView4.OptionsView.ColumnAutoWidth = false;
+            this.gridView4.OptionsView.ShowDetailButtons = false;
+            this.gridView4.OptionsView.ShowGroupExpandCollapseButtons = false;
+            this.gridView4.OptionsView.ShowGroupPanel = false;
+            // 
             // frmMain
             // 
             this.ClientSize = new System.Drawing.Size(1143, 744);
@@ -1241,19 +1558,31 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
-            this.tblp_Machines.ResumeLayout(false);
-            this.tblp_Machines.PerformLayout();
+            this.tblp_Main.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
+            this.tbp_Machines.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
+            this.xtraTabControl2.ResumeLayout(false);
+            this.xtraTabPage1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.groupBox15.ResumeLayout(false);
             this.grpShiftIncharge.ResumeLayout(false);
             this.grpShiftIncharge.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtIncharge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCurDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtCurDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtShift.Properties)).EndInit();
-            this.groupBox15.ResumeLayout(false);
-            this.tblp_Main.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.tbp_Machines.ResumeLayout(false);
+            this.xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabWeight)).EndInit();
+            this.xtraTabWeight.ResumeLayout(false);
+            this.xtraTabCCM1.ResumeLayout(false);
+            this.xtraTabCCM2.ResumeLayout(false);
+            this.xtraTabCCM3.ResumeLayout(false);
+            this.xtraTabCCM4.ResumeLayout(false);
+            this.xtraTabCCM5.ResumeLayout(false);
+            this.xtraTabCCM6.ResumeLayout(false);
             this.tbp_10Pipes.ResumeLayout(false);
             this.tblp_10Pipes.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -1296,13 +1625,14 @@
             this.groupBox12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvLog)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridOverWt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tblp_Machines;
         private System.Windows.Forms.TableLayoutPanel tblp_Main;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage tbp_Machines;
@@ -1326,7 +1656,6 @@
         private DevExpress.XtraEditors.DateEdit txtToDt;
         private System.Windows.Forms.Button btnExport;
         private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.GroupBox groupBox6;
         private DevExpress.XtraGrid.GridControl grd_report;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
@@ -1352,10 +1681,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvLog;
         private System.Windows.Forms.ComboBox cmbLogType;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private uct_Weight_wpf.WeightCanwas weightCanwas1;
-        private System.Windows.Forms.Integration.ElementHost elementHost2;
-        private uct_Weight_wpf.WeightCanwas weightCanwas2;
         private DevExpress.XtraTab.XtraTabPage tbp_SummaryReport;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.GroupBox groupBox13;
@@ -1374,8 +1699,22 @@
         private DevExpress.XtraEditors.DateEdit txtSumFromDt;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.ComboBox cmbWeighLog;
-        private System.Windows.Forms.Integration.ElementHost elementHost3;
-        private uct_Weight_wpf.WeightCanwas weightCanwas3;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Integration.ElementHost elm_main_1;
+        private uct_main_wpf.mainCanwas mainCanwas1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private System.Windows.Forms.Integration.ElementHost elm_main_6;
+        private uct_main_wpf.mainCanwas mainCanwas6;
+        private System.Windows.Forms.Integration.ElementHost elm_main_5;
+        private uct_main_wpf.mainCanwas mainCanwas5;
+        private System.Windows.Forms.Integration.ElementHost elm_main_4;
+        private uct_main_wpf.mainCanwas mainCanwas4;
+        private System.Windows.Forms.Integration.ElementHost elm_main_3;
+        private uct_main_wpf.mainCanwas mainCanwas3;
+        private System.Windows.Forms.Integration.ElementHost elm_main_2;
+        private uct_main_wpf.mainCanwas mainCanwas2;
         private System.Windows.Forms.GroupBox grpShiftIncharge;
         private System.Windows.Forms.Button btnSaveIncharge;
         private DevExpress.XtraEditors.TextEdit txtIncharge;
@@ -1384,10 +1723,35 @@
         private DevExpress.XtraEditors.DateEdit txtCurDate;
         private System.Windows.Forms.Label label25;
         private DevExpress.XtraEditors.ComboBoxEdit txtShift;
-        private System.Windows.Forms.Button btnDefect;
         private System.Windows.Forms.GroupBox groupBox15;
-        private System.Windows.Forms.Integration.ElementHost elementHost4;
-        private uct_Weight_wpf.WeightCanwas weightCanwas4;
         private System.Windows.Forms.Button btnMasterData;
+        private System.Windows.Forms.Button btnDefect;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnModbusSetting;
+        private System.Windows.Forms.Button btnRFIDSetting;
+        private System.Windows.Forms.Button btnEmailSetting;
+        private System.Windows.Forms.Button btnWeightSetting;
+        private DevExpress.XtraTab.XtraTabControl xtraTabWeight;
+        private DevExpress.XtraTab.XtraTabPage xtraTabCCM1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabCCM2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabCCM3;
+        private DevExpress.XtraTab.XtraTabPage xtraTabCCM4;
+        private DevExpress.XtraTab.XtraTabPage xtraTabCCM5;
+        private DevExpress.XtraTab.XtraTabPage xtraTabCCM6;
+        private System.Windows.Forms.Integration.ElementHost elm_wt_1;
+        private System.Windows.Forms.Integration.ElementHost elm_wt_2;
+        private uct_Weight_wpf.WeightCanwas weightCanwas2;
+        private System.Windows.Forms.Integration.ElementHost elm_wt_3;
+        private uct_Weight_wpf.WeightCanwas weightCanwas3;
+        private System.Windows.Forms.Integration.ElementHost elm_wt_4;
+        private uct_Weight_wpf.WeightCanwas weightCanwas4;
+        private System.Windows.Forms.Integration.ElementHost elm_wt_5;
+        private uct_Weight_wpf.WeightCanwas weightCanwas5;
+        private System.Windows.Forms.Integration.ElementHost elm_wt_6;
+        private uct_Weight_wpf.WeightCanwas weightCanwas6;
+        private uct_Weight_wpf.WeightCanwas weightCanwas1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private DevExpress.XtraGrid.GridControl gridOverWt;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
     }
 }

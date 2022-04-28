@@ -82,6 +82,7 @@
     <Reference Include="DevExpress.Mvvm.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.XtraBars.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v21.2">
       <Private>True</Private>
     </Reference>
@@ -94,12 +95,15 @@
     <Reference Include="DevExpress.XtraPrinting.v21.2, Version=21.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Interop.zkemkeeper">
+      <HintPath>..\..\..\RFIDSDK_Interoap_reference\Interop.zkemkeeper.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.6.0.0\lib\net461\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <Private>True</Private>
@@ -107,14 +111,32 @@
     <Reference Include="PresentationFramework">
       <Private>True</Private>
     </Reference>
-    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\RabbitMQ.Client.5.1.0\lib\net451\RabbitMQ.Client.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="RabbitMQ.Client, Version=6.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.6.2.4\lib\net461\RabbitMQ.Client.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Management.Instrumentation" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.6.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml">
       <Private>True</Private>
     </Reference>
@@ -137,6 +159,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsMachine.cs" />
     <Compile Include="frmEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,11 +184,23 @@
     <Compile Include="frmMasters.Designer.cs">
       <DependentUpon>frmMasters.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmModbusTcpConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmModbusTcpConfig.Designer.cs">
+      <DependentUpon>frmModbusTcpConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPass.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPass.Designer.cs">
       <DependentUpon>frmPass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRFID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRFID.Designer.cs">
+      <DependentUpon>frmRFID.cs</DependentUpon>
     </Compile>
     <Compile Include="frmShiftConfig.cs">
       <SubType>Form</SubType>
@@ -194,8 +229,14 @@
     <EmbeddedResource Include="frmMasters.resx">
       <DependentUpon>frmMasters.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmModbusTcpConfig.resx">
+      <DependentUpon>frmModbusTcpConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmPass.resx">
       <DependentUpon>frmPass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRFID.resx">
+      <DependentUpon>frmRFID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmShiftConfig.resx">
       <DependentUpon>frmShiftConfig.cs</DependentUpon>
@@ -236,6 +277,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\uct_mainscreen_wpf\uct_main_wpf.csproj">
+      <Project>{8eeb2b7a-99d2-4d08-aa57-54ad2dc48711}</Project>
+      <Name>uct_main_wpf</Name>
+    </ProjectReference>
     <ProjectReference Include="..\uct_Weight_wpf\uct_Weight_wpf.csproj">
       <Project>{9764d549-6e0f-4724-9284-62ac428a39a2}</Project>
       <Name>uct_Weight_wpf</Name>
