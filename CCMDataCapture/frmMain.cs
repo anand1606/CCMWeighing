@@ -390,7 +390,7 @@ namespace CCMDataCapture
             if (!string.IsNullOrEmpty(tablename))
             {
                 string sql =
-                    "Select top 10 Convert(varchar(10),C.tDate,121) as tDate,C.tShift,SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
+                    "Select top 10 Convert(varchar(10),C.tDate,121) as tDate,C.tShift,IntSrNo as SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
                     "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                     " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG " +
                     ",(case when (NomWt > 0) then Round(((ActWt-NomWt)/NomWt*100),3) else 100 end) as DevPer, info.InchargeName, C.PipeStatus, " +
@@ -463,7 +463,7 @@ namespace CCMDataCapture
             string tOption = cmb_Options.Text.ToString().Trim();
             string tTableName = GetTableName(tMachine);
             string sql =
-                "Select Convert(varchar(10),C.tDate,121) as tDate,C.tShift,SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
+                "Select Convert(varchar(10),C.tDate,121) as tDate,C.tShift,IntSrNo as SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
                 "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                 " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG , " +
                 " ABS((Case When (NomWt <= 0 ) then 0 else Round(((NomWt-ActWt)/NomWt*100),3) end)) as DevPer,info.InchargeName, PipeStatus, OperatorCode,OperatorName  " +

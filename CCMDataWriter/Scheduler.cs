@@ -859,7 +859,10 @@ namespace CCMDataWriter
                     #endregion
 
                     //Batch No - as per old 
-                    PipeNumber = CurYear + MonthName + tDate.ToString("dd") + MachineNo  + tintSrno.ToString("0000");
+                    //PipeNumber = CurYear + MonthName + tDate.ToString("dd") + MachineNo  + tintSrno.ToString("0000");
+
+                    //curYear not required
+                    PipeNumber = MonthName + tDate.ToString("dd") + MachineNo + tintSrno.ToString("0000");
 
                     t.Parameters.MouldNo = t.Parameters.MouldNo.Replace("'", "");
                     t.Parameters.MouldNo = t.Parameters.MouldNo.Replace('"', ' ');
