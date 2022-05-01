@@ -119,11 +119,19 @@ namespace CCMDataCapture
 
             string err = string.Empty;
             sys = new Sysinfo();
-            
-            
-           
 
-            ReloadMasterData();
+
+
+            string connectionerror;
+            ReloadMasterData(out connectionerror);
+
+            //added 01/05/22 sql server connection error 
+            if (!string.IsNullOrEmpty(connectionerror))
+            {
+                MessageBox.Show(connectionerror,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                Application.Exit();
+            }
+
             cmbWeighLog.Visible = false;
             cmbWeighLog.Items.Clear();
             cmb_Report_Machines.Items.Clear();
@@ -772,8 +780,9 @@ namespace CCMDataCapture
         //}
 
 
-        private void ReloadMasterData()
+        private void ReloadMasterData(out string err1)
         {
+            err1 = string.Empty;
             strlstdia.Clear();
             strlstClass.Clear();
             strlstLength.Clear();
@@ -785,16 +794,20 @@ namespace CCMDataCapture
             if (!string.IsNullOrEmpty(err))
             {
                 MessageBox.Show(err, "Master-Size", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                err1 += err + Environment.NewLine;
+                return;
             }
             dsClass = Utility.GetData("Select * from ccmClass Order by Description", SQLConStr,out err);
             if (!string.IsNullOrEmpty(err))
             {
                 MessageBox.Show(err, "Master-Class", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                err1 += err + Environment.NewLine;
             }
             dsLen = Utility.GetData("Select * from ccmLength Order by Description", SQLConStr,out err);
             if (!string.IsNullOrEmpty(err))
             {
                 MessageBox.Show(err, "Master-Length", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                err1 += err + Environment.NewLine;
             }
 
             //dsDefect = Utility.GetData("Select * from ccmDefect Order by Description", SQLConStr, out err);
@@ -807,12 +820,14 @@ namespace CCMDataCapture
             if (!string.IsNullOrEmpty(err))
             {
                 MessageBox.Show(err, "Master-Material", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                err1 += err + Environment.NewLine;
             }
 
             dsStandard = Utility.GetData("Select * from ccmStandard Order By Description", SQLConStr, out err);
             if (!string.IsNullOrEmpty(err))
             {
                 MessageBox.Show(err, "Master-Standard", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                err1 += err + Environment.NewLine;
             }
 
             //dsMachine = Utility.GetData("Select * from ccmMachineConfig Order by MachineName", SQLConStr, out err);
@@ -825,6 +840,7 @@ namespace CCMDataCapture
             if (!string.IsNullOrEmpty(err))
             {
                 MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                err1 += err + Environment.NewLine;
             }
 
             cmbSumReport.DataSource = null;
