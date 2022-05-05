@@ -918,11 +918,12 @@ namespace CCMDataWriter
 
                         if(tPipeStatus != "OK")
                         {
-                            sql1 = "Insert into ccmAlarm (tDate,tShift,MachineNo,SrNo,PipeNumber,PipeWt,AlmSent,AddDt,PipeDia,PipeClass,OperatorCode,OperatorName,PipeStaus) " +
+                            string sql2 = "Insert into ccmAlarm (tDate,tShift,MachineNo,SrNo,PipeNumber,PipeWt,AlmSent,AddDt,PipeDia,PipeClass,OperatorCode,OperatorName,PipeStaus) " +
                                 " Values ('" + tDate.ToString("yyyy-MM-dd") + "','" + tShift + "','" + t.MachineID.ToString() + "'," +
                                 " '" + t.SrNo.ToString() + "','" + t.PipeNumber + "','" + t.ActWt.ToString() + "',0,GetDate()," +
                                 "'" + t.Parameters.Size + "','" + t.Parameters.Class + "','" + t.Parameters.OperatorCode + "','" + t.Parameters.OperatorName + "','" + tPipeStatus + "')";
 
+                            cmd.CommandText = sql2;
                             cmd.ExecuteNonQuery();
 
                         }

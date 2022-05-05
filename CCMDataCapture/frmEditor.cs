@@ -105,6 +105,18 @@ namespace CCMDataCapture
                 this.rptStatus.TextEditStyle = TextEditStyles.DisableTextEditor;
 
                 this.gridView1.Columns["PipeStatus"].ColumnEdit = this.rptStatus;
+
+
+                txtMachines.Items.Clear();
+                str = "select MachineName from ccmMachineConfig  ";
+                cmd = new SqlCommand(str, cn);
+                dr = cmd.ExecuteReader();                
+               
+                while (dr.Read())
+                {
+                    txtMachines.Items.Add(dr["MachineName"].ToString());
+                }
+                dr.Close();
             }
 
         }

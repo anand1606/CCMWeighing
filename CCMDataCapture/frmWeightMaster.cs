@@ -316,7 +316,7 @@ namespace CCMDataCapture
                     {
                         cn.Open();
                         cmd.Connection = cn;
-                        string sql = "Insert into ccmWeightMaster (Size,Class,Len,MinWt,MaxWt,NomWt,AlmMinWt,AlmMaxWt,AddDt) Values ('{0}','{1}','{2}','{3}','{4}','{5}',GetDate())";
+                        string sql = "Insert into ccmWeightMaster (Size,Class,Len,MinWt,MaxWt,NomWt,AlmMinWt,AlmMaxWt,AddDt) Values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}',GetDate())";
                         sql = string.Format(sql, 
                             txtSize.Text.ToString(),
                             txtClass.Text.ToString(),

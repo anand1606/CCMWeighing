@@ -9,11 +9,128 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Management;
 using Newtonsoft.Json;
+using RabbitMQ.Client;
 
 namespace CCMDataCapture
 {
     class Utility
     {
+
+        private static ConnectionFactory factory = new ConnectionFactory();
+        private static IConnection conn;
+        private static IModel channel;
+
+        public static bool Start_RBMQ_Client(string uri)
+        {
+            if (string.IsNullOrEmpty(uri))
+            {
+                uri = "amqp://anand:anand123@172.16.12.44:5672/CCM";
+            }
+
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+            try
+            {
+                //uri = "amqp://anand:anand123@172.16.12.44:5672/CCM";
+
+                //"amqp://user:pass@hostName:port/vhost";
+                //Property 	Default Value
+                //Username 	"guest"
+                //Password 	"guest"
+                //Virtual host 	"/"
+                //Hostname 	"localhost"
+                //port 	5672 for regular connections, 5671 for connections that use TLS
+
+                Uri t = new Uri(uri);
+                factory.Uri = t;
+                factory.AutomaticRecoveryEnabled = true;
+                factory.NetworkRecoveryInterval = TimeSpan.FromSeconds(5);
+
+
+#pragma warning disable CS0168 // The variable 'ect' is declared but never used
+                try
+                {
+                    conn = factory.CreateConnection();
+                    channel = conn.CreateModel();
+                    channel.ExchangeDeclare(exchange: "COMMUNICATION", type: "direct", durable: true, autoDelete: false);
+                }
+                catch (RabbitMQ.Client.Exceptions.BrokerUnreachableException ect)
+                {
+
+
+                    // apply retry logic
+                    Start_RBMQ_Client(uri);
+                }
+#pragma warning restore CS0168 // The variable 'ect' is declared but never used
+
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+            return true;
+        }
+
+        public static bool Publish_RBMQ_MSG(string message, string routingkey)
+        {
+            if (!string.IsNullOrEmpty(message))
+            {
+
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+                try
+                {
+
+
+                    var body = Encoding.UTF8.GetBytes(message);
+                    channel.BasicPublish(exchange: "COMMUNICATION",
+                                         routingKey: routingkey,
+                                         basicProperties: null,
+                                         body: body);
+
+
+                    //Library.WriteErrorLog("Pulibshed : " + message);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+
+                    return false;
+                }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool STOP_RBMQ_Client()
+        {
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+            try
+            {
+                if (conn != null && channel != null)
+                {
+
+                    channel.Close();
+                    conn.Close();
+
+                }
+
+            }
+            catch (Exception ex) { }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+            finally
+            {
+               
+            }
+
+            return true;
+        }
+
+
         public static DataSet GetData(string sql, string ConnectionString,out string err)
         {
             err = string.Empty;
@@ -210,6 +327,8 @@ namespace CCMDataCapture
                 }
                 else
                 {
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     try
                     {
                         string tempstr = DecryptString(key, x);
@@ -227,6 +346,8 @@ namespace CCMDataCapture
                         err = "Invalid Licence";
                         result = false;
                     }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
                 }
                 
             }

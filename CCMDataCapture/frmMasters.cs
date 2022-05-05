@@ -11,6 +11,7 @@ using System.Data.SqlClient;
 using System.IO;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraGrid.Columns;
 
 namespace CCMDataCapture
 {
@@ -19,7 +20,7 @@ namespace CCMDataCapture
         private string SQLConStr;
         private string strpath = AppDomain.CurrentDomain.BaseDirectory.ToString();
         private DataSet dsMaster = new DataSet();
-        private string mode = "NEW";
+
         private string oldCode = "";
         private string TableName = string.Empty;
         public frmMasters()
@@ -151,16 +152,15 @@ namespace CCMDataCapture
         {
             txtID.Text = "0";
             txtDesc.Text = "";
-            mode = "NEW";
+           
             oldCode = "";
         }
 
         private void frmMasters_Load(object sender, EventArgs e)
         {
-            string sqlconfig = "sql_connection.txt";
-            string fullpath = Path.Combine(strpath, sqlconfig);
-            SQLConStr = File.ReadLines(fullpath).First();
-            
+
+            SQLConStr = Utility.SQLCnStr;
+
             //set default selected item of Master Table
             grpMaster.EditValue = "ccmSize";
             ResetControl();
@@ -170,7 +170,20 @@ namespace CCMDataCapture
         {
             bool t = AddMaster(TableName, txtID.Text.ToString(), txtDesc.Text.ToString());
             ResetControl();
-            LoadGrid(); 
+            LoadGrid();
+            DataTable dt = GetDataTable(gv);
+            string details = TableName + "-";
+            foreach (DataRow dr in dt.Rows)
+            {
+                details +=   dr["Description"].ToString() + ",";
+            }
+
+            string cutlen = details.Substring(0, details.Length - 1);
+
+            Utility.Publish_RBMQ_MSG(cutlen, "MasterReload");
+
+            //Utility.Publish_RBMQ_MSG(TableName, "MasterReload");
+
 
         }
 
@@ -179,11 +192,36 @@ namespace CCMDataCapture
             bool t = DeleteMaster(TableName, txtID.Text.ToString(), txtDesc.Text.ToString());
             ResetControl();
             LoadGrid();
+            DataTable dt = GetDataTable(gv);
+            string details = TableName + "-";
+            foreach(DataRow dr in dt.Rows)
+            {
+                details +=  dr["Description"].ToString() + ",";
+            }
+            string cutlen = details.Substring(0, details.Length - 1);
+            Utility.Publish_RBMQ_MSG(cutlen, "MasterReload");
+        }
+
+
+        DataTable GetDataTable(GridView view)
+        {
+            DataTable dt = new DataTable();
+            foreach (GridColumn c in view.Columns)
+                dt.Columns.Add(c.FieldName, c.ColumnType);
+            for (int r = 0; r < view.RowCount; r++)
+            {
+                object[] rowValues = new object[dt.Columns.Count];
+                for (int c = 0; c < dt.Columns.Count; c++)
+                    rowValues[c] = view.GetRowCellValue(r, dt.Columns[c].ColumnName);
+                dt.Rows.Add(rowValues);
+            }
+            return dt;
         }
 
         private void grpMaster_EditValueChanged(object sender, EventArgs e)
         {
             TableName = grpMaster.EditValue.ToString();
+            ResetControl();
             LoadGrid();
         }
 
@@ -203,6 +241,8 @@ namespace CCMDataCapture
             grid.DataSource = dsMaster;
             grid.DataMember = dsMaster.Tables[0].TableName;
             grid.RefreshDataSource();
+
+            
         }
 
         private void btnShiftConfig_Click(object sender, EventArgs e)
@@ -232,7 +272,7 @@ namespace CCMDataCapture
             }
             object o = new object();
             EventArgs e = new EventArgs();
-            mode = "OLD";
+           
             oldCode = txtID.Text.ToString();
             txtID_Validated(o, e);
         }
@@ -249,7 +289,7 @@ namespace CCMDataCapture
             string sql = "Select Description from [" + TableName + "]  Where ID = '" + txtID.Text.Trim() + "'";
             string err;
             txtDesc.Text = Utility.GetDescription(sql,SQLConStr, out err);
-            mode = "OLD";
+            
             oldCode = txtID.Text.Trim();
 
         }

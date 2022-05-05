@@ -19,6 +19,7 @@ using System.Management;
 using System.Collections;
 using System.Windows.Forms.Integration;
 using uct_Weight_wpf;
+using System.Collections.ObjectModel;
 
 
 
@@ -35,27 +36,29 @@ namespace CCMDataCapture
        
         private string strpath = AppDomain.CurrentDomain.BaseDirectory.ToString();
         
-        private List<string> strlstdia = new List<string>();
-        private List<string> strlstClass = new List<string>();
-        private List<string> strlstLength = new List<string>();
-        private List<string> strlstMaterial = new List<string>();
-        private List<string> strlstStandard = new List<string>();
+        public List<string> strlstdia = new List<string>();
+        public List<string> strlstClass = new List<string>();
+        public List<string> strlstLength = new List<string>();
+        public List<string> strlstMaterial = new List<string>();
+        public List<string> strlstStandard = new List<string>();
 
         private string ErrTable = "ccmErrLog";
         private DataSet dsSize;
         private DataSet dsClass;
         private DataSet dsLen;
-        private DataSet dsMachine;
+
         private DataSet dsSummaryRpt;
-        private DataSet dsDefect;
         private DataSet dsMaterial;
         private DataSet dsStandard;
 
         private string RBMQServer;
         private string SQLConStr;
+#pragma warning disable CS0414 // The field 'frmMain.key' is assigned but its value is never used
         static string key = "b14ca5898a4e4133bbce2ea2315a1916";
+#pragma warning restore CS0414 // The field 'frmMain.key' is assigned but its value is never used
         // create a timer which will fire the poller
         static string install_lic = string.Empty;
+       
 
         public frmMain()
         {
@@ -65,7 +68,7 @@ namespace CCMDataCapture
 
         }
 
-     
+        
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -82,6 +85,31 @@ namespace CCMDataCapture
                 this.weightCanwas4.model.Disconnect();
                 this.weightCanwas5.model.Disconnect();
                 this.weightCanwas6.model.Disconnect();
+
+                this.mainCanwas1.model.Disconnect();
+                this.mainCanwas2.model.Disconnect();
+                this.mainCanwas3.model.Disconnect();
+                this.mainCanwas4.model.Disconnect();
+                this.mainCanwas5.model.Disconnect();
+                this.mainCanwas6.model.Disconnect();
+
+                
+                this.elm_wt_1.Dispose();
+                this.elm_wt_2.Dispose();
+                this.elm_wt_3.Dispose();
+                this.elm_wt_4.Dispose();
+                this.elm_wt_5.Dispose();
+                this.elm_wt_6.Dispose();
+                this.elm_main_1.Dispose();
+                this.elm_main_2.Dispose();
+                this.elm_main_3.Dispose();
+                this.elm_main_4.Dispose();
+                this.elm_main_5.Dispose();
+                this.elm_main_6.Dispose();
+
+                this.Cursor = Cursors.Default;
+                this.Close();
+                Environment.Exit(Environment.ExitCode);
 
             }
         }
@@ -129,7 +157,7 @@ namespace CCMDataCapture
             if (!string.IsNullOrEmpty(connectionerror))
             {
                 MessageBox.Show(connectionerror,"Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                Application.Exit();
+                btnClose_Click(sender, e,"FORCE");
             }
 
             cmbWeighLog.Visible = false;
@@ -149,80 +177,57 @@ namespace CCMDataCapture
             }
 
 
+            //this is used for intercommuntion - between front end and wpf dell 
+            //used for reload - size,class,length,material,standard - etc
+            //exchange = "COMMUNICATION"
 
-            //bool x = Utility.RetriveLic(SQLConStr, key, out sys, out err);
-            //txtLicID.Text = sys.Hostkey;
-            //lblInstallDt.Text = sys.InstallDt.ToString("yyyy-MM-dd");
-            //lblLicType.Text = sys.LicType + "-" + sys.Limitdays.ToString() + "Days";
+            Utility.Start_RBMQ_Client(RBMQServer);
 
-            //if (x && sys.LicType != "TRIAL")
-            //{
-            //    x = Utility.MatchLic(sys, SQLConStr, key);
-            //    if (!x)
-            //    {
-            //        MessageBox.Show("Invalid License/Trial Expired, Please contact to supplier", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //       // lblLicType.Text = sys.LicType + "-Expired";
-            //        return;
-            //    }
-            //    else
-            //    {
-            //        lblLicType.Text = sys.LicType + "-FULL";
-            //    }
-            //}
-            //else
-            //{
-            //    if (!Utility.MatchLic(sys, SQLConStr, key))
-            //    {
-            //        MessageBox.Show("Invalid License/Trial Expired, Please contact to supplier", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        lblLicType.Text = sys.LicType + "-Expired";
-            //        return;
-            //    }
-            //}
-
-
+            
+            bool t1,t2,t3,t4,t5,t6;
 
 
             xtraTabCCM1.Text = "CCM-P";
-            bool t1 = weightCanwas1.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia,strlstMaterial,strlstStandard, "P", "", "",true);
+            t1 = weightCanwas1.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia,strlstMaterial,strlstStandard, "P", "", "",true);
             Thread.Sleep(100);
 
             xtraTabCCM2.Text = "CCM-Q";
-            bool t2 = weightCanwas2.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard,"Q", "", "", true);
+            t2 = weightCanwas2.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "Q", "", "", true);
             Thread.Sleep(100);
 
             xtraTabCCM3.Text = "CCM-R";
-            bool t3 = weightCanwas3.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia,strlstMaterial, strlstStandard, "R", "", "", true);
+            t3 = weightCanwas3.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "R", "", "", true);
             Thread.Sleep(100);
 
             xtraTabCCM4.Text = "CCM-S";
-            bool t4 = weightCanwas4.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "S", "", "", true);
+            t4 = weightCanwas4.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "S", "", "", true);
             Thread.Sleep(100);
 
             xtraTabCCM5.Text = "CCM-T";
-            bool t5 = weightCanwas5.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "T", "", "", true);
+            t5 = weightCanwas5.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "T", "", "", true);
             Thread.Sleep(100);
 
             xtraTabCCM6.Text = "CCM-N";
-            bool t6 = weightCanwas6.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "N", "", "", true);
+            t6 = weightCanwas6.model.Connect(RBMQServer, SQLConStr, strlstLength, strlstClass, strlstdia, strlstMaterial, strlstStandard, "N", "", "", true);
             Thread.Sleep(100);
 
 
-            t1 = mainCanwas1.model.Connect(RBMQServer, SQLConStr, "P", "", "", true);
+            t1 = mainCanwas1.model.Connect(RBMQServer, SQLConStr, "P", "", "", false);
             Thread.Sleep(100);
 
-            t2 = mainCanwas2.model.Connect(RBMQServer, SQLConStr, "Q", "", "", true);
+            t2 = mainCanwas2.model.Connect(RBMQServer, SQLConStr, "Q", "", "", false);
             Thread.Sleep(100);
 
-            t3 = mainCanwas3.model.Connect(RBMQServer, SQLConStr, "R", "", "", true);
+            t3 = mainCanwas3.model.Connect(RBMQServer, SQLConStr, "R", "", "", false);
             Thread.Sleep(100);
 
-            t4 = mainCanwas4.model.Connect(RBMQServer, SQLConStr, "S", "", "", true);
+            t4 = mainCanwas4.model.Connect(RBMQServer, SQLConStr, "S", "", "", false);
             Thread.Sleep(100);
 
-            t5 = mainCanwas5.model.Connect(RBMQServer, SQLConStr, "T", "", "", true);
+            t5 = mainCanwas5.model.Connect(RBMQServer, SQLConStr, "T", "", "", false);
             Thread.Sleep(100);
 
-            t6 = mainCanwas6.model.Connect(RBMQServer, SQLConStr, "N", "", "", true);
+            t6 = mainCanwas6.model.Connect(RBMQServer, SQLConStr, "N", "", "", false);
             Thread.Sleep(100);
 
 
@@ -319,77 +324,78 @@ namespace CCMDataCapture
             //EnableMenuItem(sm, SC_CLOSE, MF_BYCOMMAND | MF_DISABLED);
         }
 
+        private void btnClose_Click(object sender, EventArgs e,string extraflg="")
+        {
+            _PasswordForm.Password = "";
+            
+            //default used with extraflg - if not blank - usefull when force exit require..
+            if (extraflg == "FORCE")
+            {
+                exitcode();
+            }
+
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             _PasswordForm.Password = "";
+
             DialogResult dr = _PasswordForm.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
-                
-              //get user/password values from dialog
-               //ask password for closing the same
+
+                //get user/password values from dialog
+                //ask password for closing the same
                 if (_PasswordForm.Password.Trim().ToUpper() == "CLOSE")
                 {
-                    //this.Close();
-                    timer1.Enabled = false;
-                    this.FormClosing -= new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
-
-                    this.Cursor = Cursors.WaitCursor;
-
-                  
-                    this.weightCanwas1.model.Disconnect();
-                    this.weightCanwas2.model.Disconnect();
-                    this.weightCanwas3.model.Disconnect();
-                    this.weightCanwas4.model.Disconnect();
-                    this.weightCanwas5.model.Disconnect();
-                    this.weightCanwas6.model.Disconnect();
-
-                    this.mainCanwas1.model.Disconnect();
-                    this.mainCanwas2.model.Disconnect();
-                    this.mainCanwas3.model.Disconnect();
-                    this.mainCanwas4.model.Disconnect();
-                    this.mainCanwas5.model.Disconnect();
-                    this.mainCanwas6.model.Disconnect();
-
-                    //bool ReadytoClose = true;
-
-                    //while (ReadytoClose)
-                    //{
-                    //    if( this.weightCanwas1.model.CurrentStatus == false &&
-                    //        this.weightCanwas2.model.CurrentStatus == false &&
-                    //        this.weightCanwas3.model.CurrentStatus == false &&
-                    //        this.weightCanwas4.model.CurrentStatus == false &&
-                    //        this.weightCanwas5.model.CurrentStatus == false 
-                    //    )
-                    //    {
-                    //        ReadytoClose = false;
-                    //    }
-
-                    //    Application.DoEvents();
-                    //}
-
-                    this.Cursor = Cursors.Default;
-                    this.elm_wt_1.Dispose();
-                    this.elm_wt_2.Dispose();
-                    this.elm_wt_3.Dispose();
-                    this.elm_wt_4.Dispose();
-                    this.elm_wt_5.Dispose();
-                    this.elm_wt_6.Dispose();
-                    this.elm_main_1.Dispose();
-                    this.elm_main_2.Dispose();
-                    this.elm_main_3.Dispose();
-                    this.elm_main_4.Dispose();  
-                    this.elm_main_5.Dispose();  
-                    this.elm_main_6.Dispose();
-
-                    this.Close();
-                    Environment.Exit(Environment.ExitCode);
+                    exitcode();
                 }
             }
+            
+
+        }
+
+        private void exitcode()
+        {
+            timer1.Enabled = false;
+            this.FormClosing -= new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+
+            this.Cursor = Cursors.WaitCursor;
 
 
-           
-           
+            this.weightCanwas1.model.Disconnect();
+            this.weightCanwas2.model.Disconnect();
+            this.weightCanwas3.model.Disconnect();
+            this.weightCanwas4.model.Disconnect();
+            this.weightCanwas5.model.Disconnect();
+            this.weightCanwas6.model.Disconnect();
+
+            this.mainCanwas1.model.Disconnect();
+            this.mainCanwas2.model.Disconnect();
+            this.mainCanwas3.model.Disconnect();
+            this.mainCanwas4.model.Disconnect();
+            this.mainCanwas5.model.Disconnect();
+            this.mainCanwas6.model.Disconnect();
+
+            this.elm_wt_1.Dispose();
+            this.elm_wt_2.Dispose();
+            this.elm_wt_3.Dispose();
+            this.elm_wt_4.Dispose();
+            this.elm_wt_5.Dispose();
+            this.elm_wt_6.Dispose();
+            this.elm_main_1.Dispose();
+            this.elm_main_2.Dispose();
+            this.elm_main_3.Dispose();
+            this.elm_main_4.Dispose();
+            this.elm_main_5.Dispose();
+            this.elm_main_6.Dispose();
+
+            Utility.STOP_RBMQ_Client();
+
+
+            this.Cursor = Cursors.Default;
+            this.Close();
+            Environment.Exit(Environment.ExitCode);
         }
 
         private void loadGrid_Last10(string tablename)
@@ -398,7 +404,7 @@ namespace CCMDataCapture
             if (!string.IsNullOrEmpty(tablename))
             {
                 string sql =
-                    "Select top 10 Convert(varchar(10),C.tDate,121) as tDate,C.tShift,IntSrNo as SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
+                    "Select top 15 Convert(varchar(10),C.tDate,121) as tDate,C.tShift,IntSrNo as SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
                     "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                     " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG " +
                     ",(case when (NomWt > 0) then Round(((ActWt-NomWt)/NomWt*100),3) else 100 end) as DevPer, info.InchargeName, C.PipeStatus, " +
@@ -471,11 +477,11 @@ namespace CCMDataCapture
             string tOption = cmb_Options.Text.ToString().Trim();
             string tTableName = GetTableName(tMachine);
             string sql =
-                "Select Convert(varchar(10),C.tDate,121) as tDate,C.tShift,IntSrNo as SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
+                "Select Convert(varchar(10),C.tDate,121) as tDate,C.tShift,SrNo, IntSrNo as [SizeSrNo], Convert(varchar(23),LogDateTime,121) as LogDateTime," +
                 "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                 " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG , " +
                 " ABS((Case When (NomWt <= 0 ) then 0 else Round(((NomWt-ActWt)/NomWt*100),3) end)) as DevPer,info.InchargeName, PipeStatus, OperatorCode,OperatorName  " +
-                " From [" + tTableName + "] C left outer join ccmShiftWiseInfo info on c.tDate = info.tDate and c.tShift = info.tShift";
+                " From [" + tTableName + "] C left outer join ccmShiftWiseInfo info on c.tDate = info.tDate and c.tShift = info.tShift ";
             
                     
 
@@ -489,19 +495,19 @@ namespace CCMDataCapture
             }
             if (tOption == "Shift-A")
             {
-                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' and C.tShift = 'A' Order By SrNo";
+                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' and C.tShift = 'A' Order By LogDateTime";
             }
             else if (tOption == "Shift-B")
             {
-                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' and C.tShift = 'B' Order By SrNo";
+                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' and C.tShift = 'B' Order By LogDateTime";
             }
             else if (tOption == "Shift-C")
             {
-                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' and C.tShift = 'C' Order By SrNo";
+                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' and C.tShift = 'C' Order By LogDateTime";
             }
             else if (tOption == "ALL") 
             {
-                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' Order by SrNo ";
+                sql += " Where C.tDate ='" + txtDate.DateTime.ToString("yyyy-MM-dd") + "' Order by LogDateTime ";
             }
             else if (tOption == "Timing")
             {
@@ -780,7 +786,7 @@ namespace CCMDataCapture
         //}
 
 
-        private void ReloadMasterData(out string err1)
+        public void ReloadMasterData(out string err1)
         {
             err1 = string.Empty;
             strlstdia.Clear();
@@ -1174,7 +1180,7 @@ namespace CCMDataCapture
             }
             else
             {
-                MessageBox.Show(sql, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(sql, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 lblSumCount.Text = "0";
             }
             gridSum_Report.Refresh();
@@ -1315,9 +1321,79 @@ namespace CCMDataCapture
                 m.Show();
             }
         }
-        
+
+        private static DialogResult ShowInputDialogBox(ref string input, string prompt, string title = "Title", int width = 300, int height = 200)
+        {
+            //This function creates the custom input dialog box by individually creating the different window elements and adding them to the dialog box
+
+            //Specify the size of the window using the parameters passed
+            Size size = new Size(width, height);
+            //Create a new form using a System.Windows Form
+            Form inputBox = new Form();
+
+            inputBox.FormBorderStyle = FormBorderStyle.FixedDialog;
+            inputBox.ClientSize = size;
+            //Set the window title using the parameter passed
+            inputBox.Text = title;
+
+            //Create a new label to hold the prompt
+            Label label = new Label();
+            label.Text = prompt;
+            label.Location = new Point(5, 5);
+            label.Width = size.Width - 10;
+            inputBox.Controls.Add(label);
+            
+            //Create a textbox to accept the user's input
+            TextBox textBox = new TextBox();
+            textBox.Size = new Size(size.Width - 10, 25);
+            textBox.Location = new Point(5, label.Location.Y + 25);
+            textBox.Text = input;
+            textBox.PasswordChar = '*';
+            inputBox.Controls.Add(textBox);
+
+            //Create an OK Button 
+            Button okButton = new Button();
+            okButton.DialogResult = DialogResult.OK;
+            okButton.Name = "okButton";
+            okButton.Size = new Size(75, 23);
+            okButton.Text = "&OK";
+            okButton.Location = new Point(size.Width - 80 - 80, size.Height - 30);
+            inputBox.Controls.Add(okButton);
+
+            //Create a Cancel Button
+            Button cancelButton = new Button();
+            cancelButton.DialogResult = DialogResult.Cancel;
+            cancelButton.Name = "cancelButton";
+            cancelButton.Size = new Size(75, 23);
+            cancelButton.Text = "&Cancel";
+            cancelButton.Location = new Point(size.Width - 80, size.Height - 30);
+            inputBox.Controls.Add(cancelButton);
+
+            //Set the input box's buttons to the created OK and Cancel Buttons respectively so the window appropriately behaves with the button clicks
+            inputBox.AcceptButton = okButton;
+            inputBox.CancelButton = cancelButton;
+
+            //Show the window dialog box 
+            DialogResult result = inputBox.ShowDialog();
+            input = textBox.Text;
+
+            //After input has been submitted, return the input value
+            return result;
+        }
+
+
+
         private void btnMasterData_Click(object sender, EventArgs e)
         {
+
+            //Initialize the input variable which will be referenced by the custom input dialog box
+            string input = "";
+            //Display the custom input dialog box with the following prompt, window title, and dimensions
+            ShowInputDialogBox(ref input, "Password for Master data Management?", "Password", 300, 200);
+
+            if (input != "master")
+                return;
+
             Form t = Application.OpenForms["frmMasters"];
 
             if (t == null)
@@ -1342,6 +1418,15 @@ namespace CCMDataCapture
 
         private void btnEmailSetting_Click(object sender, EventArgs e)
         {
+
+            //Initialize the input variable which will be referenced by the custom input dialog box
+            string input = "";
+            //Display the custom input dialog box with the following prompt, window title, and dimensions
+            ShowInputDialogBox(ref input, "Password for Master data Management?", "Password", 300, 200);
+
+            if (input != "master")
+                return;
+
             Form t = Application.OpenForms["frmEmailConfig"];
 
             if (t == null)
@@ -1354,6 +1439,14 @@ namespace CCMDataCapture
 
         private void btnRFIDSetting_Click(object sender, EventArgs e)
         {
+            //Initialize the input variable which will be referenced by the custom input dialog box
+            string input = "";
+            //Display the custom input dialog box with the following prompt, window title, and dimensions
+            ShowInputDialogBox(ref input, "Password for Master data Management?", "Password", 300, 200);
+
+            if (input != "master")
+                return;
+
             Form t = Application.OpenForms["frmRFID"];
 
             if (t == null)
@@ -1365,6 +1458,14 @@ namespace CCMDataCapture
 
         private void btnModbusSetting_Click(object sender, EventArgs e)
         {
+            //Initialize the input variable which will be referenced by the custom input dialog box
+            string input = "";
+            //Display the custom input dialog box with the following prompt, window title, and dimensions
+            ShowInputDialogBox(ref input, "Password for Master data Management?", "Password", 300, 200);
+
+            if (input != "master")
+                return;
+
             Form t = Application.OpenForms["frmModbusTcpConfig"];
 
             if (t == null)
@@ -1374,5 +1475,6 @@ namespace CCMDataCapture
             }
         }
 
+       
     }
 }

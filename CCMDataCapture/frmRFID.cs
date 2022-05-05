@@ -199,12 +199,14 @@ namespace CCMDataCapture
                 int rescnt = 0;
                 using (SqlCommand cmd = cn.CreateCommand())
                 {
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     try
                     {
                         cmd.CommandText = sql;
                         rescnt = cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex) { }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
 
 
 
@@ -264,12 +266,14 @@ namespace CCMDataCapture
                 int rescnt = 0;
                 using (SqlCommand cmd = cn.CreateCommand())
                 {
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     try
                     {
                         cmd.CommandText = sql;
                         rescnt = cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex) { }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
 
 
 
@@ -381,12 +385,14 @@ namespace CCMDataCapture
                 int rescnt = 0;
                 using (SqlCommand cmd = cn.CreateCommand())
                 {
+#pragma warning disable CS0168 // The variable 'ex' is declared but never used
                     try
                     {
                         cmd.CommandText = sql;
                         rescnt = cmd.ExecuteNonQuery();
                     }
                     catch (Exception ex) { }
+#pragma warning restore CS0168 // The variable 'ex' is declared but never used
 
 
 

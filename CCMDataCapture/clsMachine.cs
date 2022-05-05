@@ -12,15 +12,39 @@ namespace CCMDataCapture
     {
         private zkemkeeper.CZKEM CZKEM1;
         
+#pragma warning disable CS0169 // The field 'clsMachine._location' is never used
+#pragma warning disable CS0169 // The field 'clsMachine._machinedesc' is never used
         private string _ip,_machinedesc , _tableName,_location;
+#pragma warning restore CS0169 // The field 'clsMachine._machinedesc' is never used
+#pragma warning restore CS0169 // The field 'clsMachine._location' is never used
         private bool _connected;
+#pragma warning disable CS0169 // The field 'clsMachine._fingerprintversion' is never used
+#pragma warning disable CS0414 // The field 'clsMachine._version' is assigned but its value is never used
         private string _version,_fingerprintversion;
+#pragma warning restore CS0414 // The field 'clsMachine._version' is assigned but its value is never used
+#pragma warning restore CS0169 // The field 'clsMachine._fingerprintversion' is never used
 
         private int _port;
+#pragma warning disable CS0649 // Field 'clsMachine._machineno' is never assigned to, and will always have its default value 0
         private int _machineno,_LastErrCode,_AttdLogCount;
+#pragma warning restore CS0649 // Field 'clsMachine._machineno' is never assigned to, and will always have its default value 0
         private string _ioflg;
 
+#pragma warning disable CS0169 // The field 'clsMachine._messflg' is never used
+#pragma warning disable CS0414 // The field 'clsMachine._finger' is assigned but its value is never used
+#pragma warning disable CS0414 // The field 'clsMachine._rfid' is assigned but its value is never used
+#pragma warning disable CS0414 // The field 'clsMachine._face' is assigned but its value is never used
+#pragma warning disable CS0414 // The field 'clsMachine._autoclear' is assigned but its value is never used
+#pragma warning disable CS0169 // The field 'clsMachine._gateinout' is never used
+#pragma warning disable CS0169 // The field 'clsMachine._lunchinout' is never used
         private bool _messflg,_autoclear,_lunchinout,_gateinout,_istft, _rfid,_face,_finger;
+#pragma warning restore CS0169 // The field 'clsMachine._lunchinout' is never used
+#pragma warning restore CS0169 // The field 'clsMachine._gateinout' is never used
+#pragma warning restore CS0414 // The field 'clsMachine._autoclear' is assigned but its value is never used
+#pragma warning restore CS0414 // The field 'clsMachine._face' is assigned but its value is never used
+#pragma warning restore CS0414 // The field 'clsMachine._rfid' is assigned but its value is never used
+#pragma warning restore CS0414 // The field 'clsMachine._finger' is assigned but its value is never used
+#pragma warning restore CS0169 // The field 'clsMachine._messflg' is never used
 
         /* Error Codes
          

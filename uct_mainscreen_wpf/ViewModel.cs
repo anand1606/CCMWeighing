@@ -544,12 +544,12 @@ namespace uct_main_wpf
                 CurrentClass = dr["LastClass"].ToString();
                 CurrentLength = dr["LastLength"].ToString();
                 CurrentSize = dr["LastSize"].ToString();
-               
-                curAlmMinWt = Convert.ToDouble(dr["LastAlmMinWt"]);
-                curAlmMaxWt = Convert.ToDouble(dr["LastAlmMaxWt"]);
 
-                CurAlramWtRangeDesc = "Min/Max : " + dr["LastAlmMinWt"].ToString() + " / " + dr["LastAlmMaxWt"].ToString();
-               
+                curAlmMinWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength + "','AlmMinWt')", curSQLConStr, out err));
+                curAlmMaxWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength + "','AlmMaxWt')", curSQLConStr, out err));
+
+                CurAlramWtRangeDesc = "Min/Max : " + curAlmMinWt.ToString() + " / " + curAlmMaxWt.ToString();
+
                 CurrentOperatorName = dr["LastOperatorName"].ToString();
                 CurrentOperatorDetails = CurrentOperator + ":" + CurrentOperatorName + "," + dr["LastPunch"].ToString();
             }
@@ -851,7 +851,11 @@ namespace uct_main_wpf
                         this.CurrentOperatorDetails = this.CurrentOperator + ":" + this.CurrentOperatorName;
                     }
                 }
+
+               
+
             }
+            LoadLastParameters();
             this.curTimer.Start();
         }
 

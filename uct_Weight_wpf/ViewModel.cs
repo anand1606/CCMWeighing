@@ -25,11 +25,11 @@ namespace uct_Weight_wpf
 
         private string curValue = "0";
         private bool curStatus = false;
-        
+        private bool shutdown = false;
         private System.Timers.Timer curTimer = new System.Timers.Timer();
 
 
-        private List<string> _sizes = new List<string>();
+        private List<string>  _sizes = new List<string>();        
         private List<string> _lengths = new List<string>();
         private List<string> _classes = new List<string>();
         private List<string> _materials = new List<string>();
@@ -71,13 +71,13 @@ namespace uct_Weight_wpf
         private string curWeightClient = string.Empty;
 
         private bool isstarted = false;
-        private bool shutdown = false;
+        
 
         private CancellationTokenSource logtokensrc;
         private CancellationToken logtoken;
         private Task DataSaveTask;
 
-
+        
 
         private static ConnectionFactory factory = new ConnectionFactory();
         private static IConnection conn;
@@ -94,10 +94,7 @@ namespace uct_Weight_wpf
         // parameter causes the property name of the caller to be substituted as an argument.
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
 
@@ -147,12 +144,13 @@ namespace uct_Weight_wpf
         {
             get
             {
-                return this._sizes;
+                
+                return _sizes;
             }
 
             set
             {
-                this._sizes = value;
+                _sizes = value;
                 NotifyPropertyChanged();
 
             }
@@ -744,10 +742,10 @@ namespace uct_Weight_wpf
                 CurrentLength = dr["LastLength"].ToString();
                 CurrentSize = dr["LastSize"].ToString();
                 CurrentMinWt = Convert.ToDouble(dr["LastMinWt"]);
-                curAlmMinWt = Convert.ToDouble(dr["LastAlmMinWt"]);
-                curAlmMaxWt = Convert.ToDouble(dr["LastAlmMaxWt"]);
+                curAlmMinWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength +"','AlmMinWt')", curSQLConStr, out err));
+                curAlmMaxWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength + "','AlmMaxWt')", curSQLConStr, out err));
 
-                CurAlramWtRangeDesc = "Min/Max : " + dr["LastAlmMinWt"].ToString() + " / " + dr["LastAlmMaxWt"].ToString();
+                CurAlramWtRangeDesc = "Min/Max : " + curAlmMinWt.ToString() + " / " + curAlmMaxWt.ToString();
                 CurrentMaxWt = Convert.ToDouble(dr["LastMaxWt"]);
                 CurrentNomWt = Convert.ToDouble(dr["LastNomWt"]);
                 CurrentMould = dr["LastMould"].ToString();
@@ -859,8 +857,8 @@ namespace uct_Weight_wpf
                 da.Fill(Result, "RESULT");
                 
             }
-            catch (SqlException ex) { err = ex.Message.ToString(); }
-            catch (Exception ex) { err = ex.Message.ToString(); }
+            catch (SqlException ex) { err = ex.Message.ToString(); Debug.Print(ex.Message); }
+            catch (Exception ex) { err = ex.Message.ToString(); Debug.Print(ex.Message); }
             finally
             {
                 conn.Close();
@@ -871,7 +869,7 @@ namespace uct_Weight_wpf
             return Result;
         }
 
-        public  string GetDescription(string sql, string ConnectionString, out string err)
+        private  string GetDescription(string sql, string ConnectionString, out string err)
         {
             object result;
             err = string.Empty;
@@ -983,6 +981,10 @@ namespace uct_Weight_wpf
                             exchange: this.CurrentMachine,
                             routingKey: "STS");
 
+                    channel.QueueBind(queue: queueName,
+                            exchange: "COMMUNICATION",
+                            routingKey: "MasterReload");
+
                     consumer = new EventingBasicConsumer(channel);
                     consumer.Received += (model, ea) =>
                     {
@@ -1010,6 +1012,79 @@ namespace uct_Weight_wpf
                         }
 
 
+                        if(routingKey == "MasterReload")
+                        {
+                            //if new master data added need to load on-the fly
+                            //Reload_MSG_MasterData(message);
+
+                            string testvar = "ccmSize,ccmLength,ccmClass,ccmMaterial,ccmStandard";
+                            string[] msgtable = message.Split('-');
+                            if (msgtable.Length <= 0)
+                                return;
+
+                            if (testvar.Contains(msgtable[0]))
+                            {
+                                string[] msgdata = msgtable[1].Split(',');
+
+                                if (msgdata.Length > 0)
+                                {
+                                    
+                                    var strlist = new List<String>();
+
+                                    foreach (string row in msgdata)
+                                    {
+                                        switch (msgtable[0])
+                                        {
+                                            case "ccmSize":
+                                                strlist.Add(row);
+                                                break;
+                                            case "ccmClass":
+                                                strlist.Add(row);
+                                                break;
+                                            case "ccmLength":
+                                                strlist.Add(row);
+                                                break;
+                                            case "ccmMaterial":
+                                                strlist.Add(row);
+                                                break;
+                                            case "ccmStandard":
+                                                strlist.Add(row);
+                                                break;
+                                            default:
+                                                break;
+                                        } //switch
+                                    } //foreach row 
+
+                                    switch (msgtable[0])
+                                    {
+                                        case "ccmSize":
+                                            Sizes = strlist;
+                                            break;
+                                        case "ccmClass":
+                                            Classes = strlist;
+                                            break;
+                                        case "ccmLength":
+                                            Lengths = strlist;
+                                            break;
+                                        case "ccmMaterial":
+                                            Materials = strlist;
+                                            break;
+                                        case "ccmStandard":
+                                            Standards = strlist;
+                                            break;
+
+                                        default:
+                                            break;
+                                    }
+
+                                }//if data found
+
+                            }
+
+
+                            return;
+                        }
+
                         //GEN_PP$2018-11-22 17:44:17$192.168.11.14$1702$       0.0#0#$PP
                         string[] msg = message.Split('$');
                         string lasttime = msg[1];
@@ -1017,49 +1092,13 @@ namespace uct_Weight_wpf
                         string[] wt = actmsg.Split('#');
                         string actwt = wt[0].Split('.')[0];
 
-                        this.CurrentWeight = actwt.Trim();
+                        double tmpwt = 0;
+                        double.TryParse(actwt, out tmpwt);
+                        this.CurrentWeight = (tmpwt < 0 ? "0.0" : string.Format("{0:0.0}", tmpwt));
                         
                       
 
-                        //if (routingKey.ToString() == "LOG")
-                        //{
-                      
-                        //    StreamReceiver tq = new StreamReceiver();
-                            
-                        //    double tmpwt = 0;
-
-                        //    double.TryParse(actwt,out tmpwt);                            
-                            
-                        //    tq.ActWt = tmpwt;
-                        //    tq.MachineID = this.CurrentMachine;
-                        //    tq.LogDateTime = DateTime.ParseExact(lasttime, "yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-                        //    tq.Parameters = new CurrentSetting();
-
-                        //    tq.Parameters.Class = CurrentClass;
-                        //    tq.Parameters.Joint = CurrentJoint;
-                        //    tq.Parameters.Size = CurrentSize;
-                        //    tq.Parameters.MouldNo = CurrentMould;
-
-                        //    decimal tmplength = 0;
-                        //    decimal tmpmaxwt = 0;
-                        //    decimal tmpminwt = 0;
-                        //    decimal tmpnomwt = 0;
-
-                        //    decimal.TryParse(CurrentLength,out tmplength);
-                        //    decimal.TryParse(CurrentMaxWt.ToString(),out tmpmaxwt);
-                        //    decimal.TryParse(CurrentMinWt.ToString(),out tmpminwt);
-                        //    decimal.TryParse(CurrentNomWt.ToString(),out tmpnomwt);
-
-                        //    tq.Parameters.Length = tmplength;
-                        //    tq.Parameters.MaxWt = tmpmaxwt;
-                        //    tq.Parameters.MinWt = tmpminwt;
-                        //    tq.Parameters.NomWt = tmpnomwt;
-
-                        //    _queue.Enqueue(tq);
-
-                        //    tq = null;
-                        //}
+                        
                         
 
                     };
@@ -1075,7 +1114,6 @@ namespace uct_Weight_wpf
                 catch (RabbitMQ.Client.Exceptions.BrokerUnreachableException ect)
                 {
                     //logerror
-
                     LogErrors("AMQP Basic Consumer Error in uct DLL->" + ect.Message, "ERROR");
                     
                     Thread.Sleep(3000);
@@ -1270,6 +1308,94 @@ namespace uct_Weight_wpf
                 Thread.Sleep(1000);
 
             }//while true;
+        }
+
+        private void Reload_MSG_MasterData(string tabledata)
+        {
+
+            var masters = "ccmSize,ccmLength,ccmClass,ccmMaterial,ccmStandard";
+            
+            if (masters.Contains(tabledata))
+            {
+                string[] msgtable = tabledata.Split('-');
+                if (msgtable.Length <= 0)
+                    return;
+
+                string[] msgdata = msgtable[1].Split(',');
+
+                if(msgdata.Length > 0)
+                {
+                    switch (msgtable[0])
+                    {
+                        case "ccmSize":
+                            _sizes.Clear();
+                            break;
+                        case "ccmClass":
+                            _classes.Clear();
+                            break;
+                        case "ccmLength":
+                            _lengths.Clear();
+                            break;
+                        case "ccmMaterial":
+                            _materials.Clear();
+                            break;
+                        case "ccmStandard":
+                            _standards.Clear();
+                            break;
+                        default:
+                            break;
+                    }
+
+
+                    foreach (string row in msgdata)
+                    {
+                        switch (msgtable[0])
+                        {
+                            case "ccmSize":
+                                _sizes.Add(row);
+                                break;
+                            case "ccmClass":
+                                _classes.Add(row);
+                                break;
+                            case "ccmLength":
+                                _lengths.Add(row);
+                                break;
+                            case "ccmMaterial":
+                                _materials.Add(row);
+                                break;
+                            case "ccmStandard":
+                                _standards.Add(row);
+                                break;
+                            default:
+                                break;
+                        } //switch
+                    } //foreach row 
+
+                    switch (msgtable[0])
+                    {
+                        case "ccmSize":
+                            Sizes = _sizes;
+                            break;
+                        case "ccmClass":
+                            Classes = _classes;
+                            break;
+                        case "ccmLength":
+                            Lengths = _lengths;
+                            break;
+                        case "ccmMaterial":
+                            Materials = _materials;
+                            break;
+                        case "ccmStandard":
+                            Standards = _standards;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                }//if data found
+                
+            }
         }
 
 

@@ -55,9 +55,10 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox3.Location = new System.Drawing.Point(12, 12);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(997, 515);
+            this.groupBox3.Size = new System.Drawing.Size(1015, 627);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Master Data";
@@ -74,7 +75,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(991, 496);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1009, 608);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // grid
@@ -83,7 +84,7 @@
             this.grid.Location = new System.Drawing.Point(3, 153);
             this.grid.MainView = this.gv;
             this.grid.Name = "grid";
-            this.grid.Size = new System.Drawing.Size(985, 410);
+            this.grid.Size = new System.Drawing.Size(1003, 452);
             this.grid.TabIndex = 7;
             this.grid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gv});
@@ -117,6 +118,7 @@
             this.gv.OptionsView.ShowDetailButtons = false;
             this.gv.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gv.OptionsView.ShowGroupPanel = false;
+            this.gv.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gv.DoubleClick += new System.EventHandler(this.gv_DoubleClick);
             // 
             // groupBox8
@@ -133,7 +135,7 @@
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox8.Location = new System.Drawing.Point(3, 3);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(985, 144);
+            this.groupBox8.Size = new System.Drawing.Size(1003, 144);
             this.groupBox8.TabIndex = 0;
             this.groupBox8.TabStop = false;
             // 
@@ -216,8 +218,11 @@
             this.txtDesc.Location = new System.Drawing.Point(381, 47);
             this.txtDesc.Name = "txtDesc";
             this.txtDesc.Properties.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegExpMaskManager));
-            this.txtDesc.Properties.MaskSettings.Set("allowBlankInput", true);
-            this.txtDesc.Properties.MaskSettings.Set("mask", "[0-9A-Z]+");
+            this.txtDesc.Properties.MaskSettings.Set("allowBlankInput", null);
+            this.txtDesc.Properties.MaskSettings.Set("mask", ".+");
+            this.txtDesc.Properties.MaskSettings.Set("placeholder", '_');
+            this.txtDesc.Properties.MaskSettings.Set("isAutoComplete", false);
+            this.txtDesc.Properties.MaskSettings.Set("showPlaceholders", false);
             this.txtDesc.Properties.MaxLength = 50;
             this.txtDesc.Size = new System.Drawing.Size(171, 20);
             this.txtDesc.TabIndex = 1;
@@ -238,7 +243,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1015, 539);
+            this.ClientSize = new System.Drawing.Size(1015, 627);
             this.Controls.Add(this.groupBox3);
             this.Name = "frmMasters";
             this.Text = "Master Data";

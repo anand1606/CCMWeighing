@@ -85,6 +85,9 @@
             this.weightCanwas6 = new uct_Weight_wpf.WeightCanwas();
             this.tbp_10Pipes = new DevExpress.XtraTab.XtraTabPage();
             this.tblp_10Pipes = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gridOverWt = new DevExpress.XtraGrid.GridControl();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.grd_last10 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -146,9 +149,6 @@
             this.grdLog = new DevExpress.XtraGrid.GridControl();
             this.gvLog = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.gridOverWt = new DevExpress.XtraGrid.GridControl();
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tblp_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -174,6 +174,9 @@
             this.xtraTabCCM6.SuspendLayout();
             this.tbp_10Pipes.SuspendLayout();
             this.tblp_10Pipes.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridOverWt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_last10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
@@ -210,9 +213,6 @@
             this.groupBox12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvLog)).BeginInit();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOverWt)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.SuspendLayout();
             // 
             // tblp_Main
@@ -553,7 +553,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.xtraTabWeight);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1123, 679);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1127, 682);
             this.xtraTabPage2.Text = "Parameter Settings";
             // 
             // xtraTabWeight
@@ -568,7 +568,7 @@
             this.xtraTabWeight.Location = new System.Drawing.Point(0, 0);
             this.xtraTabWeight.Name = "xtraTabWeight";
             this.xtraTabWeight.SelectedTabPage = this.xtraTabCCM1;
-            this.xtraTabWeight.Size = new System.Drawing.Size(1123, 679);
+            this.xtraTabWeight.Size = new System.Drawing.Size(1127, 682);
             this.xtraTabWeight.TabIndex = 0;
             this.xtraTabWeight.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabCCM1,
@@ -582,7 +582,7 @@
             // 
             this.xtraTabCCM1.Controls.Add(this.elm_wt_1);
             this.xtraTabCCM1.Name = "xtraTabCCM1";
-            this.xtraTabCCM1.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM1.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM1.Text = "CCM-1";
             // 
             // elm_wt_1
@@ -598,7 +598,7 @@
             // 
             this.xtraTabCCM2.Controls.Add(this.elm_wt_2);
             this.xtraTabCCM2.Name = "xtraTabCCM2";
-            this.xtraTabCCM2.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM2.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM2.Text = "CCM-2";
             // 
             // elm_wt_2
@@ -614,7 +614,7 @@
             // 
             this.xtraTabCCM3.Controls.Add(this.elm_wt_3);
             this.xtraTabCCM3.Name = "xtraTabCCM3";
-            this.xtraTabCCM3.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM3.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM3.Text = "CCM-3";
             // 
             // elm_wt_3
@@ -679,7 +679,7 @@
             this.tbp_10Pipes.Controls.Add(this.tblp_10Pipes);
             this.tbp_10Pipes.Name = "tbp_10Pipes";
             this.tbp_10Pipes.Size = new System.Drawing.Size(1129, 707);
-            this.tbp_10Pipes.Text = "Last 10 Pipes";
+            this.tbp_10Pipes.Text = "Last 15 Pipes";
             // 
             // tblp_10Pipes
             // 
@@ -697,6 +697,58 @@
             this.tblp_10Pipes.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tblp_10Pipes.Size = new System.Drawing.Size(1129, 707);
             this.tblp_10Pipes.TabIndex = 0;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.gridOverWt);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(3, 403);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(1123, 301);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Alarmed Pipes :";
+            // 
+            // gridOverWt
+            // 
+            this.gridOverWt.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridOverWt.Location = new System.Drawing.Point(3, 17);
+            this.gridOverWt.MainView = this.gridView4;
+            this.gridOverWt.Name = "gridOverWt";
+            this.gridOverWt.Size = new System.Drawing.Size(1117, 281);
+            this.gridOverWt.TabIndex = 6;
+            this.gridOverWt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView4});
+            // 
+            // gridView4
+            // 
+            this.gridView4.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.gridView4.Appearance.EvenRow.Options.UseBackColor = true;
+            this.gridView4.GridControl = this.gridOverWt;
+            this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.Editable = false;
+            this.gridView4.OptionsCustomization.AllowColumnMoving = false;
+            this.gridView4.OptionsCustomization.AllowFilter = false;
+            this.gridView4.OptionsCustomization.AllowGroup = false;
+            this.gridView4.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gridView4.OptionsCustomization.AllowSort = false;
+            this.gridView4.OptionsFilter.AllowColumnMRUFilterList = false;
+            this.gridView4.OptionsFilter.AllowFilterEditor = false;
+            this.gridView4.OptionsFilter.AllowFilterIncrementalSearch = false;
+            this.gridView4.OptionsFilter.AllowMRUFilterList = false;
+            this.gridView4.OptionsFind.AllowFindPanel = false;
+            this.gridView4.OptionsMenu.EnableColumnMenu = false;
+            this.gridView4.OptionsMenu.EnableFooterMenu = false;
+            this.gridView4.OptionsMenu.EnableGroupPanelMenu = false;
+            this.gridView4.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.False;
+            this.gridView4.OptionsMenu.ShowAutoFilterRowItem = false;
+            this.gridView4.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
+            this.gridView4.OptionsMenu.ShowGroupSortSummaryItems = false;
+            this.gridView4.OptionsMenu.ShowSplitItem = false;
+            this.gridView4.OptionsView.ColumnAutoWidth = false;
+            this.gridView4.OptionsView.ShowDetailButtons = false;
+            this.gridView4.OptionsView.ShowGroupExpandCollapseButtons = false;
+            this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
             // groupBox7
             // 
@@ -1492,58 +1544,6 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.gridOverWt);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(3, 403);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1123, 301);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Alarmed Pipes :";
-            // 
-            // gridOverWt
-            // 
-            this.gridOverWt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridOverWt.Location = new System.Drawing.Point(3, 17);
-            this.gridOverWt.MainView = this.gridView4;
-            this.gridOverWt.Name = "gridOverWt";
-            this.gridOverWt.Size = new System.Drawing.Size(1117, 281);
-            this.gridOverWt.TabIndex = 6;
-            this.gridOverWt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView4});
-            // 
-            // gridView4
-            // 
-            this.gridView4.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.gridView4.Appearance.EvenRow.Options.UseBackColor = true;
-            this.gridView4.GridControl = this.gridOverWt;
-            this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsBehavior.Editable = false;
-            this.gridView4.OptionsCustomization.AllowColumnMoving = false;
-            this.gridView4.OptionsCustomization.AllowFilter = false;
-            this.gridView4.OptionsCustomization.AllowGroup = false;
-            this.gridView4.OptionsCustomization.AllowQuickHideColumns = false;
-            this.gridView4.OptionsCustomization.AllowSort = false;
-            this.gridView4.OptionsFilter.AllowColumnMRUFilterList = false;
-            this.gridView4.OptionsFilter.AllowFilterEditor = false;
-            this.gridView4.OptionsFilter.AllowFilterIncrementalSearch = false;
-            this.gridView4.OptionsFilter.AllowMRUFilterList = false;
-            this.gridView4.OptionsFind.AllowFindPanel = false;
-            this.gridView4.OptionsMenu.EnableColumnMenu = false;
-            this.gridView4.OptionsMenu.EnableFooterMenu = false;
-            this.gridView4.OptionsMenu.EnableGroupPanelMenu = false;
-            this.gridView4.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView4.OptionsMenu.ShowAutoFilterRowItem = false;
-            this.gridView4.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
-            this.gridView4.OptionsMenu.ShowGroupSortSummaryItems = false;
-            this.gridView4.OptionsMenu.ShowSplitItem = false;
-            this.gridView4.OptionsView.ColumnAutoWidth = false;
-            this.gridView4.OptionsView.ShowDetailButtons = false;
-            this.gridView4.OptionsView.ShowGroupExpandCollapseButtons = false;
-            this.gridView4.OptionsView.ShowGroupPanel = false;
-            // 
             // frmMain
             // 
             this.ClientSize = new System.Drawing.Size(1143, 744);
@@ -1585,6 +1585,9 @@
             this.xtraTabCCM6.ResumeLayout(false);
             this.tbp_10Pipes.ResumeLayout(false);
             this.tblp_10Pipes.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridOverWt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grd_last10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
@@ -1625,9 +1628,6 @@
             this.groupBox12.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvLog)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridOverWt)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.ResumeLayout(false);
 
         }
