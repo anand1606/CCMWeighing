@@ -555,15 +555,15 @@ namespace CCMDataWriter
                         try
                         {
                              issaved = SaveRecordToDB(tmprec, out err2, t.TableName, out retjson);
-                             //if (!string.IsNullOrEmpty(err2))
-                             //{
-                             //    //Library.WriteInfoLog("Step 3->Error->" + err2);
-                             //    continue;
-                             //}
+                            if (!string.IsNullOrEmpty(err2))
+                            {
+                                Library.WriteInfoLog("Step 3->Error->" + err2);
+                               
+                            }
 
-                            
 
-                             isupdated = UpdateSignalRecords(tmprec.LogDateTime, t.MachineIP, issaved, err2);
+
+                            isupdated = UpdateSignalRecords(tmprec.LogDateTime, t.MachineIP, issaved,"");
 
                              if (issaved)
                              {
@@ -628,10 +628,11 @@ namespace CCMDataWriter
         {
             using (SqlConnection cn = new SqlConnection(sqlcnstr))
             {
+                string sql = string.Empty;
                 try
                 {
                     cn.Open();
-                    string sql = "Update ccmSignalDetection set Remarks = '" + remarks.Trim().ToString() + "' " +
+                    sql = "Update ccmSignalDetection set Remarks = '" + remarks.Trim().ToString() + "' " +
                         " ,Saved = '" + ((tSaved)?"1":"0") + "' " +
                         " ,Processed = 1 " +
                         " where " +
@@ -649,6 +650,7 @@ namespace CCMDataWriter
                 catch (Exception ex)
                 {
                     Library.WriteInfoLog("Signal_Update_Error->" + ex.Message);
+                    Library.WriteInfoLog("Signal_Update_Error->" + sql);
                 }
             }
 
@@ -722,7 +724,7 @@ namespace CCMDataWriter
                 }
                 catch (Exception ex)
                 {
-                    err = ex.ToString();
+                    err = ex.Message.ToString();
                     LogErrors("Error While Opnining SQL Connection", "ERROR");
                     return false;
                 }
@@ -918,13 +920,23 @@ namespace CCMDataWriter
 
                         if(tPipeStatus != "OK")
                         {
-                            string sql2 = "Insert into ccmAlarm (tDate,tShift,MachineNo,SrNo,PipeNumber,PipeWt,AlmSent,AddDt,PipeDia,PipeClass,OperatorCode,OperatorName,PipeStaus) " +
+                            string sql2 = "Insert into ccmAlarm (tDate,tShift,MachineNo,SrNo,PipeNumber,PipeWt,AlmSent,AddDt,PipeDia,PipeClass,OperatorCode,OperatorName,PipeStatus) " +
                                 " Values ('" + tDate.ToString("yyyy-MM-dd") + "','" + tShift + "','" + t.MachineID.ToString() + "'," +
                                 " '" + t.SrNo.ToString() + "','" + t.PipeNumber + "','" + t.ActWt.ToString() + "',0,GetDate()," +
                                 "'" + t.Parameters.Size + "','" + t.Parameters.Class + "','" + t.Parameters.OperatorCode + "','" + t.Parameters.OperatorName + "','" + tPipeStatus + "')";
 
-                            cmd.CommandText = sql2;
-                            cmd.ExecuteNonQuery();
+                            try
+                            {
+                                cmd.CommandText = sql2;
+                                cmd.ExecuteNonQuery();
+                            }
+                            catch(Exception ex)
+                            {
+                                err += "Alarm Error ->" + sql2 + "->" + ex.Message;
+                                
+                            }
+                            
+                            
 
                         }
 

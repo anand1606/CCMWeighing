@@ -749,13 +749,13 @@ namespace uct_main_wpf
                         string[] msg = message.Split('$');
                         string lasttime = msg[1];
                         string actmsg = msg[4];
-                        string[] wt = actmsg.Split('#');
+                        string[] wt = actmsg.Split('#');                        
                         string actwt = wt[0].Split('.')[0];
 
-                        this.CurrentWeight = actwt.Trim();
+                        double tmpwt = 0;
+                        double.TryParse(actwt, out tmpwt);
+                        this.CurrentWeight = (tmpwt < 0 ? "0.0" : string.Format("{0:0.0}", tmpwt));
                         
-                      
-
                         //if (routingKey.ToString() == "LOG")
                         //{
                       

@@ -404,7 +404,7 @@ namespace CCMDataCapture
             if (!string.IsNullOrEmpty(tablename))
             {
                 string sql =
-                    "Select top 15 Convert(varchar(10),C.tDate,121) as tDate,C.tShift,IntSrNo as SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
+                    "Select top 15 Convert(varchar(10),C.tDate,121) as [Date],C.tShift as [Shift],SrNo,IntSrNo as SizeSrNo, Convert(varchar(8),Convert(time(5),LogDateTime)) as [Time]," +
                     "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                     " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG " +
                     ",(case when (NomWt > 0) then Round(((ActWt-NomWt)/NomWt*100),3) else 100 end) as DevPer, info.InchargeName, C.PipeStatus, " +
@@ -430,8 +430,8 @@ namespace CCMDataCapture
 
                 //Alarmed Pipes
                 string MachineNo = cmb_10.Text.Trim().ToString();
-                sql = "Select top 50 Convert(varchar(10),tDate,121) as tDate, tShift,PipeDia,PipeClass,PipeWt,PipeWt,PipeStatus,OperatorCode,OperatorName " +
-                    " From ccmAlarm Where tDate = Convert(date,getdate()) and MachineNo ='" + MachineNo + "'";
+                sql = "Select top 50 Convert(varchar(10),tDate,121) as [Date], tShift as [Shift],SrNo,PipeNumber,PipeDia,PipeClass,PipeWt,PipeStatus,OperatorCode,OperatorName " +
+                    " From ccmAlarm Where tDate = Convert(date,getdate()) and MachineNo ='" + MachineNo + "' Order by AddDt Desc";
 
                 ds = Utility.GetData(sql, SQLConStr, out err);
 
@@ -477,7 +477,7 @@ namespace CCMDataCapture
             string tOption = cmb_Options.Text.ToString().Trim();
             string tTableName = GetTableName(tMachine);
             string sql =
-                "Select Convert(varchar(10),C.tDate,121) as tDate,C.tShift,SrNo, IntSrNo as [SizeSrNo], Convert(varchar(23),LogDateTime,121) as LogDateTime," +
+                "Select Convert(varchar(10),C.tDate,121) as [Date],C.tShift as [Shift],SrNo, IntSrNo as [SizeSrNo], Convert(varchar(8),Convert(time(5),LogDateTime)) as [Time]," +
                 "PipeNumber,PipeDia,PipeClass,PipeLength,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt,MachineNo, " +
                 " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG , " +
                 " ABS((Case When (NomWt <= 0 ) then 0 else Round(((NomWt-ActWt)/NomWt*100),3) end)) as DevPer,info.InchargeName, PipeStatus, OperatorCode,OperatorName  " +
