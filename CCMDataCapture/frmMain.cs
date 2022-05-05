@@ -405,10 +405,9 @@ namespace CCMDataCapture
             {
                 string sql =
                     "Select top 15 Convert(varchar(10),C.tDate,121) as [Date],C.tShift as [Shift],SrNo,IntSrNo as SizeSrNo, Convert(varchar(8),Convert(time(5),LogDateTime)) as [Time]," +
-                    " MachineNo,PipeDia,PipeClass,PipeLength,PipeNumber,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt, " +
+                    " MachineNo,PipeDia,PipeClass,PipeLength,PipeNumber,MinWt,MaxWt,ActWt,NomWt, " +
                     " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG " +
-                    ",(case when (NomWt > 0) then Round(((ActWt-NomWt)/NomWt*100),3) else 100 end) as DevPer, info.InchargeName, C.PipeStatus, " +
-                    " OperatorCode,OperatorName " +
+                    ",(case when (NomWt > 0) then Round(((ActWt-NomWt)/NomWt*100),3) else 100 end) as DevPer, C.PipeStatus " +
                     " From [" + tablename + "] C left outer join ccmShiftWiseInfo info on c.tDate = info.tDate and c.tShift = info.tShift" +
                     " where C.tdate = Convert(date,Getdate())  " +
                     " Order By C.LogDateTime Desc ";
@@ -480,7 +479,7 @@ namespace CCMDataCapture
                 "Select Convert(varchar(10),C.tDate,121) as [Date],C.tShift as [Shift],SrNo, IntSrNo as [SizeSrNo], Convert(varchar(8),Convert(time(5),LogDateTime)) as [Time]," +
                 " MachineNo,PipeDia,PipeClass,PipeLength,PipeNumber,JointType,MouldNo,MinWt,MaxWt,ActWt,NomWt, " +
                 " (case when (ActWt <= NomWt) then (ActWt-NomWt) else (NomWt-ActWt) end) as DevKG , " +
-                " ABS((Case When (NomWt <= 0 ) then 0 else Round(((NomWt-ActWt)/NomWt*100),3) end)) as DevPer,info.InchargeName, PipeStatus, OperatorCode,OperatorName  " +
+                " ABS((Case When (NomWt <= 0 ) then 0 else Round(((NomWt-ActWt)/NomWt*100),3) end)) as DevPer,info.InchargeName, PipeStatus,Material,Standard, OperatorCode,OperatorName  " +
                 " From [" + tTableName + "] C left outer join ccmShiftWiseInfo info on c.tDate = info.tDate and c.tShift = info.tShift ";
             
                     

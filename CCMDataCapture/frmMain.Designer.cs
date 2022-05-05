@@ -222,6 +222,7 @@
             this.tblp_Main.Controls.Add(this.xtraTabControl1, 0, 0);
             this.tblp_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblp_Main.Location = new System.Drawing.Point(0, 0);
+            this.tblp_Main.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.tblp_Main.Name = "tblp_Main";
             this.tblp_Main.RowCount = 1;
             this.tblp_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -846,6 +847,7 @@
             this.tblp_Reports.Controls.Add(this.groupBox6, 0, 1);
             this.tblp_Reports.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblp_Reports.Location = new System.Drawing.Point(0, 0);
+            this.tblp_Reports.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
             this.tblp_Reports.Name = "tblp_Reports";
             this.tblp_Reports.RowCount = 2;
             this.tblp_Reports.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
@@ -1078,6 +1080,7 @@
             this.gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.gridView1.Appearance.EvenRow.Options.UseBackColor = true;
             this.gridView1.GridControl = this.grd_report;
+            this.gridView1.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsCustomization.AllowColumnMoving = false;
@@ -1102,6 +1105,7 @@
             this.gridView1.OptionsView.ShowDetailButtons = false;
             this.gridView1.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             // 
             // tbp_SummaryReport
             // 
