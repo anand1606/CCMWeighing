@@ -23,7 +23,8 @@ namespace uct_Weight_wpf
     public partial class WeightCanwas : UserControl
     {
         public ViewModel model = new ViewModel();
-
+        private bool lockstatus = true;
+        private string tmp_pw = String.Empty;
         public WeightCanwas()
         {
             InitializeComponent();
@@ -32,9 +33,16 @@ namespace uct_Weight_wpf
             
         }
 
+        void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            //timer.Stop();
+            //timer.Start();
+        }
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
+            sel_Size.IsEnabled = false;
+            
         }
 
         private void btnConfig_Click(object sender, RoutedEventArgs e)
@@ -190,6 +198,42 @@ namespace uct_Weight_wpf
         private void sel_Standard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnUnlock_Click(object sender, RoutedEventArgs e)
+        {
+            string sqlcn = model.GetCurrentSQLConn;
+            string err = string.Empty;
+            tmp_pw = GetDescription("Select Config_Value from ccmParaConfig where Config_Key ='QualitySizePW'", sqlcn, out err);
+
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show(err,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
+                return;
+            }
+
+            if (txtSizePass.Password == tmp_pw)
+            {
+                sel_Size.IsEnabled = true;
+                lockstatus = false;
+                btnUnlock.Content = "Lock";
+            }
+            else
+            {
+                sel_Size.IsEnabled = false;
+                lockstatus = true;
+                txtSizePass.Password = "";
+                btnUnlock.Content = "Unlock";
+            }
+        
+        }
+
+        private void sel_Size_DropDownClosed(object sender, EventArgs e)
+        {
+            txtSizePass.Password = "";
+            lockstatus = true ;
+            sel_Size.IsEnabled = false;
+            btnUnlock.Content = "Unlock";
         }
     }
 }

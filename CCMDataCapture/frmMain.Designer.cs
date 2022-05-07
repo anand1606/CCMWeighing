@@ -554,7 +554,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.xtraTabWeight);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1127, 682);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1123, 679);
             this.xtraTabPage2.Text = "Parameter Settings";
             // 
             // xtraTabWeight
@@ -569,7 +569,7 @@
             this.xtraTabWeight.Location = new System.Drawing.Point(0, 0);
             this.xtraTabWeight.Name = "xtraTabWeight";
             this.xtraTabWeight.SelectedTabPage = this.xtraTabCCM1;
-            this.xtraTabWeight.Size = new System.Drawing.Size(1127, 682);
+            this.xtraTabWeight.Size = new System.Drawing.Size(1123, 679);
             this.xtraTabWeight.TabIndex = 0;
             this.xtraTabWeight.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabCCM1,
@@ -583,14 +583,14 @@
             // 
             this.xtraTabCCM1.Controls.Add(this.elm_wt_1);
             this.xtraTabCCM1.Name = "xtraTabCCM1";
-            this.xtraTabCCM1.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM1.Size = new System.Drawing.Size(1117, 646);
             this.xtraTabCCM1.Text = "CCM-1";
             // 
             // elm_wt_1
             // 
             this.elm_wt_1.Location = new System.Drawing.Point(22, 22);
             this.elm_wt_1.Name = "elm_wt_1";
-            this.elm_wt_1.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_1.Size = new System.Drawing.Size(822, 430);
             this.elm_wt_1.TabIndex = 0;
             this.elm_wt_1.Text = "elementHost1";
             this.elm_wt_1.Child = this.weightCanwas1;
@@ -599,14 +599,14 @@
             // 
             this.xtraTabCCM2.Controls.Add(this.elm_wt_2);
             this.xtraTabCCM2.Name = "xtraTabCCM2";
-            this.xtraTabCCM2.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM2.Size = new System.Drawing.Size(1117, 646);
             this.xtraTabCCM2.Text = "CCM-2";
             // 
             // elm_wt_2
             // 
             this.elm_wt_2.Location = new System.Drawing.Point(22, 22);
             this.elm_wt_2.Name = "elm_wt_2";
-            this.elm_wt_2.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_2.Size = new System.Drawing.Size(822, 430);
             this.elm_wt_2.TabIndex = 1;
             this.elm_wt_2.Text = "elementHost2";
             this.elm_wt_2.Child = this.weightCanwas2;
@@ -615,14 +615,14 @@
             // 
             this.xtraTabCCM3.Controls.Add(this.elm_wt_3);
             this.xtraTabCCM3.Name = "xtraTabCCM3";
-            this.xtraTabCCM3.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM3.Size = new System.Drawing.Size(1117, 646);
             this.xtraTabCCM3.Text = "CCM-3";
             // 
             // elm_wt_3
             // 
             this.elm_wt_3.Location = new System.Drawing.Point(22, 22);
             this.elm_wt_3.Name = "elm_wt_3";
-            this.elm_wt_3.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_3.Size = new System.Drawing.Size(822, 430);
             this.elm_wt_3.TabIndex = 1;
             this.elm_wt_3.Text = "elementHost3";
             this.elm_wt_3.Child = this.weightCanwas3;
@@ -631,14 +631,14 @@
             // 
             this.xtraTabCCM4.Controls.Add(this.elm_wt_4);
             this.xtraTabCCM4.Name = "xtraTabCCM4";
-            this.xtraTabCCM4.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM4.Size = new System.Drawing.Size(1117, 646);
             this.xtraTabCCM4.Text = "CCM-4";
             // 
             // elm_wt_4
             // 
             this.elm_wt_4.Location = new System.Drawing.Point(22, 22);
             this.elm_wt_4.Name = "elm_wt_4";
-            this.elm_wt_4.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_4.Size = new System.Drawing.Size(822, 430);
             this.elm_wt_4.TabIndex = 1;
             this.elm_wt_4.Text = "elementHost4";
             this.elm_wt_4.Child = this.weightCanwas4;
@@ -647,14 +647,14 @@
             // 
             this.xtraTabCCM5.Controls.Add(this.elm_wt_5);
             this.xtraTabCCM5.Name = "xtraTabCCM5";
-            this.xtraTabCCM5.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM5.Size = new System.Drawing.Size(1117, 646);
             this.xtraTabCCM5.Text = "CCM-5";
             // 
             // elm_wt_5
             // 
             this.elm_wt_5.Location = new System.Drawing.Point(22, 22);
             this.elm_wt_5.Name = "elm_wt_5";
-            this.elm_wt_5.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_5.Size = new System.Drawing.Size(822, 430);
             this.elm_wt_5.TabIndex = 1;
             this.elm_wt_5.Text = "elementHost11";
             this.elm_wt_5.Child = this.weightCanwas5;
@@ -663,14 +663,14 @@
             // 
             this.xtraTabCCM6.Controls.Add(this.elm_wt_6);
             this.xtraTabCCM6.Name = "xtraTabCCM6";
-            this.xtraTabCCM6.Size = new System.Drawing.Size(1121, 649);
+            this.xtraTabCCM6.Size = new System.Drawing.Size(1117, 646);
             this.xtraTabCCM6.Text = "CCM-6";
             // 
             // elm_wt_6
             // 
             this.elm_wt_6.Location = new System.Drawing.Point(22, 22);
             this.elm_wt_6.Name = "elm_wt_6";
-            this.elm_wt_6.Size = new System.Drawing.Size(822, 343);
+            this.elm_wt_6.Size = new System.Drawing.Size(822, 430);
             this.elm_wt_6.TabIndex = 1;
             this.elm_wt_6.Text = "elementHost12";
             this.elm_wt_6.Child = this.weightCanwas6;
