@@ -252,6 +252,7 @@ namespace CCMDataWriter
         }
 
         //Low high Low based pipe record ->second method
+        /****
         static void timer_Elapsed_LowHighLow(object sender, System.Timers.ElapsedEventArgs e)
         {
             if (ShutdownSignal)
@@ -479,7 +480,7 @@ namespace CCMDataWriter
             timer.Start();
            
         }
-        
+        ***/
         //pure signal based pipe record
         static void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -497,6 +498,7 @@ namespace CCMDataWriter
             if (!string.IsNullOrEmpty(err))
             {
                 Library.WriteInfoLog("Data Writer Service->Step-1->" + err);
+                ShutdownSignal = false;
                 timer.Start();
                 return;
             }

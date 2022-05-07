@@ -1,1 +1,1 @@
-﻿Server=172.16.13.10;Database=CCM;User Id=sa;Password=testomonials@123;
+﻿Server=172.16.12.14;Database=mohit;User Id=sa;Password=testomonials@123;

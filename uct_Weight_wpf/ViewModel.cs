@@ -741,13 +741,14 @@ namespace uct_Weight_wpf
                 CurrentClass = dr["LastClass"].ToString();
                 CurrentLength = dr["LastLength"].ToString();
                 CurrentSize = dr["LastSize"].ToString();
-                CurrentMinWt = Convert.ToDouble(dr["LastMinWt"]);
+                CurrentMinWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength + "','MINWT')", curSQLConStr, out err));
                 curAlmMinWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength +"','AlmMinWt')", curSQLConStr, out err));
                 curAlmMaxWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength + "','AlmMaxWt')", curSQLConStr, out err));
 
                 CurAlramWtRangeDesc = "Min/Max : " + curAlmMinWt.ToString() + " / " + curAlmMaxWt.ToString();
-                CurrentMaxWt = Convert.ToDouble(dr["LastMaxWt"]);
-                CurrentNomWt = Convert.ToDouble(dr["LastNomWt"]);
+                CurrentMaxWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength + "','MAXWT')", curSQLConStr, out err));
+                CurrentNomWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + CurrentSize + "','" + CurrentClass + "','" + CurrentLength + "','NOMWT')", curSQLConStr, out err));
+                
                 CurrentMould = dr["LastMould"].ToString();
                 CurrentJoint = dr["LastJoint"].ToString();
                 CurrentMaterial = dr["LastMaterial"].ToString();
@@ -1308,94 +1309,6 @@ namespace uct_Weight_wpf
                 Thread.Sleep(1000);
 
             }//while true;
-        }
-
-        private void Reload_MSG_MasterData(string tabledata)
-        {
-
-            var masters = "ccmSize,ccmLength,ccmClass,ccmMaterial,ccmStandard";
-            
-            if (masters.Contains(tabledata))
-            {
-                string[] msgtable = tabledata.Split('-');
-                if (msgtable.Length <= 0)
-                    return;
-
-                string[] msgdata = msgtable[1].Split(',');
-
-                if(msgdata.Length > 0)
-                {
-                    switch (msgtable[0])
-                    {
-                        case "ccmSize":
-                            _sizes.Clear();
-                            break;
-                        case "ccmClass":
-                            _classes.Clear();
-                            break;
-                        case "ccmLength":
-                            _lengths.Clear();
-                            break;
-                        case "ccmMaterial":
-                            _materials.Clear();
-                            break;
-                        case "ccmStandard":
-                            _standards.Clear();
-                            break;
-                        default:
-                            break;
-                    }
-
-
-                    foreach (string row in msgdata)
-                    {
-                        switch (msgtable[0])
-                        {
-                            case "ccmSize":
-                                _sizes.Add(row);
-                                break;
-                            case "ccmClass":
-                                _classes.Add(row);
-                                break;
-                            case "ccmLength":
-                                _lengths.Add(row);
-                                break;
-                            case "ccmMaterial":
-                                _materials.Add(row);
-                                break;
-                            case "ccmStandard":
-                                _standards.Add(row);
-                                break;
-                            default:
-                                break;
-                        } //switch
-                    } //foreach row 
-
-                    switch (msgtable[0])
-                    {
-                        case "ccmSize":
-                            Sizes = _sizes;
-                            break;
-                        case "ccmClass":
-                            Classes = _classes;
-                            break;
-                        case "ccmLength":
-                            Lengths = _lengths;
-                            break;
-                        case "ccmMaterial":
-                            Materials = _materials;
-                            break;
-                        case "ccmStandard":
-                            Standards = _standards;
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                }//if data found
-                
-            }
         }
 
 

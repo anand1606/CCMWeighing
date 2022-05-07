@@ -161,24 +161,15 @@ namespace uct_Weight_wpf
             string tSize = model.CurrentSize;
             string tClass = model.CurrentClass;
             string tLen = model.CurrentLength;
+            string err = string.Empty;
+            model.CurrentMinWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + tSize + "','" + tClass + "','" + tLen + "','MINWT')", sqlcn, out err));
+            model.CurrentMaxWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + tSize + "','" + tClass + "','" + tLen + "','MAXWT')", sqlcn, out err));
+            model.CurrentNomWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + tSize + "','" + tClass + "','" + tLen + "','NOMWT')", sqlcn, out err));
+            model.CurrentAlmMinWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + tSize + "','" + tClass + "','" + tLen + "','ALMMINWT')", sqlcn, out err));
+            model.CurrentAlmMaxWt = Convert.ToDouble(GetDescription("select dbo.udf_get_Wt_minmax('" + tSize + "','" + tClass + "','" + tLen + "','ALMMAXWT')", sqlcn, out err));
 
-            string tminwt = string.Empty,tmaxwt = string.Empty,tnomwt = string.Empty, err = string.Empty;
-            string sql = "Select top 1 * from ccmWeightMaster where Size = '" + tSize + "' And Class ='" + tClass + "' and Len = '" + tLen + "'";
-            DataSet tds = GetData(sql, sqlcn, out err);
-            Boolean hasRows = tds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
-            if (hasRows)
-            {
-                foreach (DataRow dr in tds.Tables[0].Rows)
-                {
-                    model.CurrentMinWt = (double)dr["MinWt"];
-                    model.CurrentMaxWt = (double)dr["MaxWt"];
-                    model.CurrentNomWt = (double)dr["NomWt"];
-                    model.CurrentAlmMinWt = (double)dr["AlmMinWt"];
-                    model.CurrentAlmMaxWt = (double)dr["AlmMaxWt"];
-
-                    model.CurAlramWtRangeDesc = "Min/Max : " + dr["AlmMinWt"].ToString() + " / " + dr["AlmMaxWt"].ToString(); 
-                } 
-            }
+            model.CurAlramWtRangeDesc = "Min/Max : " + model.CurrentAlmMinWt.ToString() + " / " + model.CurrentAlmMaxWt.ToString(); 
+           
         }
 
         private void sel_Class_SelectionChanged(object sender, SelectionChangedEventArgs e)

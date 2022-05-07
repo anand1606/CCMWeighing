@@ -124,17 +124,17 @@
             <TextBlock x:Name="lbl_Mould" FontSize="14" TextAlignment="Left" Grid.Column="9"  Text="Mould" Grid.Row="5" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Center"   />
 
             <ComboBox x:Name="sel_Size" Margin="0,1,20,0" Grid.Column="1"  
-                      ItemsSource="{Binding Sizes, BindsDirectlyToSource=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsSynchronizedWithCurrentItem="True"
+                      ItemsSource="{Binding Sizes,  Mode=TwoWay }" 
                       SelectedValue="{Binding CurrentSize}" SelectionChanged="sel_Size_SelectionChanged" Grid.ColumnSpan="2" Width="100" Grid.Row="3" />
 
             <ComboBox x:Name="sel_Class" Margin="0,1,20,0" Grid.Column="4"   
-                      ItemsSource="{Binding Classes, BindsDirectlyToSource=True, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" IsSynchronizedWithCurrentItem="True"
+                      ItemsSource="{Binding Classes,  Mode=TwoWay }" 
                       SelectedValue="{Binding CurrentClass}" SelectionChanged="sel_Class_SelectionChanged" Grid.ColumnSpan="2" Width="100" Grid.Row="3" 
                       />
 
 
             <ComboBox x:Name="sel_Length" Margin="1,1,19,0" Grid.Column="7" 
-                      ItemsSource="{Binding Lengths,BindsDirectlyToSource=True, Mode=TwoWay ,UpdateSourceTrigger=PropertyChanged }" IsSynchronizedWithCurrentItem="True"
+                      ItemsSource="{Binding Lengths, Mode=TwoWay }" IsSynchronizedWithCurrentItem="True"
                       SelectedValue="{Binding CurrentLength}" SelectionChanged="sel_Length_SelectionChanged" Grid.ColumnSpan="2" Width="100" Grid.Row="3" />
 
 
@@ -159,11 +159,11 @@
             <Button x:Name="btnConfig" Content="IP Config" Grid.Column="10" HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="100" Click="btnConfig_Click" Grid.ColumnSpan="2" Margin="0,4,0,0" Grid.RowSpan="2" Visibility="Hidden"/>
             <TextBlock x:Name="lbl_Material" FontSize="14" TextAlignment="Left" Margin="5,0,0,0"  Text="Material" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center"  />
             <ComboBox x:Name="sel_Material" Margin="1,0,19,0" Grid.Column="1" Grid.ColumnSpan="5"  Grid.Row="7"  
-                ItemsSource="{Binding Materials, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" IsSynchronizedWithCurrentItem="True"
+                ItemsSource="{Binding Materials }" 
                 SelectedValue="{Binding CurrentMaterial}" SelectionChanged="sel_Material_SelectionChanged" />
             <TextBlock x:Name="lbl_Standard" FontSize="14" TextAlignment="Left" Margin="3,2,0,2" Grid.Column="6"  Text="Std." Grid.Row="7" RenderTransformOrigin="0.456,-0.478" />
             <ComboBox x:Name="sel_Standard" Margin="2,0,19,0" Grid.Column="7" Grid.ColumnSpan="5"  Grid.Row="7"   
-                ItemsSource="{Binding Standards, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" IsSynchronizedWithCurrentItem="True"
+                ItemsSource="{Binding Standards }" 
                 SelectedValue="{Binding CurrentStandard}" SelectionChanged="sel_Standard_SelectionChanged"
                       />
             <TextBlock x:Name="lbl_Alarm_Range" FontSize="14" TextAlignment="Left" Margin="5,0,5,5"  Text="Alarm Range" Grid.Row="11" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Left" />
