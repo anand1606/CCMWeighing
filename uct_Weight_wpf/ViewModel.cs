@@ -211,7 +211,8 @@ namespace uct_Weight_wpf
                 {
                     this.curMinWt = value;
                     NotifyPropertyChanged();
-                   
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
                 }
             }
         }
@@ -229,7 +230,8 @@ namespace uct_Weight_wpf
                 {
                     this.curMaxWt = value;
                     NotifyPropertyChanged();
-                   
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
                 }
             }
         }
@@ -247,7 +249,8 @@ namespace uct_Weight_wpf
                 {
                     this.curNomWt = value;
                     NotifyPropertyChanged();
-                    
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
                 }
             }
         }
@@ -265,8 +268,8 @@ namespace uct_Weight_wpf
                 {
                     this.curAlmMinWt = value;
                     NotifyPropertyChanged();
-                    //if (this.isDataSaveRequired)
-                    //    SaveLastParameters();
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
                 }
             }
         }
@@ -284,8 +287,8 @@ namespace uct_Weight_wpf
                 {
                     this.curAlmMaxWt = value;
                     NotifyPropertyChanged();
-                    //if (this.isDataSaveRequired)
-                    //    SaveLastParameters();
+                    if (this.isDataSaveRequired)
+                        SaveLastParameters();
                 }
             }
         }

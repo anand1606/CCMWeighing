@@ -991,6 +991,7 @@ namespace CCMDataWriter
                          "   Len(Rtrim([LastSize])) > 0 and " +
                          "   Len(Rtrim([LastLength])) > 0  and " +
                          "   Len(Rtrim([LastClass])) > 0 and  " +
+                         "   LastMinWt > 0 and LastMaxWt > 0 and LastNomWt > 0 " +
                          "   MachineID = '" + MachineID + "' and UpdDt <= '" + LastSaveTime.ToString("yyyy-MM-dd HH:mm:ss") + "' " +
                          "   order by [UpdDt] desc ";
 
