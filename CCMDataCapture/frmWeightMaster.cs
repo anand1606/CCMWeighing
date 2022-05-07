@@ -223,8 +223,8 @@ namespace CCMDataCapture
             double.TryParse(txtMinWt.EditValue.ToString(), out tMin);
             double.TryParse(txtMaxWt.EditValue.ToString(), out tMax);
             double.TryParse(txtNomWt.EditValue.ToString(), out tNom);
-            double.TryParse(txtAlmMinWt.EditValue.ToString(),out tAlmMin);
-            double.TryParse(txtAlmMaxWt.EditValue.ToString(),out tAlmMax);
+            //double.TryParse(txtAlmMinWt.EditValue.ToString(),out tAlmMin);
+            //double.TryParse(txtAlmMaxWt.EditValue.ToString(),out tAlmMax);
  
             if (tMin == 0 || tMax == 0 || tMax == 0)
             {
@@ -263,15 +263,15 @@ namespace CCMDataCapture
                 err = err + "Nominal Weight must be less than Maximum Weight" + Environment.NewLine;
             }
 
-            if(tAlmMin > tMin)
-            {
-                err = err + "Alarm Min Weight must be less than Minimum Weight" + Environment.NewLine;
-            }
+            //if(tAlmMin > tMin)
+            //{
+            //    err = err + "Alarm Min Weight must be less than Minimum Weight" + Environment.NewLine;
+            //}
 
-            if (tAlmMax < tMax)
-            {
-                err = err + "Alarm Max Weight must be gretor than Maximum Weight" + Environment.NewLine;
-            }
+            //if (tAlmMax < tMax)
+            //{
+            //    err = err + "Alarm Max Weight must be gretor than Maximum Weight" + Environment.NewLine;
+            //}
 
             return err;
         }
