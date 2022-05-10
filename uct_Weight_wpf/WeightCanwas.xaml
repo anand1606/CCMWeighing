@@ -134,7 +134,7 @@
 
 
             <ComboBox x:Name="sel_Length" Margin="1,1,19,0" Grid.Column="7" 
-                      ItemsSource="{Binding Lengths, Mode=TwoWay}" IsSynchronizedWithCurrentItem="True"
+                      ItemsSource="{Binding Lengths, Mode=TwoWay}" 
                       SelectedValue="{Binding CurrentLength}" SelectionChanged="sel_Length_SelectionChanged" Grid.ColumnSpan="2" Width="100" Grid.Row="3" />
 
 
