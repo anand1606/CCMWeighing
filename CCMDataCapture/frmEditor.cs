@@ -27,6 +27,66 @@ namespace CCMDataCapture
             DS = new DataSet();
         }
 
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Filter = "CSV File|*.csv|Excel (2010)|*.xlsx|Html File (.html)|*.html";
+                if (saveDialog.ShowDialog() != DialogResult.Cancel)
+                {
+                    string exportFilePath = saveDialog.FileName;
+                    string fileExtenstion = new FileInfo(exportFilePath).Extension;
+
+                    switch (fileExtenstion)
+                    {
+                        case ".csv":
+                            gridView1.ExportToCsv(exportFilePath);
+                            break;
+                        case ".xls":
+                            gridView1.ExportToXls(exportFilePath);
+                            break;
+                        case ".xlsx":
+                            gridView1.ExportToXlsx(exportFilePath);
+                            break;
+                        case ".rtf":
+                            gridView1.ExportToRtf(exportFilePath);
+                            break;
+                        case ".pdf":
+                            gridView1.ExportToPdf(exportFilePath);
+                            break;
+                        case ".html":
+                            gridView1.ExportToHtml(exportFilePath);
+                            break;
+                        case ".mht":
+                            gridView1.ExportToMht(exportFilePath);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (File.Exists(exportFilePath))
+                    {
+                        try
+                        {
+                            //Try to open the file and let windows decide how to open it.
+                            System.Diagnostics.Process.Start(exportFilePath);
+                        }
+                        catch
+                        {
+                            String msg = "The file could not be opened." + Environment.NewLine + Environment.NewLine + "Path: " + exportFilePath;
+                            MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        String msg = "The file could not be saved." + Environment.NewLine + Environment.NewLine + "Path: " + exportFilePath;
+                        MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             if (txtDate.EditValue == null || txtMachines.Text.Trim() == "" || txtShift.Text.Trim() == "")
@@ -45,8 +105,9 @@ namespace CCMDataCapture
             //load grid..
             string tablename = GetTableName(txtMachines.Text.Trim());
             sql =
-                "Select SrNo, Convert(varchar(23),LogDateTime,121) as LogDateTime," +
-                "PipeNumber,PipeDia,PipeClass,ActWt,PipeStatus " +
+                "Select SrNo, Convert(varchar(10),LogDateTime,121) as LogDate,Convert(varchar(5),Convert(time(5),LogDateTime)) as LogTime, " +
+                " MachineNo,tShift,IntSrNo,PipeNumber,PipeDia,PipeClass,PipeLength,ActWt,NomWt,Material,Standard,JointType,MouldNo,PipeStatus " +
+                ",ABS((Case When(NomWt <= 0) then 0 else Round(((NomWt - ActWt) / NomWt * 100), 3) end)) as DevPer, OperatorCode,OperatorName " +
                 " From [" + tablename + "] " +
                 " where tDate='" + txtDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim().ToString() + "'";
 
@@ -84,15 +145,15 @@ namespace CCMDataCapture
             txtShift.SelectedText = "A";
             txtMachines.SelectedText = "P";
 
-            string sqlconfig = "sql_connection.txt";
-            string fullpath = Path.Combine(strpath, sqlconfig);
-            cnstr = File.ReadLines(fullpath).First();
+
+            cnstr = Utility.SQLCnStr;
 
             using (SqlConnection cn = new SqlConnection(cnstr))
             {
                 string str = "select Description from ccmDefect Order by Description ";                             
                 SqlCommand cmd = new SqlCommand(str, cn);
 
+                //fill defect codes
                 cn.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 ComboBoxItemCollection items_DT = this.rptStatus.Items;
@@ -103,7 +164,6 @@ namespace CCMDataCapture
                 }
                 dr.Close();
                 this.rptStatus.TextEditStyle = TextEditStyles.DisableTextEditor;
-
                 this.gridView1.Columns["PipeStatus"].ColumnEdit = this.rptStatus;
 
 
@@ -117,6 +177,37 @@ namespace CCMDataCapture
                     txtMachines.Items.Add(dr["MachineName"].ToString());
                 }
                 dr.Close();
+
+                //fill standard
+                items_DT = this.rptStandard.Items;
+                str = "Select Description from ccmStandard order by Description";
+                cmd = new SqlCommand(str,cn);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    items_DT.Add(dr["Description"].ToString());
+                }
+                dr.Close();
+                this.rptStandard.TextEditStyle = TextEditStyles.DisableTextEditor;
+                this.gridView1.Columns["Standard"].ColumnEdit = this.rptStandard;
+
+
+                //fill material
+                items_DT = this.rptMaterial.Items;
+                str = "Select Description from ccmMaterial order by Description";
+                cmd = new SqlCommand(str, cn);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    items_DT.Add(dr["Description"].ToString());
+                }
+                dr.Close();
+                this.rptMaterial.TextEditStyle = TextEditStyles.DisableTextEditor;
+                this.gridView1.Columns["Material"].ColumnEdit = this.rptMaterial;
+
+
+
+
             }
 
         }
@@ -221,7 +312,12 @@ namespace CCMDataCapture
                         DataTable HrlyView = DS.Tables[GetTableName(txtMachines.Text.Trim())].Copy();
                         foreach (DataRow Nhr in HrlyView.Rows)
                         {
-                            sql = "update [" + tablename + "] Set PipeStatus ='" + Nhr["PipeStatus"].ToString() + "', UpdDt = GetDate() Where " +
+                            sql = "update [" + tablename + "] Set PipeStatus ='" + Nhr["PipeStatus"].ToString() + "'," +
+                                " Material='" + Nhr["Material"].ToString() + "'," +
+                                " Standard='" + Nhr["Standard"].ToString() + "'," +
+                                " JointType='" + Nhr["JointType"].ToString() + "'," +
+                                " MouldNo='" + Nhr["MouldNo"].ToString() + "'," +
+                                " UpdDt = GetDate() Where " +
                                 " tDate ='" + txtDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim() + "' " +
                                 " And SrNo ='" + Nhr["SrNo"].ToString() + "'";
                             cmd.CommandText = sql;

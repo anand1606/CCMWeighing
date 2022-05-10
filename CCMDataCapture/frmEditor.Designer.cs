@@ -32,14 +32,28 @@
             this.grd_report = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colSrNo = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colLogDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colPipeNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colShift = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMachine = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSizeSrNo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPipeDia = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPipeClass = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colLength = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colBatchNo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colNomWt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colActWt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colDevPer = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPipeStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rptStatus = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.colJoint = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMould = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colMaterial = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rptMaterial = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            this.colStandard = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rptStandard = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnExport = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -55,6 +69,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.grd_report)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rptStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rptMaterial)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rptStandard)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtIncharge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtShift.Properties)).BeginInit();
@@ -84,7 +100,9 @@
             this.grd_report.MainView = this.gridView1;
             this.grd_report.Name = "grd_report";
             this.grd_report.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.rptStatus});
+            this.rptStatus,
+            this.rptMaterial,
+            this.rptStandard});
             this.grd_report.Size = new System.Drawing.Size(909, 343);
             this.grd_report.TabIndex = 7;
             this.grd_report.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -96,12 +114,23 @@
             this.gridView1.Appearance.EvenRow.Options.UseBackColor = true;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colSrNo,
-            this.colLogDateTime,
-            this.colPipeNumber,
+            this.colDate,
+            this.colTime,
+            this.colShift,
+            this.colMachine,
+            this.colSizeSrNo,
             this.colPipeDia,
             this.colPipeClass,
+            this.colLength,
+            this.colBatchNo,
+            this.colNomWt,
             this.colActWt,
-            this.colPipeStatus});
+            this.colDevPer,
+            this.colPipeStatus,
+            this.colJoint,
+            this.colMould,
+            this.colMaterial,
+            this.colStandard});
             this.gridView1.GridControl = this.grd_report;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsCustomization.AllowColumnMoving = false;
@@ -113,7 +142,6 @@
             this.gridView1.OptionsFilter.AllowFilterEditor = false;
             this.gridView1.OptionsFilter.AllowFilterIncrementalSearch = false;
             this.gridView1.OptionsFilter.AllowMRUFilterList = false;
-            this.gridView1.OptionsFilter.FilterEditorUseMenuForOperandsAndOperators = false;
             this.gridView1.OptionsFind.AllowFindPanel = false;
             this.gridView1.OptionsMenu.EnableColumnMenu = false;
             this.gridView1.OptionsMenu.EnableFooterMenu = false;
@@ -140,33 +168,56 @@
             this.colSrNo.OptionsColumn.ReadOnly = true;
             this.colSrNo.Visible = true;
             this.colSrNo.VisibleIndex = 0;
-            this.colSrNo.Width = 67;
+            this.colSrNo.Width = 43;
             // 
-            // colLogDateTime
+            // colDate
             // 
-            this.colLogDateTime.Caption = "LogDateTime";
-            this.colLogDateTime.FieldName = "LogDateTime";
-            this.colLogDateTime.Name = "colLogDateTime";
-            this.colLogDateTime.OptionsColumn.AllowEdit = false;
-            this.colLogDateTime.OptionsColumn.AllowMove = false;
-            this.colLogDateTime.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
-            this.colLogDateTime.OptionsColumn.ReadOnly = true;
-            this.colLogDateTime.Visible = true;
-            this.colLogDateTime.VisibleIndex = 1;
-            this.colLogDateTime.Width = 189;
+            this.colDate.Caption = "Date";
+            this.colDate.FieldName = "LogDate";
+            this.colDate.Name = "colDate";
+            this.colDate.OptionsColumn.AllowEdit = false;
+            this.colDate.OptionsColumn.AllowMove = false;
+            this.colDate.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.colDate.OptionsColumn.ReadOnly = true;
+            this.colDate.Visible = true;
+            this.colDate.VisibleIndex = 1;
+            this.colDate.Width = 76;
             // 
-            // colPipeNumber
+            // colTime
             // 
-            this.colPipeNumber.Caption = "PipeNumber";
-            this.colPipeNumber.FieldName = "PipeNumber";
-            this.colPipeNumber.Name = "colPipeNumber";
-            this.colPipeNumber.OptionsColumn.AllowEdit = false;
-            this.colPipeNumber.OptionsColumn.AllowMove = false;
-            this.colPipeNumber.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
-            this.colPipeNumber.OptionsColumn.ReadOnly = true;
-            this.colPipeNumber.Visible = true;
-            this.colPipeNumber.VisibleIndex = 2;
-            this.colPipeNumber.Width = 131;
+            this.colTime.Caption = "Time";
+            this.colTime.FieldName = "LogTime";
+            this.colTime.Name = "colTime";
+            this.colTime.Visible = true;
+            this.colTime.VisibleIndex = 2;
+            this.colTime.Width = 56;
+            // 
+            // colShift
+            // 
+            this.colShift.Caption = "Shift";
+            this.colShift.FieldName = "tShift";
+            this.colShift.Name = "colShift";
+            this.colShift.Visible = true;
+            this.colShift.VisibleIndex = 3;
+            this.colShift.Width = 33;
+            // 
+            // colMachine
+            // 
+            this.colMachine.Caption = "Machine";
+            this.colMachine.FieldName = "MachineNo";
+            this.colMachine.Name = "colMachine";
+            this.colMachine.Visible = true;
+            this.colMachine.VisibleIndex = 4;
+            this.colMachine.Width = 53;
+            // 
+            // colSizeSrNo
+            // 
+            this.colSizeSrNo.Caption = "SizeSrNo";
+            this.colSizeSrNo.FieldName = "IntSrNo";
+            this.colSizeSrNo.Name = "colSizeSrNo";
+            this.colSizeSrNo.Visible = true;
+            this.colSizeSrNo.VisibleIndex = 5;
+            this.colSizeSrNo.Width = 56;
             // 
             // colPipeDia
             // 
@@ -178,8 +229,8 @@
             this.colPipeDia.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.colPipeDia.OptionsColumn.ReadOnly = true;
             this.colPipeDia.Visible = true;
-            this.colPipeDia.VisibleIndex = 3;
-            this.colPipeDia.Width = 111;
+            this.colPipeDia.VisibleIndex = 6;
+            this.colPipeDia.Width = 48;
             // 
             // colPipeClass
             // 
@@ -191,8 +242,41 @@
             this.colPipeClass.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.colPipeClass.OptionsColumn.ReadOnly = true;
             this.colPipeClass.Visible = true;
-            this.colPipeClass.VisibleIndex = 4;
-            this.colPipeClass.Width = 94;
+            this.colPipeClass.VisibleIndex = 7;
+            this.colPipeClass.Width = 58;
+            // 
+            // colLength
+            // 
+            this.colLength.Caption = "Length";
+            this.colLength.FieldName = "PipeLength";
+            this.colLength.Name = "colLength";
+            this.colLength.Visible = true;
+            this.colLength.VisibleIndex = 8;
+            this.colLength.Width = 48;
+            // 
+            // colBatchNo
+            // 
+            this.colBatchNo.Caption = "BatchNo";
+            this.colBatchNo.FieldName = "PipeNumber";
+            this.colBatchNo.Name = "colBatchNo";
+            this.colBatchNo.OptionsColumn.AllowEdit = false;
+            this.colBatchNo.OptionsColumn.AllowMove = false;
+            this.colBatchNo.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.colBatchNo.OptionsColumn.ReadOnly = true;
+            this.colBatchNo.Visible = true;
+            this.colBatchNo.VisibleIndex = 9;
+            this.colBatchNo.Width = 81;
+            // 
+            // colNomWt
+            // 
+            this.colNomWt.Caption = "NomWt";
+            this.colNomWt.FieldName = "NomWt";
+            this.colNomWt.Name = "colNomWt";
+            this.colNomWt.OptionsColumn.AllowEdit = false;
+            this.colNomWt.OptionsColumn.ReadOnly = true;
+            this.colNomWt.Visible = true;
+            this.colNomWt.VisibleIndex = 11;
+            this.colNomWt.Width = 63;
             // 
             // colActWt
             // 
@@ -204,7 +288,18 @@
             this.colActWt.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.colActWt.OptionsColumn.ReadOnly = true;
             this.colActWt.Visible = true;
-            this.colActWt.VisibleIndex = 5;
+            this.colActWt.VisibleIndex = 10;
+            this.colActWt.Width = 56;
+            // 
+            // colDevPer
+            // 
+            this.colDevPer.Caption = "Wt. Gain(%)";
+            this.colDevPer.FieldName = "DevPer";
+            this.colDevPer.Name = "colDevPer";
+            this.colDevPer.OptionsColumn.AllowEdit = false;
+            this.colDevPer.OptionsColumn.ReadOnly = true;
+            this.colDevPer.Visible = true;
+            this.colDevPer.VisibleIndex = 12;
             // 
             // colPipeStatus
             // 
@@ -215,8 +310,8 @@
             this.colPipeStatus.OptionsColumn.AllowMove = false;
             this.colPipeStatus.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             this.colPipeStatus.Visible = true;
-            this.colPipeStatus.VisibleIndex = 6;
-            this.colPipeStatus.Width = 187;
+            this.colPipeStatus.VisibleIndex = 13;
+            this.colPipeStatus.Width = 99;
             // 
             // rptStatus
             // 
@@ -225,8 +320,63 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.rptStatus.Name = "rptStatus";
             // 
+            // colJoint
+            // 
+            this.colJoint.Caption = "Joint";
+            this.colJoint.FieldName = "JointType";
+            this.colJoint.Name = "colJoint";
+            this.colJoint.Visible = true;
+            this.colJoint.VisibleIndex = 16;
+            this.colJoint.Width = 43;
+            // 
+            // colMould
+            // 
+            this.colMould.Caption = "Mould";
+            this.colMould.FieldName = "MouldNo";
+            this.colMould.Name = "colMould";
+            this.colMould.Visible = true;
+            this.colMould.VisibleIndex = 15;
+            this.colMould.Width = 87;
+            // 
+            // colMaterial
+            // 
+            this.colMaterial.Caption = "Material";
+            this.colMaterial.ColumnEdit = this.rptMaterial;
+            this.colMaterial.FieldName = "Material";
+            this.colMaterial.Name = "colMaterial";
+            this.colMaterial.Visible = true;
+            this.colMaterial.VisibleIndex = 14;
+            this.colMaterial.Width = 91;
+            // 
+            // rptMaterial
+            // 
+            this.rptMaterial.AutoHeight = false;
+            this.rptMaterial.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rptMaterial.Name = "rptMaterial";
+            this.rptMaterial.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
+            // colStandard
+            // 
+            this.colStandard.Caption = "Standard";
+            this.colStandard.ColumnEdit = this.rptStandard;
+            this.colStandard.FieldName = "Standard";
+            this.colStandard.Name = "colStandard";
+            this.colStandard.Visible = true;
+            this.colStandard.VisibleIndex = 17;
+            this.colStandard.Width = 123;
+            // 
+            // rptStandard
+            // 
+            this.rptStandard.AutoHeight = false;
+            this.rptStandard.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.rptStandard.Name = "rptStandard";
+            this.rptStandard.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnExport);
             this.groupBox1.Controls.Add(this.btnCancel);
             this.groupBox1.Controls.Add(this.btnSave);
             this.groupBox1.Controls.Add(this.btnRefresh);
@@ -244,6 +394,16 @@
             this.groupBox1.Size = new System.Drawing.Size(909, 114);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(726, 63);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(95, 27);
+            this.btnExport.TabIndex = 30;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // btnCancel
             // 
@@ -333,8 +493,6 @@
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtDate.Properties.CalendarTimeProperties.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F4);
-            this.txtDate.Properties.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.txtDate.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.txtDate.Size = new System.Drawing.Size(125, 22);
             this.txtDate.TabIndex = 10;
@@ -368,12 +526,14 @@
             this.ClientSize = new System.Drawing.Size(915, 469);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "frmEditor";
-            this.Text = "frmEditor";
+            this.Text = "Quality Editor";
             this.Load += new System.EventHandler(this.frmEditor_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grd_report)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rptStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rptMaterial)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rptStandard)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtIncharge.Properties)).EndInit();
@@ -402,12 +562,26 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnCancel;
         private DevExpress.XtraGrid.Columns.GridColumn colSrNo;
-        private DevExpress.XtraGrid.Columns.GridColumn colLogDateTime;
-        private DevExpress.XtraGrid.Columns.GridColumn colPipeNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn colDate;
+        private DevExpress.XtraGrid.Columns.GridColumn colBatchNo;
         private DevExpress.XtraGrid.Columns.GridColumn colPipeDia;
         private DevExpress.XtraGrid.Columns.GridColumn colPipeClass;
         private DevExpress.XtraGrid.Columns.GridColumn colActWt;
         private DevExpress.XtraGrid.Columns.GridColumn colPipeStatus;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox rptStatus;
+        private DevExpress.XtraGrid.Columns.GridColumn colTime;
+        private DevExpress.XtraGrid.Columns.GridColumn colSizeSrNo;
+        private DevExpress.XtraGrid.Columns.GridColumn colLength;
+        private DevExpress.XtraGrid.Columns.GridColumn colJoint;
+        private DevExpress.XtraGrid.Columns.GridColumn colMould;
+        private DevExpress.XtraGrid.Columns.GridColumn colShift;
+        private DevExpress.XtraGrid.Columns.GridColumn colMachine;
+        private DevExpress.XtraGrid.Columns.GridColumn colNomWt;
+        private DevExpress.XtraGrid.Columns.GridColumn colMaterial;
+        private DevExpress.XtraGrid.Columns.GridColumn colStandard;
+        private System.Windows.Forms.Button btnExport;
+        private DevExpress.XtraGrid.Columns.GridColumn colDevPer;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox rptMaterial;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox rptStandard;
     }
 }
