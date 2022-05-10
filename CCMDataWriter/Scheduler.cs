@@ -907,7 +907,7 @@ namespace CCMDataWriter
                         " Material,Standard,OperatorCode,OperatorName,AlmMinWt,AlmMaxWt ) " +
                         " values ('" + tDate.ToString("yyyy-MM-dd") + "','" + tShift + "','" + tSrNo.ToString() + "','" + t.LogDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff") + "','" + tintSrno.ToString() + "'," +
                         " '" + t.MachineID + "','" + PipeNumber + "','" + t.Parameters.Class + "','" + t.Parameters.Length.ToString() + "','" + t.Parameters.Size.ToString() + "','" + t.Parameters.Joint + "','" + t.Parameters.MouldNo + "'," +
-                        " '" + t.ActWt.ToString() + "','" + t.Parameters.MinWt.ToString() + "','" + t.Parameters.MaxWt.ToString() + "','" + t.Parameters.NomWt.ToString() + "',GetDate(),'" + tPipeStatus + "'," +
+                        " '" + t.ActWt.ToString() + "','" + t.Parameters.MinWt.ToString() + "','" + t.Parameters.MaxWt.ToString() + "','" + t.Parameters.NomWt.ToString() + "',GetDate(),'OK'," +
                         " '" + t.Parameters.Material + "','" + t.Parameters.Standard + "','" + t.Parameters.OperatorCode + "','" + t.Parameters.OperatorName + "','" + t.Parameters.AlmMinWt.ToString() + "','" + t.Parameters.AlmMaxWt.ToString() + "');";
 
                     try
