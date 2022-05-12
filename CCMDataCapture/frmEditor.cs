@@ -107,7 +107,7 @@ namespace CCMDataCapture
             sql =
                 "Select SrNo, Convert(varchar(10),LogDateTime,121) as LogDate,Convert(varchar(5),Convert(time(5),LogDateTime)) as LogTime, " +
                 " MachineNo,tShift,IntSrNo,PipeNumber,PipeDia,PipeClass,PipeLength,ActWt,NomWt,Material,Standard,JointType,MouldNo,PipeStatus " +
-                ",ABS((Case When(NomWt <= 0) then 0 else Round(((NomWt - ActWt) / NomWt * 100), 3) end)) as DevPer, OperatorCode,OperatorName " +
+                ",ABS((Case When(NomWt <= 0) then 0 else Round(((NomWt - ActWt) / NomWt * 100), 3) end)) as DevPer,Remarks, OperatorCode,OperatorName " +
                 " From [" + tablename + "] " +
                 " where tDate='" + txtDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim().ToString() + "'";
 
@@ -232,7 +232,7 @@ namespace CCMDataCapture
 
         private void ResetCtrl()
         {
-            txtDate.EditValue = null;
+            //txtDate.EditValue = null;
             txtIncharge.Text = "";
             txtShift.Text = "";
             txtMachines.Text = "";
@@ -317,6 +317,7 @@ namespace CCMDataCapture
                                 " Standard='" + Nhr["Standard"].ToString() + "'," +
                                 " JointType='" + Nhr["JointType"].ToString() + "'," +
                                 " MouldNo='" + Nhr["MouldNo"].ToString() + "'," +
+                                " Remarks='" + Nhr["Remarks"].ToString() + "'," +
                                 " UpdDt = GetDate() Where " +
                                 " tDate ='" + txtDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim() + "' " +
                                 " And SrNo ='" + Nhr["SrNo"].ToString() + "'";

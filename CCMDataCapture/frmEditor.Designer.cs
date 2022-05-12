@@ -65,6 +65,8 @@
             this.txtDate = new DevExpress.XtraEditors.DateEdit();
             this.txtMachines = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.colRemarks = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.rptRemarks = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_report)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -76,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtShift.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rptRemarks)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -102,7 +105,8 @@
             this.grd_report.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.rptStatus,
             this.rptMaterial,
-            this.rptStandard});
+            this.rptStandard,
+            this.rptRemarks});
             this.grd_report.Size = new System.Drawing.Size(909, 343);
             this.grd_report.TabIndex = 7;
             this.grd_report.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -130,7 +134,8 @@
             this.colJoint,
             this.colMould,
             this.colMaterial,
-            this.colStandard});
+            this.colStandard,
+            this.colRemarks});
             this.gridView1.GridControl = this.grd_report;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsCustomization.AllowColumnMoving = false;
@@ -519,6 +524,23 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Machine :";
             // 
+            // colRemarks
+            // 
+            this.colRemarks.Caption = "Remarks";
+            this.colRemarks.FieldName = "Remarks";
+            this.colRemarks.Name = "colRemarks";
+            this.colRemarks.Visible = true;
+            this.colRemarks.VisibleIndex = 18;
+            // 
+            // rptRemarks
+            // 
+            this.rptRemarks.AutoHeight = false;
+            this.rptRemarks.MaskSettings.Set("MaskManagerType", typeof(DevExpress.Data.Mask.RegularMaskManager));
+            this.rptRemarks.MaskSettings.Set("MaskManagerSignature", "ignoreMaskBlank=True");
+            this.rptRemarks.MaskSettings.Set("mask", "[0-9 a-zA-Z \\-\\[\\]+=.*(){},$:;!@#?><]+");
+            this.rptRemarks.MaxLength = 50;
+            this.rptRemarks.Name = "rptRemarks";
+            // 
             // frmEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,6 +562,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtShift.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rptRemarks)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -583,5 +606,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn colDevPer;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox rptMaterial;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox rptStandard;
+        private DevExpress.XtraGrid.Columns.GridColumn colRemarks;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit rptRemarks;
     }
 }
