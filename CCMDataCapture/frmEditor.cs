@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraEditors.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraEditors.Registrator;
+using DevExpress.XtraEditors;
 
 namespace CCMDataCapture
 {
@@ -20,6 +23,7 @@ namespace CCMDataCapture
 
         private static string cnstr;
         private string strpath = AppDomain.CurrentDomain.BaseDirectory.ToString();
+        
 
         public frmEditor()
         {
@@ -106,8 +110,8 @@ namespace CCMDataCapture
             string tablename = GetTableName(txtMachines.Text.Trim());
             sql =
                 "Select SrNo, Convert(varchar(10),LogDateTime,121) as LogDate,Convert(varchar(5),Convert(time(5),LogDateTime)) as LogTime, " +
-                " MachineNo,tShift,IntSrNo,PipeNumber,PipeDia,PipeClass,PipeLength,ActWt,NomWt,Material,Standard,JointType,MouldNo,PipeStatus " +
-                ",ABS((Case When(NomWt <= 0) then 0 else Round(((NomWt - ActWt) / NomWt * 100), 3) end)) as DevPer,Remarks, OperatorCode,OperatorName " +
+                " MachineNo,tShift,IntSrNo,PipeNumber,PipeDia,PipeClass,PipeLength,ActWt,NomWt,Material,Standard,JointType,MouldNo,PipeStatus,MinWt,MaxWt,AlmMinWt,AlmMaxWt, " +
+                " ABS((Case When(NomWt <= 0) then 0 else Round(((NomWt - ActWt) / NomWt * 100), 3) end)) as DevPer,Remarks, OperatorCode,OperatorName " +
                 " From [" + tablename + "] " +
                 " where tDate='" + txtDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim().ToString() + "'";
 
@@ -192,6 +196,36 @@ namespace CCMDataCapture
                 this.gridView1.Columns["Standard"].ColumnEdit = this.rptStandard;
 
 
+
+                //class
+                items_DT = this.rptClass.Items;
+                str = "Select Description from ccmClass order by Description";
+                cmd = new SqlCommand(str, cn);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    items_DT.Add(dr["Description"].ToString());
+                }
+                dr.Close();
+                this.rptClass.TextEditStyle = TextEditStyles.DisableTextEditor;
+                this.gridView1.Columns["PipeClass"].ColumnEdit = this.rptClass;
+
+                //length
+                items_DT = this.rptLength.Items;
+                str = "Select Description from ccmLength order by Description";
+                cmd = new SqlCommand(str, cn);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    items_DT.Add(dr["Description"].ToString());
+                }
+                dr.Close();
+                this.rptLength.TextEditStyle = TextEditStyles.DisableTextEditor;
+                this.gridView1.Columns["PipeLength"].ColumnEdit = this.rptLength;
+
+
+
+
                 //fill material
                 items_DT = this.rptMaterial.Items;
                 str = "Select Description from ccmMaterial order by Description";
@@ -208,9 +242,13 @@ namespace CCMDataCapture
 
 
 
-            }
+            }//using sql connection
+
+
+            
 
         }
+
 
         private void LockCtrl()
         {
@@ -234,12 +272,15 @@ namespace CCMDataCapture
         {
             //txtDate.EditValue = null;
             txtIncharge.Text = "";
-            txtShift.Text = "";
-            txtMachines.Text = "";
-            txtMachines.SelectedIndex = -1;
-            txtShift.SelectedIndex = -1;
+            //txtShift.Text = "";
+            //txtMachines.Text = "";
+            //txtMachines.SelectedIndex = -1;
+            //txtShift.SelectedIndex = -1;
             btnSave.Enabled = false;
             btnRefresh.Enabled = true;
+            cmbBulkItem.SelectedIndex = 0;
+            txtBulkValue.EditValue = "";
+            txtBulkValue.Text = "";
         }
 
 
@@ -317,6 +358,13 @@ namespace CCMDataCapture
                                 " Standard='" + Nhr["Standard"].ToString() + "'," +
                                 " JointType='" + Nhr["JointType"].ToString() + "'," +
                                 " MouldNo='" + Nhr["MouldNo"].ToString() + "'," +
+                                " PipeClass='" + Nhr["PipeClass"].ToString() + "'," +
+                                " PipeLength='" + Nhr["PipeLength"].ToString() + "'," +
+                                " NomWt='" + Nhr["NomWt"].ToString() + "'," +
+                                " MinWt='" + Nhr["MinWt"].ToString() + "'," +
+                                " MaxWt='" + Nhr["MaxWt"].ToString() + "'," +
+                                " AlmMinWt='" + Nhr["AlmMinWt"].ToString() + "'," +
+                                " AlmMaxWt='" + Nhr["AlmMaxWt"].ToString() + "'," +
                                 " Remarks='" + Nhr["Remarks"].ToString() + "'," +
                                 " UpdDt = GetDate() Where " +
                                 " tDate ='" + txtDate.DateTime.Date.ToString("yyyy-MM-dd") + "' and tShift ='" + txtShift.Text.Trim() + "' " +
@@ -350,10 +398,204 @@ namespace CCMDataCapture
             if (string.IsNullOrEmpty(pstatus))
             {
                 e.Valid = false;
-                e.ErrorText = string.Format("Defect Code is Requred.\n");
+                e.ErrorText = string.Format("Pipe Status is Requred.\n");
                 return;
+            }
+
+            double nomwt = Convert.ToDouble(gridView1.GetRowCellValue(e.RowHandle, "NomWt"));
+
+            if(nomwt <= 0)
+            {
+                e.Valid = false;
+                e.ErrorText = string.Format("Nominam Weight is Requred.\n");
+                return;
+            }
+
+            string err = string.Empty;
+            string sql = "select * from ccmWeightMaster where Size='" + gridView1.GetRowCellValue(e.RowHandle, "PipeDia") + "' " +
+                " And Class='" + gridView1.GetRowCellValue(e.RowHandle, "PipeClass") + "' " +
+                " And Len='" + gridView1.GetRowCellValue(e.RowHandle, "PipeLength") + "'";
+            //minwt,maxwt,nomwt,alminwt,almmaxwt - change to be need if incase any change in size,class,length
+            DataSet ds = Utility.GetData(sql, Utility.SQLCnStr, out err);
+            if (!string.IsNullOrEmpty(err))
+            {
+                e.Valid = false;
+                e.ErrorText = string.Format("Error from ->Get Auto Weight informaiton->" + err);
+                return;
+            }
+
+            bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+            if (hasRows)
+            {                
+                DataRow dr = ds.Tables[0].Rows[0];
+                gridView1.SetRowCellValue(e.RowHandle, "MinWt", dr["MinWt"].ToString());
+                gridView1.SetRowCellValue(e.RowHandle, "MaxWt", dr["MaxWt"].ToString());
+               // gridView1.SetRowCellValue(e.RowHandle, "NomWt", dr["NomWt"].ToString());
+                gridView1.SetRowCellValue(e.RowHandle, "AlmMinWt", dr["AlmMinWt"].ToString());
+                gridView1.SetRowCellValue(e.RowHandle, "AlmMaxWt", dr["AlmMaxWt"].ToString());
+            }
+            
+
+        }
+
+        private void UpdateSelectedRows(string columnname, string columnvalue)
+        {
+            ArrayList rows = new ArrayList();
+
+            // Add the selected rows to the list.
+            Int32[] selectedRowHandles = gridView1.GetSelectedRows();
+            for (int i = 0; i < selectedRowHandles.Length; i++)
+            {
+                int selectedRowHandle = selectedRowHandles[i];
+                if (selectedRowHandle >= 0)
+                    rows.Add(gridView1.GetDataRow(selectedRowHandle));
+            }
+            try
+            {
+                gridView1.BeginUpdate();
+                for (int i = 0; i < rows.Count; i++)
+                {
+                    DataRow row = rows[i] as DataRow;
+                    // Change the field value.
+                    row[columnname] = columnvalue;
+                }
+            }
+            finally
+            {
+                gridView1.EndUpdate();
             }
         }
 
+        private void btnBulkChange_Click(object sender, EventArgs e)
+        {
+            
+            //return if no item is selected
+            if(cmbBulkItem.SelectedIndex <= 0)
+            {
+                
+                return;
+            }
+
+            if(cmbBulkItem.SelectedItem.ToString().Trim() == "")
+            {
+                return;
+            }
+
+            //return if not selected any rows
+            Int32[] selectedRowHandles = gridView1.GetSelectedRows();
+            if (selectedRowHandles.Length <= 1)
+            {
+                MessageBox.Show("Please Select multiple rows..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               
+                return;
+            }
+
+            if(txtBulkValue.EditValue == null)
+            {
+                MessageBox.Show("Please Enter Value..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtBulkValue.EditValue.ToString().Trim()))
+            {
+                MessageBox.Show("Please Enter Value..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            //validate nomwt
+
+
+            if (cmbBulkItem.SelectedItem.ToString() == "NomWt")
+            {
+                double tnomwt = 0;
+                double.TryParse(txtBulkValue.EditValue.ToString().Trim(), out tnomwt);
+                if (tnomwt <= 0)
+                {
+                    MessageBox.Show("Please Enter Nominal Weight..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            string changedvalue = txtBulkValue.EditValue.ToString().Trim();
+
+            switch (cmbBulkItem.Text.Trim().ToString())
+            {
+                case "PipeClass":
+                    UpdateSelectedRows("PipeClass", changedvalue);
+                    break;
+                case "PipeLength":
+                    UpdateSelectedRows("PipeLength", changedvalue);
+                    break;
+                case "JointType":
+                    UpdateSelectedRows("JointType", changedvalue);
+                    break;
+                case "MouldNo":
+                    UpdateSelectedRows("MouldNo", changedvalue);
+                    break;
+                case "NomWt":
+                    UpdateSelectedRows("NomWt", changedvalue);
+                    break;
+                case "Standard":
+                    UpdateSelectedRows("Standard", changedvalue);
+                    break;
+                case "Material":
+                    UpdateSelectedRows("Material", changedvalue);
+                    break;
+                case "PipeStatus":
+                    UpdateSelectedRows("PipeStatus", changedvalue);
+                    break;
+                case "Remarks":
+                    UpdateSelectedRows("Remarks", changedvalue);
+                    break;
+
+                default:
+                    break;
+            }
+
+            cmbBulkItem.SelectedIndex = 0;
+            txtBulkValue.EditValue = null;
+        }
+
+        private void cmbBulkItem_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbBulkItem.SelectedIndex <= 0)
+            {
+                return;
+            }
+
+
+            if (string.IsNullOrEmpty(cmbBulkItem.SelectedItem.ToString()))
+            {
+                return;
+            }
+
+            txtBulkValue.EditValue = "";
+            txtBulkValue.Properties.Items.Clear();
+
+            switch (cmbBulkItem.SelectedItem.ToString())
+            {
+                case "PipeClass":                    
+                    txtBulkValue.Properties.Items.AddRange(this.rptClass.Items);
+                    break;
+                case "PipeLength":                    
+                    txtBulkValue.Properties.Items.AddRange(this.rptLength.Items);
+                    break; 
+                case "Standard":                   
+                    txtBulkValue.Properties.Items.AddRange(this.rptStandard.Items);
+                    break;
+                case "Material":                    
+                    txtBulkValue.Properties.Items.AddRange(this.rptMaterial.Items);
+                    break;
+                case "PipeStatus":
+                    txtBulkValue.Properties.Items.AddRange(this.rptStatus.Items);
+                    break;
+               
+
+                default:
+                    break;
+            }
+
+        }
     }
 }

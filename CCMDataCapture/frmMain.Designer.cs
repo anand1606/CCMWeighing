@@ -332,9 +332,9 @@
             // 
             // btnModbusSetting
             // 
-            this.btnModbusSetting.Location = new System.Drawing.Point(185, 102);
+            this.btnModbusSetting.Location = new System.Drawing.Point(132, 93);
             this.btnModbusSetting.Name = "btnModbusSetting";
-            this.btnModbusSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnModbusSetting.Size = new System.Drawing.Size(120, 27);
             this.btnModbusSetting.TabIndex = 39;
             this.btnModbusSetting.Text = "Alarm Modbus Config";
             this.btnModbusSetting.UseVisualStyleBackColor = true;
@@ -342,9 +342,9 @@
             // 
             // btnRFIDSetting
             // 
-            this.btnRFIDSetting.Location = new System.Drawing.Point(185, 69);
+            this.btnRFIDSetting.Location = new System.Drawing.Point(132, 60);
             this.btnRFIDSetting.Name = "btnRFIDSetting";
-            this.btnRFIDSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnRFIDSetting.Size = new System.Drawing.Size(120, 27);
             this.btnRFIDSetting.TabIndex = 38;
             this.btnRFIDSetting.Text = "RFID Config";
             this.btnRFIDSetting.UseVisualStyleBackColor = true;
@@ -352,9 +352,9 @@
             // 
             // btnEmailSetting
             // 
-            this.btnEmailSetting.Location = new System.Drawing.Point(185, 36);
+            this.btnEmailSetting.Location = new System.Drawing.Point(132, 27);
             this.btnEmailSetting.Name = "btnEmailSetting";
-            this.btnEmailSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnEmailSetting.Size = new System.Drawing.Size(120, 27);
             this.btnEmailSetting.TabIndex = 37;
             this.btnEmailSetting.Text = "Email Config";
             this.btnEmailSetting.UseVisualStyleBackColor = true;
@@ -362,9 +362,9 @@
             // 
             // btnWeightSetting
             // 
-            this.btnWeightSetting.Location = new System.Drawing.Point(46, 102);
+            this.btnWeightSetting.Location = new System.Drawing.Point(6, 93);
             this.btnWeightSetting.Name = "btnWeightSetting";
-            this.btnWeightSetting.Size = new System.Drawing.Size(133, 27);
+            this.btnWeightSetting.Size = new System.Drawing.Size(120, 27);
             this.btnWeightSetting.TabIndex = 36;
             this.btnWeightSetting.Text = "Weight Chart Master";
             this.btnWeightSetting.UseVisualStyleBackColor = true;
@@ -372,9 +372,9 @@
             // 
             // btnMasterData
             // 
-            this.btnMasterData.Location = new System.Drawing.Point(46, 36);
+            this.btnMasterData.Location = new System.Drawing.Point(6, 27);
             this.btnMasterData.Name = "btnMasterData";
-            this.btnMasterData.Size = new System.Drawing.Size(133, 27);
+            this.btnMasterData.Size = new System.Drawing.Size(120, 27);
             this.btnMasterData.TabIndex = 30;
             this.btnMasterData.Text = "Master Data";
             this.btnMasterData.UseVisualStyleBackColor = true;
@@ -382,9 +382,9 @@
             // 
             // btnDefect
             // 
-            this.btnDefect.Location = new System.Drawing.Point(46, 69);
+            this.btnDefect.Location = new System.Drawing.Point(6, 60);
             this.btnDefect.Name = "btnDefect";
-            this.btnDefect.Size = new System.Drawing.Size(133, 27);
+            this.btnDefect.Size = new System.Drawing.Size(120, 27);
             this.btnDefect.TabIndex = 26;
             this.btnDefect.Text = "Quality Result";
             this.btnDefect.UseVisualStyleBackColor = true;
@@ -394,9 +394,9 @@
             // 
             this.btnClose.BackColor = System.Drawing.Color.Yellow;
             this.btnClose.ForeColor = System.Drawing.Color.Red;
-            this.btnClose.Location = new System.Drawing.Point(46, 135);
+            this.btnClose.Location = new System.Drawing.Point(6, 126);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(272, 58);
+            this.btnClose.Size = new System.Drawing.Size(246, 42);
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "&Exit";
             this.btnClose.UseVisualStyleBackColor = false;
@@ -422,24 +422,24 @@
             // 
             // btnSaveIncharge
             // 
-            this.btnSaveIncharge.Location = new System.Drawing.Point(294, 36);
+            this.btnSaveIncharge.Location = new System.Drawing.Point(6, 151);
             this.btnSaveIncharge.Name = "btnSaveIncharge";
-            this.btnSaveIncharge.Size = new System.Drawing.Size(63, 57);
+            this.btnSaveIncharge.Size = new System.Drawing.Size(136, 27);
             this.btnSaveIncharge.TabIndex = 25;
             this.btnSaveIncharge.Text = "Save";
             this.btnSaveIncharge.UseVisualStyleBackColor = true;
             // 
             // txtIncharge
             // 
-            this.txtIncharge.Location = new System.Drawing.Point(107, 68);
+            this.txtIncharge.Location = new System.Drawing.Point(6, 125);
             this.txtIncharge.Name = "txtIncharge";
-            this.txtIncharge.Size = new System.Drawing.Size(184, 20);
+            this.txtIncharge.Size = new System.Drawing.Size(141, 20);
             this.txtIncharge.TabIndex = 24;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(8, 71);
+            this.label27.Location = new System.Drawing.Point(9, 109);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(93, 13);
             this.label27.TabIndex = 23;
@@ -448,7 +448,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(159, 43);
+            this.label26.Location = new System.Drawing.Point(9, 76);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(29, 13);
             this.label26.TabIndex = 22;
@@ -478,7 +478,7 @@
             // 
             // txtShift
             // 
-            this.txtShift.Location = new System.Drawing.Point(194, 40);
+            this.txtShift.Location = new System.Drawing.Point(51, 73);
             this.txtShift.Name = "txtShift";
             this.txtShift.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -554,7 +554,7 @@
             // 
             this.xtraTabPage2.Controls.Add(this.xtraTabWeight);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1123, 679);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1127, 682);
             this.xtraTabPage2.Text = "Parameter Settings";
             // 
             // xtraTabWeight
@@ -569,7 +569,7 @@
             this.xtraTabWeight.Location = new System.Drawing.Point(0, 0);
             this.xtraTabWeight.Name = "xtraTabWeight";
             this.xtraTabWeight.SelectedTabPage = this.xtraTabCCM1;
-            this.xtraTabWeight.Size = new System.Drawing.Size(1123, 679);
+            this.xtraTabWeight.Size = new System.Drawing.Size(1127, 682);
             this.xtraTabWeight.TabIndex = 0;
             this.xtraTabWeight.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabCCM1,
@@ -583,7 +583,7 @@
             // 
             this.xtraTabCCM1.Controls.Add(this.elm_wt_1);
             this.xtraTabCCM1.Name = "xtraTabCCM1";
-            this.xtraTabCCM1.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM1.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM1.Text = "CCM-1";
             // 
             // elm_wt_1
@@ -599,7 +599,7 @@
             // 
             this.xtraTabCCM2.Controls.Add(this.elm_wt_2);
             this.xtraTabCCM2.Name = "xtraTabCCM2";
-            this.xtraTabCCM2.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM2.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM2.Text = "CCM-2";
             // 
             // elm_wt_2
@@ -615,7 +615,7 @@
             // 
             this.xtraTabCCM3.Controls.Add(this.elm_wt_3);
             this.xtraTabCCM3.Name = "xtraTabCCM3";
-            this.xtraTabCCM3.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM3.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM3.Text = "CCM-3";
             // 
             // elm_wt_3
@@ -631,7 +631,7 @@
             // 
             this.xtraTabCCM4.Controls.Add(this.elm_wt_4);
             this.xtraTabCCM4.Name = "xtraTabCCM4";
-            this.xtraTabCCM4.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM4.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM4.Text = "CCM-4";
             // 
             // elm_wt_4
@@ -647,7 +647,7 @@
             // 
             this.xtraTabCCM5.Controls.Add(this.elm_wt_5);
             this.xtraTabCCM5.Name = "xtraTabCCM5";
-            this.xtraTabCCM5.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM5.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM5.Text = "CCM-5";
             // 
             // elm_wt_5
@@ -663,7 +663,7 @@
             // 
             this.xtraTabCCM6.Controls.Add(this.elm_wt_6);
             this.xtraTabCCM6.Name = "xtraTabCCM6";
-            this.xtraTabCCM6.Size = new System.Drawing.Size(1117, 646);
+            this.xtraTabCCM6.Size = new System.Drawing.Size(1121, 649);
             this.xtraTabCCM6.Text = "CCM-6";
             // 
             // elm_wt_6
@@ -1058,19 +1058,21 @@
             // 
             this.groupBox6.Controls.Add(this.grd_report);
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox6.Location = new System.Drawing.Point(3, 103);
+            this.groupBox6.Location = new System.Drawing.Point(0, 100);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(0);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(1123, 601);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(0, 0, 10, 50);
+            this.groupBox6.Size = new System.Drawing.Size(1129, 607);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             // 
             // grd_report
             // 
             this.grd_report.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.grd_report.Location = new System.Drawing.Point(3, 17);
+            this.grd_report.Location = new System.Drawing.Point(0, 14);
             this.grd_report.MainView = this.gridView1;
             this.grd_report.Name = "grd_report";
-            this.grd_report.Size = new System.Drawing.Size(1117, 581);
+            this.grd_report.Size = new System.Drawing.Size(1119, 543);
             this.grd_report.TabIndex = 6;
             this.grd_report.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
