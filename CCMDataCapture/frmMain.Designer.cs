@@ -428,6 +428,7 @@
             this.btnSaveIncharge.TabIndex = 25;
             this.btnSaveIncharge.Text = "Save";
             this.btnSaveIncharge.UseVisualStyleBackColor = true;
+            this.btnSaveIncharge.Click += new System.EventHandler(this.btnSaveIncharge_Click);
             // 
             // txtIncharge
             // 

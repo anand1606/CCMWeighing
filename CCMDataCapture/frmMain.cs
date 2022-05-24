@@ -1473,7 +1473,5 @@ namespace CCMDataCapture
                 m.Show();
             }
         }
-
-       
     }
 }
