@@ -59,6 +59,8 @@
             this.gridRegister = new DevExpress.XtraGrid.GridControl();
             this.gvRegister = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnRegDownload = new System.Windows.Forms.Button();
+            this.btnRegTime = new System.Windows.Forms.Button();
             this.chkListRFID = new DevExpress.XtraEditors.CheckedListBoxControl();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbEmp = new System.Windows.Forms.ComboBox();
@@ -73,8 +75,7 @@
             this.btnPunchQry = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.txtdate = new DevExpress.XtraEditors.DateEdit();
-            this.btnRegTime = new System.Windows.Forms.Button();
-            this.btnRegDownload = new System.Windows.Forms.Button();
+            this.btnRegALL = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabMachine.SuspendLayout();
@@ -496,6 +497,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnRegALL);
             this.groupBox3.Controls.Add(this.btnRegDownload);
             this.groupBox3.Controls.Add(this.btnRegTime);
             this.groupBox3.Controls.Add(this.chkListRFID);
@@ -509,6 +511,27 @@
             this.groupBox3.Size = new System.Drawing.Size(319, 417);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
+            // 
+            // btnRegDownload
+            // 
+            this.btnRegDownload.Location = new System.Drawing.Point(196, 387);
+            this.btnRegDownload.Name = "btnRegDownload";
+            this.btnRegDownload.Size = new System.Drawing.Size(112, 23);
+            this.btnRegDownload.TabIndex = 45;
+            this.btnRegDownload.Text = "Download Punch";
+            this.btnRegDownload.UseVisualStyleBackColor = true;
+            this.btnRegDownload.Visible = false;
+            this.btnRegDownload.Click += new System.EventHandler(this.btnRegDownload_Click);
+            // 
+            // btnRegTime
+            // 
+            this.btnRegTime.Location = new System.Drawing.Point(233, 329);
+            this.btnRegTime.Name = "btnRegTime";
+            this.btnRegTime.Size = new System.Drawing.Size(75, 23);
+            this.btnRegTime.TabIndex = 44;
+            this.btnRegTime.Text = "Set Time";
+            this.btnRegTime.UseVisualStyleBackColor = true;
+            this.btnRegTime.Click += new System.EventHandler(this.btnRegTime_Click);
             // 
             // chkListRFID
             // 
@@ -671,25 +694,15 @@
             this.txtdate.Size = new System.Drawing.Size(100, 20);
             this.txtdate.TabIndex = 1;
             // 
-            // btnRegTime
+            // btnRegALL
             // 
-            this.btnRegTime.Location = new System.Drawing.Point(233, 329);
-            this.btnRegTime.Name = "btnRegTime";
-            this.btnRegTime.Size = new System.Drawing.Size(75, 23);
-            this.btnRegTime.TabIndex = 44;
-            this.btnRegTime.Text = "Set Time";
-            this.btnRegTime.UseVisualStyleBackColor = true;
-            this.btnRegTime.Click += new System.EventHandler(this.btnRegTime_Click);
-            // 
-            // btnRegDownload
-            // 
-            this.btnRegDownload.Location = new System.Drawing.Point(71, 358);
-            this.btnRegDownload.Name = "btnRegDownload";
-            this.btnRegDownload.Size = new System.Drawing.Size(156, 23);
-            this.btnRegDownload.TabIndex = 45;
-            this.btnRegDownload.Text = "Download Punch";
-            this.btnRegDownload.UseVisualStyleBackColor = true;
-            this.btnRegDownload.Click += new System.EventHandler(this.btnRegDownload_Click);
+            this.btnRegALL.Location = new System.Drawing.Point(71, 358);
+            this.btnRegALL.Name = "btnRegALL";
+            this.btnRegALL.Size = new System.Drawing.Size(237, 23);
+            this.btnRegALL.TabIndex = 46;
+            this.btnRegALL.Text = "Register ALL Operator";
+            this.btnRegALL.UseVisualStyleBackColor = true;
+            this.btnRegALL.Click += new System.EventHandler(this.btnRegALL_Click);
             // 
             // frmRFID
             // 
@@ -785,5 +798,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnRegTime;
         private System.Windows.Forms.Button btnRegDownload;
+        private System.Windows.Forms.Button btnRegALL;
     }
 }

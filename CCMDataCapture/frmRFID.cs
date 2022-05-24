@@ -51,7 +51,7 @@ namespace CCMDataCapture
             gridRFID.DataSource = null; 
 
             //feed operator details in grid and combo selection
-            ds = Utility.GetData("select OperatorCode,OperatorName from ccmRFIDOperator", sqlcn , out err);
+            ds = Utility.GetData("select OperatorCode,OperatorName from ccmRFIDOperator Where Active = 1", sqlcn , out err);
 
             bool hasrows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
             if (hasrows)
@@ -327,6 +327,7 @@ namespace CCMDataCapture
 
 
             string rfidno = string.Empty;
+            string ActiveSts = string.Empty;
            
             string remoteconn = Utility.GetDescription("Select config_value from ccmParaConfig Where config_key = 'HRMasterData'", sqlcn, out err);
 
@@ -341,9 +342,18 @@ namespace CCMDataCapture
                 " And Type = 'RFID'";
             rfidno = Utility.GetDescription(sql, remoteconn, out err);
 
+            sql = "Select Active from MastEmp Where EmpUnqID = '" + txtEmpCode.Text.Trim().ToString() + "'";
+            ActiveSts = Utility.GetDescription(sql, remoteconn, out err);
+
             if(string.IsNullOrEmpty(rfidno))
             {
                 MessageBox.Show("Error ->HRMasterData->RFID No not found..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(ActiveSts))
+            {
+                MessageBox.Show("Error ->HRMasterData->Active Status No not found..", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -373,28 +383,30 @@ namespace CCMDataCapture
                 
                 if (mode == "OLD")
                     sql = "Update ccmRFIDOperator set RFIDNo ='" + rfidno + "'," +
-                        " OperatorName ='" + txtEmpName.Text.Trim().ToString() + "', UpdDt = GetDate() " +
-                        " Where OperatorCode ='" + txtEmpCode.Text.ToString() + "'";
+                        " OperatorName ='" + txtEmpName.Text.Trim().ToString() + "', UpdDt = GetDate(), Active = '" + ActiveSts + "' " +
+                        " Where OperatorCode ='" + txtEmpCode.Text.ToString() + "' ";
 
                 else
-                    sql = "Insert into ccmRFIDOperator (OperatorCode,OperatorName,RFIDNo,AddDt) values " +
+                    sql = "Insert into ccmRFIDOperator (OperatorCode,OperatorName,RFIDNo,AddDt,active) values " +
                         " ('" + txtEmpCode.Text.ToString().Trim() + "','" + txtEmpName.Text.ToString().Trim() + "'," +
-                        " '" + rfidno.Trim() + "',GetDate() ) ";
+                        " '" + rfidno.Trim() + "',GetDate(),1 ) ";
 
 
                 int rescnt = 0;
                 using (SqlCommand cmd = cn.CreateCommand())
                 {
-#pragma warning disable CS0168 // The variable 'ex' is declared but never used
+
                     try
                     {
                         cmd.CommandText = sql;
                         rescnt = cmd.ExecuteNonQuery();
                     }
-                    catch (Exception ex) { }
-#pragma warning restore CS0168 // The variable 'ex' is declared but never used
+                    catch (Exception ex) {
 
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
 
+                    }
 
                     if (rescnt > 0)
                     {
@@ -437,9 +449,9 @@ namespace CCMDataCapture
                 return;
             }
 
-            txtEmpName.Text = Utility.GetDescription("select EmpName from MastEmp Where Active = 1 and EmpUnqID ='" + txtEmpCode.Text.Trim().ToString() + "'", remoteconn, out err);
+            txtEmpName.Text = Utility.GetDescription("select EmpName from MastEmp Where  EmpUnqID ='" + txtEmpCode.Text.Trim().ToString() + "'", remoteconn, out err);
 
-            if (string.IsNullOrEmpty(txtEmpName.Text))
+            if (!string.IsNullOrEmpty(err))
             {
                
                 txtEmpName.Text = "";
@@ -522,6 +534,48 @@ namespace CCMDataCapture
 
 
         #region Registration
+
+
+        private void btnRegALL_Click(object sender, EventArgs e)
+        {
+
+            DataSet ds = Utility.GetData("Select * from ccmRFIDOperator where active = 1", Utility.SQLCnStr, out string err);
+            if (string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            bool hasrows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+            if (hasrows)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                foreach (DevExpress.XtraEditors.Controls.CheckedListBoxItem selitem in chkListRFID.CheckedItems)
+                {
+                   
+                    string MachineIP = selitem.Description.ToString().Split(',')[0];
+                    clsMachine machine = new clsMachine(MachineIP, "I");
+                    machine.Connect(out err);
+                    if (!string.IsNullOrEmpty(err))
+                    {
+                        MessageBox.Show(err, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        machine.DisConnect(out err);
+                        continue;
+                    }
+                    foreach(DataRow dr in ds.Tables[0].Rows)
+                    {
+                        string empcode = dr["OperatorCode"].ToString().Trim();
+                        string rfid = dr["RFIDNO"].ToString().Trim();
+                        machine.Register(empcode, rfid, out err);
+                        MessageBox.Show(err, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    machine.DisConnect(out err);
+                }
+
+               
+            }
+            this.Cursor = Cursors.Default;
+            MessageBox.Show("Registraton of All operator has been complete in selected machine.", "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
         private void btnRegAdd_Click(object sender, EventArgs e)
         {
@@ -657,6 +711,11 @@ namespace CCMDataCapture
             MessageBox.Show("Complted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ReloadData();
         }
+       
+        
+        
         #endregion
+
+       
     }
 }

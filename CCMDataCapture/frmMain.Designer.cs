@@ -422,7 +422,7 @@
             // 
             // btnSaveIncharge
             // 
-            this.btnSaveIncharge.Location = new System.Drawing.Point(6, 151);
+            this.btnSaveIncharge.Location = new System.Drawing.Point(11, 141);
             this.btnSaveIncharge.Name = "btnSaveIncharge";
             this.btnSaveIncharge.Size = new System.Drawing.Size(136, 27);
             this.btnSaveIncharge.TabIndex = 25;
@@ -431,15 +431,15 @@
             // 
             // txtIncharge
             // 
-            this.txtIncharge.Location = new System.Drawing.Point(6, 125);
+            this.txtIncharge.Location = new System.Drawing.Point(11, 116);
             this.txtIncharge.Name = "txtIncharge";
-            this.txtIncharge.Size = new System.Drawing.Size(141, 20);
+            this.txtIncharge.Size = new System.Drawing.Size(134, 20);
             this.txtIncharge.TabIndex = 24;
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(9, 109);
+            this.label27.Location = new System.Drawing.Point(8, 100);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(93, 13);
             this.label27.TabIndex = 23;
@@ -457,14 +457,14 @@
             // txtCurDate
             // 
             this.txtCurDate.EditValue = null;
-            this.txtCurDate.Location = new System.Drawing.Point(51, 40);
+            this.txtCurDate.Location = new System.Drawing.Point(44, 38);
             this.txtCurDate.Name = "txtCurDate";
             this.txtCurDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtCurDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.txtCurDate.Properties.ReadOnly = true;
-            this.txtCurDate.Size = new System.Drawing.Size(96, 20);
+            this.txtCurDate.Size = new System.Drawing.Size(101, 20);
             this.txtCurDate.TabIndex = 20;
             // 
             // label25
@@ -478,7 +478,7 @@
             // 
             // txtShift
             // 
-            this.txtShift.Location = new System.Drawing.Point(51, 73);
+            this.txtShift.Location = new System.Drawing.Point(44, 73);
             this.txtShift.Name = "txtShift";
             this.txtShift.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -487,7 +487,7 @@
             "B",
             "C"});
             this.txtShift.Properties.ReadOnly = true;
-            this.txtShift.Size = new System.Drawing.Size(94, 20);
+            this.txtShift.Size = new System.Drawing.Size(101, 20);
             this.txtShift.TabIndex = 21;
             // 
             // elm_main_6
