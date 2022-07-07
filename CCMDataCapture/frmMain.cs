@@ -118,6 +118,8 @@ namespace CCMDataCapture
         {
             this.CloseBox = false;
 
+           
+
             txtFromDt.DateTime = DateTime.Now;
             txtToDt.DateTime = DateTime.Now;
             txtDate.DateTime = DateTime.Now;
@@ -180,6 +182,8 @@ namespace CCMDataCapture
             //this is used for intercommuntion - between front end and wpf dell 
             //used for reload - size,class,length,material,standard - etc
             //exchange = "COMMUNICATION"
+
+           
 
             Utility.Start_RBMQ_Client(RBMQServer);
 
