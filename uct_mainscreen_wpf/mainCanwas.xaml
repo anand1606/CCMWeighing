@@ -80,6 +80,7 @@
             <TextBlock x:Name="lbl_Operator_Code" FontSize="14" TextAlignment="Left" Grid.Row="4" Grid.Column="1" Margin="19,1,0,3"  Grid.ColumnSpan="2"  Text="{Binding CurrentOperator, Mode=OneWay}"/>
             <TextBlock x:Name="lbl_Operator_Name" FontSize="14" TextAlignment="Left" Grid.Row="5" Grid.Column="1" Margin="19,2,0,2"  Grid.ColumnSpan="4"  Text="{Binding CurrentOperatorName, Mode=OneWay}" HorizontalAlignment="Left" Width="211"/>
             <TextBlock x:Name="lbl_Size_Copy" FontSize="14" TextAlignment="Left" Margin="3,0,0,0"  Text="Alarm Range :" Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"  />
+            <TextBlock x:Name="lbl_TotalNos" FontSize="14" TextAlignment="Center" Grid.Row="3" Grid.Column="3" Margin="4,1,14,3"  Grid.ColumnSpan="2"  Text="{Binding DayTotalPipes, Mode=OneWay}"/>
 
         </Grid>
     </Border>

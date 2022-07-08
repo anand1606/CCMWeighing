@@ -83,6 +83,9 @@ namespace uct_main_wpf
         private string curTableNm = string.Empty;
         private string curSQLConStr = string.Empty;
 
+        private string _totalpipe = "";
+
+
         // This method is called by the Set accessor of each property.
         // The CallerMemberName attribute that is applied to the optional propertyName
         // parameter causes the property name of the caller to be substituted as an argument.
@@ -94,6 +97,13 @@ namespace uct_main_wpf
             }
         }
 
+        public string DayTotalPipes { 
+            get {  return _totalpipe; }
+            set { 
+                _totalpipe = value; 
+                NotifyPropertyChanged(); 
+            }
+        }
 
         public string GetCurrentSQLConn
         {
@@ -510,6 +520,15 @@ namespace uct_main_wpf
                                     this.LastWeight = dr["ActWt"].ToString();
                                 }
                             }
+
+
+                            DateTime dt = DateTime.Now;
+                            if (dt.Hour >= 0 && dt.Hour < 6)
+                                sql = "Select Count(*) from " + this.curTableNm + " where tDate = Convert(date,DateAdd(day,-1,GetDate()))";
+                            else
+                                sql = "Select Count(*) from " + this.curTableNm + " where tDate = Convert(date,GetDate())";
+
+                            this.DayTotalPipes = "(" + GetDescription(sql, curSQLConStr, out err) + ")";
 
                             Thread.Sleep(1000);
 

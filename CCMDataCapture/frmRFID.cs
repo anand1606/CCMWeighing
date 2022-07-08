@@ -540,7 +540,7 @@ namespace CCMDataCapture
         {
 
             DataSet ds = Utility.GetData("Select * from ccmRFIDOperator where active = 1", Utility.SQLCnStr, out string err);
-            if (string.IsNullOrEmpty(err))
+            if (!string.IsNullOrEmpty(err))
             {
                 MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
